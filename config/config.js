@@ -1,28 +1,33 @@
 import { defineConfig } from 'umi';
 
-import routes from './routes'
+import routes from './routes';
 
-import px2vw from 'postcss-px-to-viewport'
+import px2vw from 'postcss-px-to-viewport';
 export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
+  headScripts: [`https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js`],
+  styles: ['stylesheet', 'https://cdn.jsdelivr.net/npm/pace-js@latest/pace-theme-default.min.css'],
   routes,
-  layout:false,
-  mfsu: {},
+  layout: false,
+  // mfsu: {},
   targets: {
     ie: 11,
   },
+  //<script data-pace-options='{ "ajax": false }' src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
+
+  headScripts: [`data-pace-options='{ "ajax": false }`, `https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js`],
   metas: [
     {
       name: 'viewport',
-      content: "width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover"
+      content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover',
     },
   ],
 
-  fastRefresh: {},  
-   webpack5: {},
-   extraPostCSSPlugins: [
+  fastRefresh: {},
+  webpack5: {},
+  extraPostCSSPlugins: [
     px2vw({
       unitToConvert: 'px', // 要转化的单位
       viewportWidth: 375, // 视窗的宽度，可根据自己的需求调整（这里是以PC端为例）

@@ -1,11 +1,11 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, SetStateAction } from 'react';
 
 import { history } from 'umi';
 
 export default () => {
   const [goodItem, setGoodItem] = useState(null);
 
-  const handleClickCard = useCallback(item => {
+  const handleClickCard = useCallback((item: SetStateAction<null>) => {
     setGoodItem(item);
     console.log(item);
 

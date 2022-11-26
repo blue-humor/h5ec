@@ -28,7 +28,7 @@ const Index: React.FC<IndexProps> = props => {
         icon={<Add color="#fa4126" />}
         style={{ margin: '6px 0 6px 0' }}
         onClick={() => {
-          history.push('/address');
+          history.push('/address/list');
         }}
       />
       <Card>

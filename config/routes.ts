@@ -7,7 +7,8 @@ export default [
   { exact: true, path: '/goods/details', component: '@/pages/goods/details' },
   { exact: true, path: '/goods/list', component: '@/pages/goods/list' },
   { exact: true, path: '/goods/pay', component: '@/pages/goods/pay' },
-  { exact: true, path: '/address', component: '@/pages/address' },
+  { exact: true, path: '/address/list', component: '@/pages/address/list' },
+  { exact: true, path: '/address/editor', component: '@/pages/address/editor' },
 
   {
     exact: false,
