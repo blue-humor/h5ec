@@ -52,7 +52,7 @@ const Index: React.FC<IndexProps> = props => {
   return (
     <>
       <NavBar title="商品列表" />
-      <DropdownMenu value={value} onChange={v => setValue(v)} style={{ margin: '0 0 4px 0' }}>
+      <DropdownMenu value={value} onChange={v => setValue(v)} style={{ margin: '0 0 4px 0' }} activeIcon={undefined}>
         <DropdownMenu.Item name="value1" options={option1} />
         <DropdownMenu.Item name="value2" options={option2} />
       </DropdownMenu>

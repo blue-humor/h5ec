@@ -4,6 +4,8 @@ import { Swiper, Image, Search, Toast, Card, Tabs } from 'react-vant';
 
 import Cards from '@/components/Cards';
 
+import { reqSwiper } from '@/services/home';
+
 import styles from './index.less';
 
 interface IndexProps {}
@@ -65,6 +67,21 @@ const images = [
 const Index: React.FC<IndexProps> = props => {
   const [value, setValue] = useState('');
 
+  const [swiperImage, setSwiperImage] = useState([]);
+
+  const handleImage = async () => {
+    const res = await reqSwiper({});
+    if (res.code === 200) {
+      setSwiperImage(res?.data);
+    }
+  };
+
+  useEffect(() => {
+    handleImage();
+
+    return () => {};
+  }, []);
+
   return (
     <>
       <div className={styles.home_nav}>
@@ -77,9 +94,9 @@ const Index: React.FC<IndexProps> = props => {
         />
         <Card>
           <Swiper autoplay={5000}>
-            {images.map((image, index) => (
-              <Swiper.Item key={index}>
-                <Image lazyload fit="fill" width="300" height="150" src={image.img} width="100%" />
+            {swiperImage.map((item, index) => (
+              <Swiper.Item key={item?.id}>
+                <Image lazyload fit="fill" height="150" src={item?.img} width="100%" />
               </Swiper.Item>
             ))}
           </Swiper>

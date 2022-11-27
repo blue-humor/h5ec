@@ -1,15 +1,14 @@
 import React from 'react';
 import { history } from 'umi';
 import { Radio, SwipeCell, Button, Typography, Card, Flex, ActionBar, Toast } from 'react-vant';
-import { createFromIconfontCN } from '@react-vant/icons';
+
+import IconFont from '@/utils/iconFont';
 
 import NavBar from '@/components/NavBar';
 
 import styles from './index.less';
 
 interface IndexProps {}
-
-const IconFont = createFromIconfontCN('//at.alicdn.com/t/c/font_3784684_dtd2e5mepsf.js');
 
 const content = 'React Vant 是一套轻量、可靠的移动端 React 组件库';
 
