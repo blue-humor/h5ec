@@ -16,19 +16,21 @@ export const option1 = [
   { text: '活动商品', value: 2 },
 ];
 export const option2 = [
-  { text: '默认排序', value: 'a' },
-  { text: '好评排序', value: 'b' },
-  { text: '销量排序', value: 'c' },
+  { text: '默认排序', value: 0 },
+  { text: '好评排序', value: 1 },
+  { text: '销量排序', value: 3 },
 ];
 
 const Index: React.FC<IndexProps> = props => {
-  const [value, setValue] = useState<any>({ value1: 0, value2: 'a' });
+  const [value, setValue] = useState<any>({ type: 0, sort: 0 });
 
   // const [cardList, setCardList] = useState([])
 
-  const handleGoodList = async params => {
+  const handleGoodList = async (params: any) => {
     const { query } = history.location;
     const res = await reqGoodList({ ...params, ...query, ...value });
+    console.log({ ...params, ...query, ...value });
+
     return res;
   };
 
@@ -40,8 +42,8 @@ const Index: React.FC<IndexProps> = props => {
     <>
       <NavBar title="商品列表" />
       <DropdownMenu defaultValue={value} value={value} onChange={v => setValue(v)} style={{ margin: '0 0 4px 0' }} activeIcon={''}>
-        <DropdownMenu.Item name="value1" options={option1} />
-        <DropdownMenu.Item name="value2" options={option2} />
+        <DropdownMenu.Item name="type" options={option1} />
+        <DropdownMenu.Item name="sort" options={option2} />
       </DropdownMenu>
       <div></div>
       <div style={{ padding: '10px' }}>

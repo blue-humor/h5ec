@@ -42,14 +42,14 @@ const Index: React.FC<IndexProps> = props => {
 
   const handleShowSku = (type: number) => {
     // setShowShopping(show)
-    skuRef?.current.show();
+    skuRef.current?.show();
     setShowButtonType(type);
   };
 
   return (
     <>
       <NavBar title="商品详情" />
-      skuRef.current?.show()
+
       <div className={styles.goods_detalis_nav}>
         <Swiper
           indicator={(total, current) => (

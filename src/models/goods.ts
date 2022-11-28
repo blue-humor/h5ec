@@ -9,7 +9,13 @@ export default () => {
     setGoodItem(item);
     console.log(item);
 
-    history.push('/goods/details');
+    history.push({
+      pathname: '/goods/details',
+      query: {
+        id: item.id,
+        storeId: item.storeId,
+      },
+    });
   }, []);
 
   return {

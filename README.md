@@ -40,7 +40,23 @@ none_sku: false, // 是否无规格商品
 
 <!-- 前端模拟字段 参考-->
 
-const data = {
+const data ={
+title:'dsadsa',
+price:29888,
+originPrice:40000,
+[
+'https://img.yzcdn.cn/vant/apple-1.jpg',
+'https://img.yzcdn.cn/vant/apple-2.jpg',
+'https://img.yzcdn.cn/vant/apple-3.jpg',
+'https://img.yzcdn.cn/vant/apple-4.jpg',
+'https://img.yzcdn.cn/vant/apple-5.jpg',
+'https://img.yzcdn.cn/vant/apple-6.jpg',
+'https://img.yzcdn.cn/vant/apple-7.jpg',
+'https://img.yzcdn.cn/vant/apple-8.jpg',
+],
+
+    cart: {
+
 goods_id: '1',
 quota: 5,
 quota_used: 0,
@@ -131,4 +147,5 @@ stock_num: 6,
 },
 ],
 },
+}
 }

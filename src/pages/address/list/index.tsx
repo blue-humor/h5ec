@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { history } from 'umi';
 import { Radio, SwipeCell, Button, Typography, Card, Flex, ActionBar, Toast } from 'react-vant';
 
 import IconFont from '@/utils/iconFont';
 
 import NavBar from '@/components/NavBar';
+
+import { reqAddressList } from '@/services/address/list';
 
 import styles from './index.less';
 
@@ -13,41 +15,72 @@ interface IndexProps {}
 const content = 'React Vant 是一套轻量、可靠的移动端 React 组件库';
 
 const Index: React.FC<IndexProps> = props => {
+  const [addressList, setAddressList] = useState([]);
+
+  const handleAddressList = async () => {
+    const res = await reqAddressList({ memberId: 1 });
+    console.log(res);
+    if ((res.code = 200)) {
+      setAddressList(res.data);
+    }
+  };
+
+  useEffect(() => {
+    handleAddressList();
+
+    return () => {};
+  }, []);
+
   return (
     <>
       <NavBar title="收获地址" />
 
-      <Radio.Group onChange={v => console.log(v)}>
-        <SwipeCell
-          rightAction={
-            <Button style={{ height: '100%' }} square type="danger">
-              删除
-            </Button>
-          }
-        >
-          <Card className={styles.addressCard}>
-            <Flex align="center" justify="around">
-              <Flex.Item>
-                <Radio
-                  name={{
-                    city: '肯德基先生的地址在',
-                    iphone: '13935890089',
-                    name: '肯德基先生',
-                  }}
-                />
-              </Flex.Item>
-              <Flex.Item className={styles.addressInfo}>
-                <Typography.Title level={6}>
-                  肯德基先生 <span>13935890089</span>
-                </Typography.Title>
-                <Typography.Text>肯德基先生的地址在 {content} s</Typography.Text>
-              </Flex.Item>
-              <Flex.Item className={styles.addressInfo}>
-                <IconFont name="icon-bianji" onClick={() => history.push('/address/editor')} />
-              </Flex.Item>
-            </Flex>
-          </Card>
-        </SwipeCell>
+      <Radio.Group onChange={v => console.log(v)} defaultValue={1}>
+        {addressList.map((item: any) => {
+          return (
+            <SwipeCell
+              key={item?.id}
+              rightAction={
+                <Button style={{ height: '100%' }} square type="danger">
+                  删除
+                </Button>
+              }
+            >
+              <Card className={styles.addressCard}>
+                <Flex align="center" justify="around">
+                  <Flex.Item>
+                    <Radio name={item?.id} />
+                  </Flex.Item>
+                  <Flex.Item className={styles.addressInfo}>
+                    <Typography.Title level={6}>
+                      {item?.name} <span>{item?.phone}</span>
+                    </Typography.Title>
+                    <Typography.Text
+                      ellipsis={{
+                        rows: 2,
+                        collapseText: '收起',
+                        expandText: '展开',
+                      }}
+                    >{`${item?.cityName} ${item?.provinceName} ${item?.districtName} ${item?.detailAddress} ${content} ${content}`}</Typography.Text>
+                  </Flex.Item>
+                  <Flex.Item>
+                    <IconFont
+                      name="icon-bianji"
+                      onClick={() =>
+                        history.push({
+                          pathname: '/address/editor',
+                          query: {
+                            id: item?.id,
+                          },
+                        })
+                      }
+                    />
+                  </Flex.Item>
+                </Flex>
+              </Card>
+            </SwipeCell>
+          );
+        })}
       </Radio.Group>
 
       <ActionBar safeAreaInsetBottom style={{ padding: '16px' }}>

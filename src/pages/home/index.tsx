@@ -22,7 +22,7 @@ const Index: React.FC<IndexProps> = props => {
     setSwiperImage(res);
   };
 
-  const handleGoodsList = async params => {
+  const handleGoodsList = async (params: any) => {
     const res = await reqGoodsList(params);
     return res;
   };
@@ -45,7 +45,7 @@ const Index: React.FC<IndexProps> = props => {
         />
         <Card>
           <Swiper autoplay={5000}>
-            {swiperImage.map((item, index) => (
+            {swiperImage.map((item: any, index) => (
               <Swiper.Item key={item?.id}>
                 <Image lazyload fit="fill" height="150" src={item?.img} width="100%" />
               </Swiper.Item>

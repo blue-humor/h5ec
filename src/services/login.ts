@@ -1,6 +1,4 @@
-// import request from '@/utils/request'
-
-const request = require('../utils/request');
+import request from '@/utils/request';
 
 interface LoginParams {
   username: string;

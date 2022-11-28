@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { history } from 'umi';
+
 import { Card, Cell, Typography, Image, Flex, Button, Badge } from 'react-vant';
 
 import IconFont from '@/utils/iconFont';
@@ -29,7 +31,7 @@ const Index: React.FC<IndexProps> = props => {
               return (
                 <Flex.Item key={item.id}>
                   <div className={styles.user_iconfont}>
-                    <Badge cdot>
+                    <Badge dot={true}>
                       <IconFont name={item.name} width={'32px'} height={'32px'} />
                       <div>{item.text}</div>
                     </Badge>
@@ -38,7 +40,7 @@ const Index: React.FC<IndexProps> = props => {
               );
             })}
           </Flex>
-          <Cell isLink title="收获地址" className={styles.harvest_addres} />
+          <Cell isLink title="收获地址" className={styles.harvest_addres} onClick={() => history.push('/address/list')} />
         </Card>
       </div>
     </>
