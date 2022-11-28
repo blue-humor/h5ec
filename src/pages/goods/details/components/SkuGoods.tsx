@@ -97,7 +97,7 @@ const data = {
   },
 };
 
-const SkuGoods: React.FC<SkuProps> = ({ skuRef }) => {
+const SkuGoods: React.FC<SkuProps> = ({ skuRef, showButtonType }) => {
   const handleAddOrBay = (value: any, Type: number) => {
     console.log('value', value);
     console.log('showButtonType', Type);
@@ -113,7 +113,7 @@ const SkuGoods: React.FC<SkuProps> = ({ skuRef }) => {
   return (
     <>
       <Sku
-        // showAddCartBtn={showButtonType === 1 ? false : true}
+        showAddCartBtn={showButtonType === 1 ? false : true}
         // skuActions={<ActionBar safeAreaInsetBottom style={{ padding: '0 16px', margin: '100px 0 0 0' }}>
         //     <Button
         //         round

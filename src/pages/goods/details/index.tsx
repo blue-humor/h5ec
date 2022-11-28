@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 
 import type { SkuInstance } from 'react-vant';
+
 import { history } from 'umi';
 
 import { Toast, Swiper, ImagePreview, Image, Card, Typography, ActionBar, Flex, Divider, Cell } from 'react-vant';
@@ -39,10 +40,9 @@ const Index: React.FC<IndexProps> = props => {
   //   setShowButtonType(type)
   // }
 
-  const handleShowSku = () => {
+  const handleShowSku = (type: number) => {
     // setShowShopping(show)
-    // setShowButtonType(type)
-    skuRef.current?.show();
+    setShowButtonType(type);
   };
 
   return (
@@ -145,8 +145,8 @@ const Index: React.FC<IndexProps> = props => {
           {/* <ActionBar.Button type='warning' text='加入购物车' onClick={() => handleShowShopping(true, 0)} /> */}
           {/* <ActionBar.Button type='danger' text='立即购买' onClick={() => handleShowShopping(true, 1)} /> */}
 
-          {/* <ActionBar.Button type='warning' text='加入购物车' onClick={() => handleShowSku(0)} /> */}
-          <ActionBar.Button type="danger" text="选择商品规格" onClick={() => handleShowSku()} />
+          <ActionBar.Button type="warning" text="加入购物车" onClick={() => handleShowSku(0)} />
+          <ActionBar.Button type="danger" text="立即购买" onClick={() => handleShowSku(1)} />
         </ActionBar>
       </div>
       <SkuGoods showButtonType={showButtonType} skuRef={skuRef} />
