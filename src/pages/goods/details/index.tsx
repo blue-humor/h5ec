@@ -27,7 +27,7 @@ const images = [
 ];
 
 const data = {
-  delailsList: {
+  details: {
     title: 'dsadsa',
     price: 29888,
     originPrice: 40000,
