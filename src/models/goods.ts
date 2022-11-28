@@ -5,7 +5,7 @@ import { history } from 'umi';
 export default () => {
   const [goodItem, setGoodItem] = useState(null);
 
-  const handleClickCard = useCallback((item: SetStateAction<null>) => {
+  const handleClickCard = useCallback((item: any) => {
     setGoodItem(item);
     console.log(item);
 

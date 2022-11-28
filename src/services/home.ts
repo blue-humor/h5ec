@@ -7,3 +7,11 @@ export async function reqSwiper(data?: any, options?: any) {
     ...(options || {}),
   });
 }
+
+export async function reqGoodsList(data?: any, options?: any) {
+  return request('/goods/getHomeGoodsList', {
+    method: 'post',
+    data,
+    ...(options || {}),
+  });
+}

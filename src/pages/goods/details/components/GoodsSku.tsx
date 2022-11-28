@@ -1,18 +1,19 @@
 import React, { useRef } from 'react';
 
-import { history } from 'umi'
+import { history } from 'umi';
 
 import { Sku, Button, Toast, Popup, ProductCard, Form, Selector, Stepper, Space, ActionBar } from 'react-vant';
-import { Fire, } from '@react-vant/icons'
+import { Fire } from '@react-vant/icons';
 
-import styles from '../index.less'
+import styles from '../index.less';
 
 // import type { SkuInstance } from 'react-vant';
 
 interface GoodsSkuProps {
-    showShoppin?: boolean
-    showButtonType?: number
-    handleShowShopping: (params: boolean, type?: number) => void
+  showShoppin?: boolean;
+  showButtonType?: number;
+  handleShowShopping: (params: boolean, type?: number) => void;
+  setSelect: any;
 }
 
 // function getSkuData(largeImageMode = false) {
@@ -169,95 +170,109 @@ interface GoodsSkuProps {
 //     }
 // }
 
-
 // const data = getSkuData()
 const options = [
-    {
-        label: '选项一',
-        value: '选项一1',
-    },
-    {
-        label: '选项二',
-        value: '选项一2',
-    },
-    {
-        label: '选项三',
-        value: '选项一3',
-    },
-]
+  {
+    label: 's',
+    value: 's',
+  },
+  {
+    label: 'm',
+    value: 'm',
+  },
+  {
+    label: 'l',
+    value: 'l',
+  },
+];
 
+const options2 = [
+  {
+    label: '红色',
+    value: '红色',
+  },
+  {
+    label: '黄色',
+    value: '黄色',
+  },
+  {
+    label: '蓝色',
+    value: '蓝色',
+  },
+];
 
-const GoodsSku: React.FC<GoodsSkuProps> = ({ showShoppin, handleShowShopping, showButtonType }) => {
-    // const ref = useRef<SkuInstance>(null);
-    const [form] = Form.useForm()
+const GoodsSku: React.FC<GoodsSkuProps> = ({ showShoppin, handleShowShopping, showButtonType, setSelect }) => {
+  // const ref = useRef<SkuInstance>(null);
+  const [form] = Form.useForm();
 
-    const handleOnFinish = (params: any) => {
-        if (params.single === undefined) {
-            Toast.info({
-                message: '请选择规格',
-                position: 'bottom',
-            })
-            return
-        } else {
-            console.log(params);
-            history.push('/goods/pay')
-        }
-
+  const handleOnFinish = (params: any) => {
+    if (params.single === undefined) {
+      Toast.info({ message: '请选择规格' });
+      return;
+    } else {
+      console.log(params);
+      if (showButtonType === 1) {
+        history.push('/goods/pay');
+      } else {
+        Toast.success({ message: '添加购物车成功' });
+      }
     }
+  };
 
-    return (
-        < >
-            <Popup
-                className={styles.goodsSkuNav}
-                round
-                closeable
-                style={{ padding: '10px 10px 80px 10px' }}
-                position='bottom'
-                // closeIcon={<Fire />}
-                visible={showShoppin}
-                onClose={() => handleShowShopping(false, showButtonType)}
-            >
-                <ProductCard
-                    lazyload
-                    // tag="标签"
-                    // num="2"
-                    price="2.00"
-                    originPrice="10.00"
-                    desc="选择 "
-                    title="React Vant 是一套轻量、可靠的移动端 React 组件库，提供了丰富的基础组件和业务组件，…动应用，使用过程中发现任何问题都可以提 Issue 给我们，当然，我们也非常欢迎你给我们发 PR"
-                    thumb="https://img.yzcdn.cn/vant/ipad.jpeg"
-                />
+  return (
+    <>
+      <Popup
+        className={styles.goodsSkuNav}
+        round
+        closeable
+        style={{ padding: '10px 10px 80px 10px' }}
+        position="bottom"
+        // closeIcon={<Fire />}
+        visible={showShoppin}
+        onClose={() => handleShowShopping(false, showButtonType)}
+      >
+        <ProductCard
+          lazyload
+          // tag="标签"
+          // num="2"
+          price="2.00"
+          originPrice="10.00"
+          desc="选择 "
+          title="React Vant 是一套轻量、可靠的移动端 React 组件库，提供了丰富的基础组件和业务组件，…动应用，使用过程中发现任何问题都可以提 Issue 给我们，当然，我们也非常欢迎你给我们发 PR"
+          thumb="https://img.yzcdn.cn/vant/ipad.jpeg"
+        />
 
-                <Form
-                    layout='vertical'
-                    form={form}
-                    onFinish={async (params) => handleOnFinish(params)}
-                    footer={
-                        <ActionBar safeAreaInsetBottom style={{ padding: '16px' }}>
-                            <Button round nativeType='submit' color='linear-gradient(to right, #ff6034, #ee0a24)' block>
-                                {showButtonType ? '立即支付' : '确认'}
-                            </Button>
-                        </ActionBar>
-                    }
-                >
-                    <Form.Item name='single' label='颜色'>
-                        <Selector
-                            options={options}
-                        />
-                    </Form.Item>
-                    <Form.Item name='single2' label='尺寸'>
-                        <Selector
-                            // onChange={(arr) => console.log(arr)}
-                            options={options}
-                        />
-                    </Form.Item>
-                    <Form.Item className={styles.goodsStepper} layout='horizontal' name='stepper' label='购买数量' initialValue={1}>
-                        <Stepper min={1} max={9999} />
-                    </Form.Item>
-                </Form>
-            </Popup>
-        </>
-    );
+        <Form
+          layout="vertical"
+          form={form}
+          onFinish={async params => handleOnFinish(params)}
+          footer={
+            <ActionBar safeAreaInsetBottom style={{ padding: '16px' }}>
+              <Button round nativeType="submit" color="linear-gradient(to right, #ff6034, #ee0a24)" block>
+                {showButtonType ? '立即支付' : '确认'}
+              </Button>
+            </ActionBar>
+          }
+        >
+          <Form.Item name="single" label="颜色">
+            <Selector
+              // onChange={(arr) => setSelect((v) => [...v, ...arr])}
+              options={options2}
+            />
+          </Form.Item>
+          <Form.Item name="single2" label="尺寸">
+            <Selector
+              // onChange={(arr) => setSelect((v) => [...v, ...arr])}
+              options={options}
+            />
+          </Form.Item>
+          <Form.Item className={styles.goodsStepper} layout="horizontal" name="stepper" label="购买数量" initialValue={1}>
+            <Stepper min={1} max={9999} />
+          </Form.Item>
+        </Form>
+      </Popup>
+    </>
+  );
 };
 
 export default GoodsSku;
