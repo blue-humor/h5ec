@@ -4,7 +4,7 @@ import { history } from 'umi';
 
 import { Sku, Button, Toast, ActionBar } from 'react-vant';
 
-import type { SkuInstance } from 'react-vant';
+import { reqDetailsPay } from '@/services/pay';
 
 interface SkuProps {
   skuRef: any;
@@ -13,6 +13,10 @@ interface SkuProps {
 }
 
 const SkuGoods: React.FC<SkuProps> = ({ skuRef, showButtonType, skuParams }) => {
+  const handledetailsPay = (params: any) => {
+    const res = reqDetailsPay(params);
+  };
+
   const handleAddOrBay = (value: any, Type: number) => {
     console.log(value);
 

@@ -46,5 +46,6 @@
     imgUrl: '';
     specification: '红色 M';
     freight: '免运费 或者 金额';
+    totalAmout: 372891739281;
   }
 }

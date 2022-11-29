@@ -376,7 +376,7 @@ const Index: React.FC<IndexProps> = props => {
           {/* <ActionBar.Button type='warning' text='加入购物车' onClick={() => handleShowShopping(true, 0)} /> */}
           {/* <ActionBar.Button type='danger' text='立即购买' onClick={() => handleShowShopping(true, 1)} /> */}
 
-          <ActionBar.Button type="warning" text="加入购物车" onClick={() => handleShowSku(0)} />
+          {/* <ActionBar.Button type="warning" text="加入购物车" onClick={() => handleShowSku(0)} /> */}
           <ActionBar.Button type="danger" text="立即购买" onClick={() => handleShowSku(1)} />
         </ActionBar>
       </div>
