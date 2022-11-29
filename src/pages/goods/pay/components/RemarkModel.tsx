@@ -10,7 +10,7 @@ interface RemarkModelProps {
 const RemarkModel: React.FC<RemarkModelProps> = ({ showClose, handleShowClose, children }) => {
   return (
     <>
-      <Popup closeable round visible={showClose} style={{ height: '70%' }} position="bottom" onClose={() => handleShowClose(false)}>
+      <Popup safeAreaInsetBottom closeable round visible={showClose} style={{ height: '70%' }} position="bottom" onClose={() => handleShowClose(false)}>
         {children}
       </Popup>
     </>

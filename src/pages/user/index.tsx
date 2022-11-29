@@ -24,7 +24,7 @@ const Index: React.FC<IndexProps> = props => {
         <div className={styles.user_bg}></div>
         <Cell style={{ alignItems: 'end' }} className={styles.user_avater} title={<Typography.Title> 大潘</Typography.Title>} icon={<Image width={'60px'} height={'60px'} src="https://we-retail-static-1300977798.cos.ap-guangzhou.myqcloud.com/retail-ui/components-exp/avatar/avatar-1.jpg" round />} />
         <Card className={styles.user_card}>
-          <Cell title={<Typography.Title level={6}>我的订单</Typography.Title>} isLink value="全部订单" />
+          <Cell title={<Typography.Title level={6}>我的订单</Typography.Title>} isLink value="全部订单" onClick={() => history.push('/user/order')} />
 
           <Flex justify="around" style={{ margin: '10px 0 20px  0' }}>
             {flow.map(item => {

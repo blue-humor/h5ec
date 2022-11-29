@@ -34,11 +34,11 @@ const SkuGoods: React.FC<SkuProps> = ({ skuRef, showButtonType, skuParams }) => 
       <Sku
         showAddCartBtn={showButtonType === 1 ? false : true}
         safeAreaInsetBottom
-        startSaleNum={skuParams.startSaleNum}
+        startSaleNum={skuParams?.startSaleNum}
         ref={skuRef}
-        sku={skuParams.sku}
-        goods={skuParams.goods_info}
-        goodsId={skuParams.goods_id}
+        sku={skuParams?.sku}
+        goods={skuParams?.goods_info}
+        goodsId={skuParams?.goods_id}
         // properties={data.properties}
         showSoldoutSku={true}
         onAddCart={(value: any) => handleAddOrBay(value, 0)}

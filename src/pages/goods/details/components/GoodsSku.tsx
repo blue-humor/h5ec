@@ -225,6 +225,7 @@ const GoodsSku: React.FC<GoodsSkuProps> = ({ showShoppin, handleShowShopping, sh
   return (
     <>
       <Popup
+        safeAreaInsetBottom
         className={styles.goodsSkuNav}
         round
         closeable
