@@ -33,7 +33,7 @@ const Index: React.FC<IndexProps> = props => {
   }, []);
 
   return (
-    <>
+    <div className={styles.address_list_nav}>
       <NavBar title="收获地址" />
 
       <Radio.Group onChange={v => console.log(v)}>
@@ -66,7 +66,9 @@ const Index: React.FC<IndexProps> = props => {
                   </Flex.Item>
                   <Flex.Item>
                     <IconFont
-                      name="icon-bianji"
+                      width={'20px'}
+                      height={'60px'}
+                      name="icon-wenbenbianjitianchong"
                       onClick={() =>
                         history.push({
                           pathname: '/address/editor',
@@ -85,11 +87,11 @@ const Index: React.FC<IndexProps> = props => {
       </Radio.Group>
 
       <ActionBar safeAreaInsetBottom style={{ padding: '16px' }}>
-        <Button round color="linear-gradient(to right, #ff6034, #ee0a24)" block icon={<IconFont name="icon-tongyong_tianjia" />} onClick={() => history.push('/address/editor')}>
+        <Button round color="linear-gradient(to right, #ff6034, #ee0a24)" block icon={<IconFont name="icon-tianjia1" />} onClick={() => history.push('/address/editor')}>
           新建收获地址
         </Button>
       </ActionBar>
-    </>
+    </div>
   );
 };
 

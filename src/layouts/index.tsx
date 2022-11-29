@@ -28,7 +28,7 @@ const Layout: React.FC<IndexProps> = props => {
     <>
       {props.children}
       <div className="demo-tabbar">
-        <Tabbar placeholder value={name} activeColor="#fa4126" inactiveColor="#8a8a8a" safeAreaInsetBottom onChange={c => handleHistory(c)}>
+        <Tabbar placeholder value={name} activeColor="#fa4126" inactiveColor="#cec8c8" safeAreaInsetBottom onChange={c => handleHistory(c)}>
           <Tabbar.Item name="home" icon={<WapHome />}>
             首页
           </Tabbar.Item>

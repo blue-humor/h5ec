@@ -52,7 +52,7 @@ const Index: React.FC<IndexProps> = ({ handleCardList }) => {
   return (
     <PullRefresh onRefresh={async () => handleOnRefresh(true)} onRefreshEnd={() => console.log('onRefreshEnd')}>
       <List finished={finished} key="list" onLoad={async () => handleOnLoad()} finishedText="暂无更多">
-        <Flex gutter={6} wrap="wrap">
+        <Flex gutter={10} wrap="wrap">
           {cardList?.map((item: any) => {
             return (
               <Flex.Item span={12} key={item?.id}>

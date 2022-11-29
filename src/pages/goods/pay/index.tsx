@@ -19,14 +19,14 @@ const Index: React.FC<IndexProps> = props => {
 
   const [showClose, setShowClose] = useState(false);
 
-  const [remark, setRemark] = useState('选项，建议和商家沟通确认');
+  const [remark, setRemark] = useState('');
 
   const handleShowClose = (params: boolean) => {
     setShowClose(params);
   };
 
   const onFinish = (values: any) => {
-    console.log(values);
+    console.log({ ...values, remark });
   };
   return (
     <>
@@ -55,7 +55,7 @@ const Index: React.FC<IndexProps> = props => {
         />
       </Card>
 
-      <Card>
+      <Card style={{ margin: '10px 0 0 0 ' }}>
         <Cell title="店铺名" icon={<ShopO />} />
         <ProductCard num="2" price="2.00" desc="描述信息" title="商品名称" thumb="https://img.yzcdn.cn/vant/ipad.jpeg" />
         <Form
@@ -86,26 +86,14 @@ const Index: React.FC<IndexProps> = props => {
           {/* <Form.Item isLink label="发票" name="invoice">
             <Input align="right" readOnly />
           </Form.Item> */}
-          <Cell
-            isLink
-            title="商家备注"
-            onClick={() => handleShowClose(true)}
-            value={
-              <Typography.Text
-                color="#969799"
-                ellipsis={{
-                  rows: 1,
-                }}
-              >
-                {remark}
-              </Typography.Text>
-            }
-          />
         </Form>
+        <Form.Item isLink label="备注" onClick={() => handleShowClose(true)}>
+          <Input align="right" placeholder="选项，建议和商家沟通确认" value={remark} readOnly />
+        </Form.Item>
       </Card>
 
       <RemarkModel handleShowClose={handleShowClose} showClose={showClose}>
-        <Card style={{ margin: '50px 20px 20px  20px' }}>
+        <Card className={styles.pay_remark_card}>
           <Input.TextArea autoFocus maxLength={200} showWordLimit placeholder="请输入文本" autoSize={{ minHeight: 200 }} onChange={v => setRemark(v)} />
         </Card>
       </RemarkModel>

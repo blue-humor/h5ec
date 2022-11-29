@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { history } from 'umi';
 
-import { NavBar } from 'react-vant';
+import { NavBar, Typography } from 'react-vant';
 
 interface IndexProps {
   title: string;
@@ -14,7 +14,7 @@ const Index: React.FC<IndexProps> = ({ title }) => {
         placeholder
         fixed
         safeAreaInsetTop
-        title={title}
+        title={<Typography.Text>{title}</Typography.Text>}
         // leftText="返回"
         onClickLeft={() => history.goBack()}
       />

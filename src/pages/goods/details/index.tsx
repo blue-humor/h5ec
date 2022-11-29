@@ -280,13 +280,7 @@ const Index: React.FC<IndexProps> = props => {
       <NavBar title="商品详情" />
 
       <div className={styles.goods_detalis_nav}>
-        <Swiper
-          indicator={(total, current) => (
-            <div className={styles.custom_indicator}>
-              {current + 1}/{total}
-            </div>
-          )}
-        >
+        <Swiper>
           {detailsParams?.imag?.map((item: any, index: number) => {
             return (
               <Swiper.Item key={index}>
@@ -305,7 +299,7 @@ const Index: React.FC<IndexProps> = props => {
           })}
         </Swiper>
 
-        <Card>
+        <Card round>
           <Card.Body>
             <Flex justify="between" align="center">
               <Flex.Item>
