@@ -41,6 +41,9 @@
     detailAddress: '黄河大江';
   }
   goods: {
+    goods_id: 11;
+    storeId: 11;
+    title: 'dasda';
     price: 19000;
     selectedNum: 2;
     imgUrl: '';
