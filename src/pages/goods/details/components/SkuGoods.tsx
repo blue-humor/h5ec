@@ -13,10 +13,6 @@ interface SkuProps {
 }
 
 const SkuGoods: React.FC<SkuProps> = ({ skuRef, showButtonType, skuParams }) => {
-  const handledetailsPay = (params: any) => {
-    const res = reqDetailsPay(params);
-  };
-
   const handleAddOrBay = (value: any, Type: number) => {
     console.log(value);
 
