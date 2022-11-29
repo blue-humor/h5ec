@@ -280,7 +280,13 @@ const Index: React.FC<IndexProps> = props => {
       <NavBar title="商品详情" />
 
       <div className={styles.goods_detalis_nav}>
-        <Swiper>
+        <Swiper
+          indicator={(total, current) => (
+            <div className={styles.custom_indicator}>
+              {current + 1}/{total}
+            </div>
+          )}
+        >
           {detailsParams?.imag?.map((item: any, index: number) => {
             return (
               <Swiper.Item key={index}>
@@ -299,7 +305,7 @@ const Index: React.FC<IndexProps> = props => {
           })}
         </Swiper>
 
-        <Card round>
+        <Card className={styles.details_card}>
           <Card.Body>
             <Flex justify="between" align="center">
               <Flex.Item>
@@ -344,7 +350,7 @@ const Index: React.FC<IndexProps> = props => {
           isLink
         />
 
-        <Card>
+        <Card round>
           <Divider>详情介绍</Divider>
           {detailsParams?.detailsImage?.map((item: any, index: number | undefined) => {
             return (

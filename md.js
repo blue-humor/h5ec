@@ -16,18 +16,18 @@
 
 //立即购买跳转支付页面
 {
-  type: 1; //购物车所传的判断字段
-  detailsId: 1; //当前详情id
   goodsId: 1;
   selectedNum: 2; //选择几个
-  discount: null;
-  id: 4;
-  price: 111; //价格
-  properties: [];
-  property_price: 0;
-  s1: '1'; //对应的规格id
-  s2: '4';
-  stock_num: 12; //库存
+  discount: 999;
+  selectedSkuComb: {
+    id: 4;
+    price: 111; //价格
+    properties: [];
+    property_price: 0;
+    s1: '1'; //对应的规格id
+    s2: '4';
+    stock_num: 12; //库存
+  }
 }
 
 //后端返回
