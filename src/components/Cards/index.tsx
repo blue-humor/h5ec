@@ -18,7 +18,7 @@ const Index: React.FC<IndexProps> = ({ handleCardList }) => {
 
   const [pageIndex, setPageIndex] = useState(1);
 
-  const [cardList, setCardList] = useState([]);
+  const [cardList, setCardList] = useState<any>([]);
 
   const [finished, setFinished] = useState<boolean>(false);
 
@@ -34,11 +34,11 @@ const Index: React.FC<IndexProps> = ({ handleCardList }) => {
 
   const handleOnLoad = async () => {
     setPageIndex(v => v + 1);
-    const res = await handleCardList({ pageIndex, pageSize: 20 });
+    const res = await handleCardList({ pageIndex, pageSize: 15 });
     console.log(res.data);
 
     if (res?.code === 200) {
-      setCardList(v => [...v, ...res.data]);
+      setCardList((v: any) => [...v, ...res.data]);
       if (cardList.length >= res?.total) {
         setFinished(true);
       }
@@ -53,7 +53,7 @@ const Index: React.FC<IndexProps> = ({ handleCardList }) => {
     <PullRefresh onRefresh={async () => handleOnRefresh(true)} onRefreshEnd={() => console.log('onRefreshEnd')}>
       <List finished={finished} key="list" onLoad={async () => handleOnLoad()} finishedText="暂无更多">
         <Flex gutter={6} wrap="wrap">
-          {cardList?.map(item => {
+          {cardList?.map((item: any) => {
             return (
               <Flex.Item span={12} key={item?.id}>
                 <Card className="card_nav" round onClick={() => handleClickCard(item)}>

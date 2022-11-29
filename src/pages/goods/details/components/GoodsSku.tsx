@@ -212,7 +212,10 @@ const GoodsSku: React.FC<GoodsSkuProps> = ({ showShoppin, handleShowShopping, sh
     } else {
       console.log(params);
       if (showButtonType === 1) {
-        history.push('/goods/pay');
+        const { query } = history.location;
+        console.log('query', query);
+
+        // history.push('/goods/pay');
       } else {
         Toast.success({ message: '添加购物车成功' });
       }

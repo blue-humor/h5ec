@@ -7,13 +7,13 @@ export default () => {
 
   const handleClickCard = useCallback((item: any) => {
     setGoodItem(item);
-    console.log(item);
+    // console.log(item);
 
     history.push({
       pathname: '/goods/details',
       query: {
         id: item.id,
-        storeId: item.storeId,
+        // storeId: item.storeId,
       },
     });
   }, []);

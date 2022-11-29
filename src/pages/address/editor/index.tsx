@@ -68,7 +68,7 @@ const Index: React.FC<IndexProps> = props => {
             <Input.TextArea rows={3} autoSize maxLength={200} showWordLimit />
           </Form.Item>
 
-          <Form.Item name="defaultAddress" controlAlign="right" label="是否设置默认地址" valuePropName="checked" labelWidth="120px">
+          <Form.Item name="isDefault" controlAlign="right" label="是否设置默认地址" valuePropName="checked" labelWidth="120px">
             <Switch size={20} activeColor="#fa4126" inactiveColor="#dcdee0" />
           </Form.Item>
         </Form>

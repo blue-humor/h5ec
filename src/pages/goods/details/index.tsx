@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import { Sku, SkuInstance } from 'react-vant';
 
@@ -12,6 +12,8 @@ import NavBar from '@/components/NavBar';
 import GoodsSku from './components/GoodsSku';
 
 import SkuGoods from './components/SkuGoods';
+
+import { reqDetails } from '@/services/goods/details';
 
 import styles from './index.less';
 
@@ -143,21 +145,125 @@ interface IndexProps {}
 const Index: React.FC<IndexProps> = props => {
   const skuRef = useRef<SkuInstance>(null);
 
-  // const [showShopping, setShowShopping] = useState(false)
+  const [detailsParams, setDetailsParams] = useState({
+    details: {
+      title: null,
+      price: null,
+      originPrice: null,
+      imag: [],
+      detailsImage: [],
+    },
+    skuList: {
+      goods_id: '1',
+      startSaleNum: 2, //起售数量
+      goods_info: {
+        price: 1,
+        title: '测试商品',
+        picture: 'https://b.yzcdn.cn/vant/sku/shoes-1.png',
+      },
+      sku: {
+        price: '199.9', //默认价格（单位元
+        stock_num: 666, // 商品总库存
+        tree: [
+          {
+            k: '颜色',
+            k_s: 's1',
+            k_id: '1',
+            v: [
+              {
+                id: '1',
+                name: '粉色',
+                imgUrl: 'https://b.yzcdn.cn/vant/sku/shoes-1.png',
+              },
+              {
+                id: '2',
+                name: '黄色',
+                imgUrl: 'https://b.yzcdn.cn/vant/sku/shoes-2.png',
+              },
+              {
+                id: '3',
+                name: '蓝色',
+                imgUrl: 'https://b.yzcdn.cn/vant/sku/shoes-3.png',
+              },
+            ],
+            largeImageMode: false, //是否开启大图预览
+          },
+          {
+            k: '尺寸',
+            k_s: 's2',
+            k_id: '2',
+            v: [
+              {
+                id: '1',
+                name: '大',
+              },
+              {
+                id: '2',
+                name: '小',
+              },
+            ],
+          },
+        ],
+        list: [
+          // 如果没有规格对应的种类参数 默认售空
+          {
+            id: 2259,
+            s1: '2', //对应 颜色种类的黄色
+            s2: '1', // 对应 尺寸的da 种类
+            price: 999, //当前商品价格
+            discount: 888, //折扣价格
+            stock_num: 110, //剩余库存
+          },
+          {
+            id: 2260,
+            s1: '3',
+            s2: '1',
+            price: 100,
+            stock_num: 99,
+          },
+          {
+            id: 2257,
+            s1: '1',
+            s2: '1',
+            price: 100,
+            stock_num: 111,
+          },
+          {
+            id: 2258,
+            s1: '1',
+            s2: '2',
+            price: 100,
+            stock_num: 6,
+          },
+        ],
+      },
+    },
+  });
+
   const [showButtonType, setShowButtonType] = useState(0);
 
   const [select, setSelect] = useState([]);
 
-  // const handleShowShopping = (show: boolean, type?: number | any) => {
-  //   setShowShopping(show)
-  //   setShowButtonType(type)
-  // }
-
+  // 打开sku弹框
   const handleShowSku = (type: number) => {
     // setShowShopping(show)
     skuRef.current?.show();
     setShowButtonType(type);
   };
+
+  //获取商品详情
+  const handleDetails = async () => {
+    let { query } = history.location;
+    const res = await reqDetails(query);
+    if (res?.code === 200) {
+      setDetailsParams(res.data);
+    }
+  };
+
+  useEffect(() => {
+    handleDetails();
+    return () => {};
+  }, []);
 
   return (
     <>
@@ -171,7 +277,7 @@ const Index: React.FC<IndexProps> = props => {
             </div>
           )}
         >
-          {images?.map((item, index) => {
+          {detailsParams?.details.imag?.map((item: any, index: number) => {
             return (
               <Swiper.Item key={index}>
                 <Image
@@ -194,10 +300,10 @@ const Index: React.FC<IndexProps> = props => {
             <Flex justify="between" align="center">
               <Flex.Item>
                 <Typography.Text type="danger">
-                  <span className={styles.card_currentPrice}>¥{299}</span>起
+                  <span className={styles.card_currentPrice}>¥{detailsParams?.details?.price}</span>起
                 </Typography.Text>{' '}
                 <Typography.Text delete className={styles.card_originalPrice}>
-                  ¥{499}
+                  ¥{detailsParams?.details?.originPrice}
                 </Typography.Text>
               </Flex.Item>
               <Flex.Item>
@@ -213,7 +319,7 @@ const Index: React.FC<IndexProps> = props => {
                 expandText: '更多',
               }}
             >
-              React Vant 是一套轻量、可靠的移动端 React 组件库，提供了丰富的基础组件和业务组件动应用，使用过程中发现任何问题都可以提 Issue 给我们，当然，我们也非常欢迎你给我们发 PR。
+              {detailsParams?.details?.title}
             </Typography.Title>
           </Card.Header>
         </Card>
@@ -237,19 +343,8 @@ const Index: React.FC<IndexProps> = props => {
 
         <Card>
           <Divider>详情介绍</Divider>
-          {images.map((item, index) => {
-            return (
-              <Image
-                key={index}
-                style={{ margin: '10px 0' }}
-                src={item}
-                onClick={() =>
-                  ImagePreview.open({
-                    images,
-                  })
-                }
-              />
-            );
+          {detailsParams?.details?.detailsImage.map((item, index) => {
+            return <Image key={index} style={{ margin: '10px 0' }} src={item} onClick={() => ImagePreview.open({})} />;
           })}
         </Card>
 
@@ -263,7 +358,7 @@ const Index: React.FC<IndexProps> = props => {
           <ActionBar.Button type="danger" text="立即购买" onClick={() => handleShowSku(1)} />
         </ActionBar>
       </div>
-      <SkuGoods showButtonType={showButtonType} skuRef={skuRef} />
+      <SkuGoods showButtonType={showButtonType} skuRef={skuRef} skuParams={detailsParams?.skuList} />
       {/* <GoodsSku showShoppin={showShopping} handleShowShopping={handleShowShopping} showButtonType={showButtonType} setSelect={setSelect} /> */}
     </>
   );

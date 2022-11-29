@@ -18,6 +18,7 @@ const Index: React.FC<IndexProps> = props => {
   const [addressList, setAddressList] = useState([]);
 
   const handleAddressList = async () => {
+    // 备注
     const res = await reqAddressList({ memberId: 1 });
     console.log(res);
     if ((res.code = 200)) {
@@ -35,7 +36,7 @@ const Index: React.FC<IndexProps> = props => {
     <>
       <NavBar title="收获地址" />
 
-      <Radio.Group onChange={v => console.log(v)} defaultValue={1}>
+      <Radio.Group onChange={v => console.log(v)}>
         {addressList.map((item: any) => {
           return (
             <SwipeCell
@@ -49,7 +50,7 @@ const Index: React.FC<IndexProps> = props => {
               <Card className={styles.addressCard}>
                 <Flex align="center" justify="around">
                   <Flex.Item>
-                    <Radio name={item?.id} />
+                    <Radio name={item?.id} checked={item?.isDefault} />
                   </Flex.Item>
                   <Flex.Item className={styles.addressInfo}>
                     <Typography.Title level={6}>

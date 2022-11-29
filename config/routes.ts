@@ -10,6 +10,8 @@ export default [
   { exact: true, path: '/address/list', component: '@/pages/address/list' },
   { exact: true, path: '/address/editor', component: '@/pages/address/editor' },
 
+  { exact: true, path: '/user/order', component: '@/pages/order' },
+
   {
     exact: false,
     component: '@/layouts/index',

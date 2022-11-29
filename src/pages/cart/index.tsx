@@ -14,21 +14,24 @@ const Index: React.FC<IndexProps> = props => {
       title: '商品名称',
       desc: '描述信息',
       price: 1998,
-      num: '2',
+      num: 2,
+      isChecked: false,
     },
     {
       id: 2,
       title: '商品名称2',
       desc: '描述信息',
       price: 198,
-      num: '2',
+      num: 2,
+      isChecked: false,
     },
     {
       id: 3,
       title: '商品名称3',
       desc: '描述信息',
       price: 2998,
-      num: '2',
+      num: 2,
+      isChecked: false,
     },
   ]);
 
@@ -62,7 +65,7 @@ const Index: React.FC<IndexProps> = props => {
 
   //单选
   const handleRaedo = (params: any) => {
-    const data = cartData.map((item: any) => {
+    let data = cartData.map((item: any) => {
       // 调试
       if (params.id === item.id) {
         item.isChecked = !item.isChecked;
@@ -72,9 +75,9 @@ const Index: React.FC<IndexProps> = props => {
       };
     });
 
-    // console.log(data);
     setCartData(data);
-    handlePrice(data);
+
+    console.log(data);
   };
 
   useEffect(() => {

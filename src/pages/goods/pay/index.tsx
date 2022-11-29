@@ -59,9 +59,9 @@ const Index: React.FC<IndexProps> = props => {
           <Form.Item label="运费" name="freight">
             <Input align="right" readOnly />
           </Form.Item>
-          <Form.Item isLink label="发票" name="invoice">
+          {/* <Form.Item isLink label="发票" name="invoice">
             <Input align="right" readOnly />
-          </Form.Item>
+          </Form.Item> */}
           <Form.Item label="商家备注" name="remark">
             <Input.TextArea maxLength={300} showWordLimit placeholder="请输入文本" autoSize={{ minHeight: 100 }} />
           </Form.Item>

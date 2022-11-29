@@ -65,8 +65,7 @@ detailsImage:[
 'https://img.yzcdn.cn/vant/apple-8.jpg',
 ],
 
-    cart: {
-
+cart: {
 goods_id: '1',
 quota: 5,
 quota_used: 0,
