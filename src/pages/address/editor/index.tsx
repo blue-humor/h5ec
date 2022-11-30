@@ -34,7 +34,7 @@ const Index: React.FC<IndexProps> = props => {
           form={form}
           onFinish={params => handleOnFinish(params)}
           initialValues={{
-            switch: false,
+            isDefault: false,
           }}
           footer={
             <div style={{ margin: '16px 16px 0' }}>
@@ -67,7 +67,6 @@ const Index: React.FC<IndexProps> = props => {
           <Form.Item name="detailAddress" label="详细地址">
             <Input.TextArea rows={3} autoSize maxLength={200} showWordLimit />
           </Form.Item>
-
           <Form.Item name="isDefault" controlAlign="right" label="是否设置默认地址" valuePropName="checked" labelWidth="120px">
             <Switch size={20} activeColor="#fa4126" inactiveColor="#dcdee0" />
           </Form.Item>

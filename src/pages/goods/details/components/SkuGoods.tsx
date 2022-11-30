@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { history } from 'umi';
 
@@ -13,19 +13,15 @@ interface SkuProps {
 }
 
 const SkuGoods: React.FC<SkuProps> = ({ skuRef, showButtonType, skuParams }) => {
-  const handleAddOrBay = (value: any, Type: number) => {
-    console.log(value);
-
-    if (Type) {
-      const { query } = history.location;
-      // console.log('query', query);
+  const handleAddOrBay = async (value: any, Type: number) => {
+    const res = await reqDetailsPay(value);
+    if (res?.code === 200) {
       history.push({
         pathname: '/goods/pay',
-        query: query,
+        query: {
+          orderId: res?.data?.id,
+        },
       });
-      return;
-    } else {
-      Toast.success('加入购物车成功');
     }
   };
 

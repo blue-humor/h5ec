@@ -38,8 +38,6 @@ const Index: React.FC<IndexProps> = props => {
   const [allPrice, setAllPrice] = useState(0);
 
   const handlePrice = (params: any) => {
-    console.log(params);
-
     const allPriceData = params.reduce((sum: any, currentItem: any) => {
       if (currentItem?.isChecked === true) {
         return sum + currentItem.price * currentItem.num;

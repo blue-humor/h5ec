@@ -26,6 +26,7 @@ const Index: React.FC<IndexProps> = ({ handleCardList }) => {
     if (params) {
       const res = await handleCardList({ pageIndex, pageSize: 20 });
       if (res?.code === 200) {
+        // 保留
         setCardList(res.data);
       }
       Toast.info('刷新成功');
@@ -39,7 +40,7 @@ const Index: React.FC<IndexProps> = ({ handleCardList }) => {
 
     if (res?.code === 200) {
       setCardList((v: any) => [...v, ...res.data]);
-      if (cardList.length >= res?.total) {
+      if (cardList.length >= res?.totalCount) {
         setFinished(true);
       }
     }

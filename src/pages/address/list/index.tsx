@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { history } from 'umi';
-import { Radio, SwipeCell, Button, Typography, Card, Flex, ActionBar, Toast } from 'react-vant';
+import { Radio, SwipeCell, Button, Typography, Card, Flex, ActionBar, Dialog } from 'react-vant';
 
 import IconFont from '@/utils/iconFont';
 
 import NavBar from '@/components/NavBar';
 
 import { reqAddressList } from '@/services/address/list';
+
+import { reqOrderDetail } from '@/services/pay';
 
 import styles from './index.less';
 
@@ -17,6 +19,8 @@ const content = 'React Vant 是一套轻量、可靠的移动端 React 组件库
 const Index: React.FC<IndexProps> = props => {
   const [addressList, setAddressList] = useState([]);
 
+  const [radioValue, setRadioValue] = useState<any>(null);
+
   const handleAddressList = async () => {
     // 备注
     const res = await reqAddressList({ memberId: 1 });
@@ -24,6 +28,31 @@ const Index: React.FC<IndexProps> = props => {
     if ((res.code = 200)) {
       setAddressList(res.data);
     }
+  };
+
+  const handleOnChange = (params: string) => {
+    const { query } = history.location;
+
+    Dialog.confirm({
+      // title: '标题',
+      message: '是否确认当前地址为收货地址？',
+    })
+      .then(async () => {
+        const res = await reqOrderDetail({ addressId: params, ...query });
+        if (res?.code == 200) {
+          setRadioValue(params);
+          history.push({
+            pathname: '/goods/pay',
+            query: {
+              ...query,
+              addressId: params,
+            },
+          });
+        }
+      })
+      .catch(() => {
+        console.log('catch');
+      });
   };
 
   useEffect(() => {
@@ -36,7 +65,7 @@ const Index: React.FC<IndexProps> = props => {
     <div className={styles.address_list_nav}>
       <NavBar title="收获地址" />
 
-      <Radio.Group onChange={v => console.log(v)}>
+      <Radio.Group onChange={(v: string) => handleOnChange(v)} value={radioValue}>
         {addressList.map((item: any) => {
           return (
             <SwipeCell
@@ -50,7 +79,7 @@ const Index: React.FC<IndexProps> = props => {
               <Card className={styles.addressCard}>
                 <Flex align="center" justify="around">
                   <Flex.Item>
-                    <Radio name={item?.id} checked={item?.isDefault} />
+                    <Radio name={item?.id} />
                   </Flex.Item>
                   <Flex.Item className={styles.addressInfo}>
                     <Typography.Title level={6}>

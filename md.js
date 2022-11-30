@@ -1,3 +1,5 @@
+// const { Sku } = require("react-vant");
+
 //加入购物车前端所传字段
 {
   type: 0; //购物车所传的判断字段
@@ -47,8 +49,8 @@
     price: 19000;
     selectedNum: 2;
     imgUrl: '';
-    specification: '红色 M';
-    freight: '免运费 或者 金额';
+    sku: ['红色', 'M'];
+    freight: '免运费';
     totalAmout: 372891739281;
   }
 }
