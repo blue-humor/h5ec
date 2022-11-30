@@ -39,7 +39,7 @@
     name: '大潘';
     phone: '15677878898';
     city: ['天津市', '天津市'];
-    isDefault: 1;
+    isDefault: true;
     detailAddress: '黄河大江';
   }
   goods: {

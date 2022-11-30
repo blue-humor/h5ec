@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { history } from 'umi';
-import { Card, Cell, Form, Input, ProductCard, ActionBar, Button, Skeleton, Typography } from 'react-vant';
+import { Card, Cell, Form, Input, ProductCard, ActionBar, Button, Skeleton, Typography, NavBar } from 'react-vant';
 import { Add, ShopO, createFromIconfontCN } from '@react-vant/icons';
 
-import NavBar from '@/components/NavBar';
+// import NavBar from '@/components/NavBar';
 
 import RemarkModel from './components/RemarkModel';
 
@@ -69,7 +69,15 @@ const Index: React.FC<IndexProps> = props => {
 
   return (
     <>
-      <NavBar title="订单确认" />
+      {/* <NavBar title="订单确认" /> */}
+      <NavBar
+        placeholder
+        fixed
+        safeAreaInsetTop
+        title={<Typography.Text>{'订单确认'}</Typography.Text>}
+        // leftText="返回"
+        onClickLeft={() => history.push('/user')}
+      />
       {addressId === 0 || undefined ? (
         <Cell
           className={styles.payAdd}

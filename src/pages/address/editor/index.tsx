@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 
 import { history } from 'umi';
 
-import { Card, Form, Input, Cascader, Button, Switch } from 'react-vant';
+import { Card, Form, Input, Cascader, Button, Switch, Toast } from 'react-vant';
 
 import NavBar from '@/components/NavBar';
+
+import { reqAddressAdd } from '@/services/address/editor';
 
 import options from './city';
 
@@ -17,8 +19,18 @@ const Index: React.FC<IndexProps> = props => {
 
   const { query } = history.location;
 
+  const handleAddressAdd = async (params: any) => {
+    const res = await reqAddressAdd(params);
+    if (res.code === 200) {
+      Toast.success('添加成功');
+      history.goBack();
+    }
+  };
+
   const handleOnFinish = (params: any) => {
     console.log({ ...params, ...query });
+
+    handleAddressAdd({ ...params, memberId: 1 });
   };
 
   useEffect(() => {

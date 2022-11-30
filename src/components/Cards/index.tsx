@@ -22,33 +22,32 @@ const Index: React.FC<IndexProps> = ({ handleCardList }) => {
 
   const [finished, setFinished] = useState<boolean>(false);
 
+  const [total, setTotal] = useState(0);
+
+  //刷新
   const handleOnRefresh = async (params: boolean) => {
     if (params) {
-      const res = await handleCardList({ pageIndex, pageSize: 20 });
+      const res = await handleCardList({ pageIndex: 1, pageSize: 20 });
       if (res?.code === 200) {
-        // 保留
-        setCardList(res.data);
+        setCardList(res.data.spuList);
       }
       Toast.info('刷新成功');
     }
   };
 
-  const handleOnLoad = async () => {
-    setPageIndex(v => v + 1);
-    const res = await handleCardList({ pageIndex, pageSize: 15 });
-    console.log(res.data);
+  // 分页
 
+  const handleOnLoad = async () => {
+    const res = await handleCardList({ pageIndex, pageSize: 15 });
+    setPageIndex(v => v + 1);
     if (res?.code === 200) {
-      setCardList((v: any) => [...v, ...res.data]);
-      if (cardList.length >= res?.totalCount) {
-        setFinished(true);
-      }
+      setCardList((v: any) => [...v, ...res.data.spuList]);
+      setTotal(res?.data?.totalCount);
+    }
+    if (cardList.length >= total) {
+      setFinished(true);
     }
   };
-
-  useEffect(() => {
-    return () => {};
-  }, []);
 
   return (
     <PullRefresh onRefresh={async () => handleOnRefresh(true)} onRefreshEnd={() => console.log('onRefreshEnd')}>

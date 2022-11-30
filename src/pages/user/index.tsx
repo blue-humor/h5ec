@@ -31,7 +31,7 @@ const Index: React.FC<IndexProps> = props => {
               return (
                 <Flex.Item key={item.id}>
                   <div className={styles.user_iconfont}>
-                    <Badge dot={true}>
+                    <Badge content={5}>
                       <IconFont name={item.name} width={'32px'} height={'32px'} />
                       <div>{item.text}</div>
                     </Badge>

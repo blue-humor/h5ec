@@ -9,3 +9,11 @@ export async function reqAddressAdd(data?: any, options?: any) {
     ...(options || {}),
   });
 }
+
+export async function reqAddressEdit(data?: any, options?: any) {
+  return request('/v1/addressEdit', {
+    method: 'post',
+    data,
+    ...(options || {}),
+  });
+}
