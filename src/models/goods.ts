@@ -7,7 +7,6 @@ export default () => {
 
   const handleClickCard = useCallback((item: any) => {
     setGoodItem(item);
-    // console.log(item);
 
     history.push({
       pathname: '/goods/details',

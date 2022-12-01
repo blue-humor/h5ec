@@ -16,10 +16,11 @@ const SkuGoods: React.FC<SkuProps> = ({ skuRef, showButtonType, skuParams }) => 
   const handleAddOrBay = async (value: any, Type: number) => {
     const res = await reqDetailsPay(value);
     if (res?.code === 200) {
+      const { id } = res?.data;
       history.push({
         pathname: '/goods/pay',
         query: {
-          orderId: res?.data?.id,
+          orderId: id,
         },
       });
     }

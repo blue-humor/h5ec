@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { history } from 'umi';
+import { history, useModel } from 'umi';
 import { Radio, SwipeCell, Button, Typography, Card, Flex, ActionBar, Dialog, Toast, Empty } from 'react-vant';
 
 import IconFont from '@/utils/iconFont';
@@ -12,10 +12,12 @@ import styles from './index.less';
 
 interface IndexProps {}
 
-const content = 'React Vant 是一套轻量、可靠的移动端 React 组件库';
-
 const Index: React.FC<IndexProps> = props => {
-  const refRedio = React.useRef();
+  const { handleClickEdit } = useModel('addressEdit', model => ({
+    handleClickEdit: model.handleClickEdit,
+  }));
+
+  const { query } = history.location;
 
   const [addressList, setAddressList] = useState([]);
 
@@ -25,7 +27,6 @@ const Index: React.FC<IndexProps> = props => {
   const handleAddressList = async () => {
     // 备注
     const res = await reqAddressList({ memberId: 1 });
-    console.log(res);
     if ((res.code = 200)) {
       setAddressList(res.data);
     }
@@ -33,32 +34,34 @@ const Index: React.FC<IndexProps> = props => {
 
   // 选择地址
   const handleOnChange = (params: string) => {
-    const { query } = history.location;
-    setRadioValue(params);
-    // console.log(refRedio);
-
-    Dialog.confirm({
-      // title: '标题',
-      message: '是否确认当前地址为收货地址？',
-    })
-      .then(async () => {
-        history.push({
-          pathname: '/goods/pay',
-          query: {
-            ...query,
-            addressId: params,
-          },
-        });
+    if (query?.orderId) {
+      setRadioValue(params);
+      Dialog.confirm({
+        // title: '标题',
+        message: '是否确认当前地址为收货地址？',
       })
-      .catch(() => {
-        setRadioValue(null);
-      });
+        .then(async () => {
+          history.push({
+            pathname: '/goods/pay',
+            query: {
+              ...query,
+              addressId: params,
+            },
+          });
+        })
+        .catch(() => {
+          setRadioValue(null);
+        });
+    } else {
+      return;
+    }
   };
 
   // 删除地址
   const handleAddressDel = async (params: any) => {
     const res = await reqAddressDel({ id: params });
     if (res?.code === 200) {
+      setAddressList(addressList.filter((item: any) => item?.id !== params));
       Toast.success(res.message);
     }
   };
@@ -87,9 +90,9 @@ const Index: React.FC<IndexProps> = props => {
                   </Button>
                 }
               >
-                <Card className={styles.addressCard}>
+                <Card className={styles.addressCard} key={item.id}>
                   <Flex align="center" justify="around">
-                    <Flex.Item>{<Radio name={item?.id} />}</Flex.Item>
+                    {query?.orderId ? <Flex.Item> {<Radio name={item?.id} />}</Flex.Item> : null}
                     <Flex.Item className={styles.addressInfo} onClick={e => handleOnChange(item?.id)}>
                       <Typography.Title level={6}>
                         {item?.name} <span>{item?.phone}</span>
@@ -100,22 +103,10 @@ const Index: React.FC<IndexProps> = props => {
                       //   collapseText: '收起',
                       //   expandText: '展开',
                       // }}
-                      >{`${item?.cityName} ${item?.provinceName} ${item?.districtName} ${item?.detailAddress}`}</Typography.Text>
+                      >{`${item?.countryName} ${item?.cityName}  ${item?.detailAddress}`}</Typography.Text>
                     </Flex.Item>
                     <Flex.Item>
-                      <IconFont
-                        width={'20px'}
-                        height={'60px'}
-                        name="icon-wenbenbianjitianchong"
-                        onClick={() =>
-                          history.push({
-                            pathname: '/address/editor',
-                            query: {
-                              id: item?.id,
-                            },
-                          })
-                        }
-                      />
+                      <IconFont width={'20px'} height={'60px'} name="icon-wenbenbianjitianchong" onClick={() => handleClickEdit(item)} />
                     </Flex.Item>
                   </Flex>
                 </Card>
@@ -126,7 +117,15 @@ const Index: React.FC<IndexProps> = props => {
       )}
 
       <ActionBar safeAreaInsetBottom style={{ padding: '16px' }}>
-        <Button round color="linear-gradient(to right, #ff6034, #ee0a24)" block icon={<IconFont name="icon-tianjia1" />} onClick={() => history.push('/address/editor')}>
+        <Button
+          round
+          color="linear-gradient(to right, #ff6034, #ee0a24)"
+          block
+          icon={<IconFont name="icon-tianjia1" />}
+          onClick={() => {
+            history.push('/address/editor');
+          }}
+        >
           新建收获地址
         </Button>
       </ActionBar>

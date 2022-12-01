@@ -11,18 +11,17 @@ interface IndexProps {
 }
 
 const Index: React.FC<IndexProps> = ({ handleCardList }) => {
-  const { goodItem, handleClickCard } = useModel('goods', model => ({
-    goodItem: model.goodItem,
+  const { handleClickCard } = useModel('goods', model => ({
     handleClickCard: model.handleClickCard,
   }));
 
-  const [pageIndex, setPageIndex] = useState(1);
+  const [pageIndex, setPageIndex] = useState<number>(1);
 
-  const [cardList, setCardList] = useState<any>([]);
+  const [cardList, setCardList] = useState<number[]>([]);
 
   const [finished, setFinished] = useState<boolean>(false);
 
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState<number>(0);
 
   //刷新
   const handleOnRefresh = async (params: boolean) => {
@@ -36,16 +35,17 @@ const Index: React.FC<IndexProps> = ({ handleCardList }) => {
   };
 
   // 分页
-
   const handleOnLoad = async () => {
     const res = await handleCardList({ pageIndex, pageSize: 15 });
-    setPageIndex(v => v + 1);
     if (res?.code === 200) {
-      setCardList((v: any) => [...v, ...res.data.spuList]);
-      setTotal(res?.data?.totalCount);
+      const { spuList, totalCount } = res?.data;
+      setCardList((v: any) => [...v, ...spuList]);
+      setTotal(totalCount);
+      setPageIndex(v => v + 1);
     }
     if (cardList.length >= total) {
       setFinished(true);
+      return;
     }
   };
 

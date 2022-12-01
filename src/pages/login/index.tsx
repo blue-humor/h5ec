@@ -5,15 +5,18 @@ import { Button, Input, Form, Flex, Cell, Toast, Loading, Card } from 'react-van
 import { UserO } from '@react-vant/icons';
 
 import { reqLogin } from '@/services/login';
+import { login } from '@/utils/rules';
 
 import styles from './index.less';
+
+import { LoginDataType } from './data';
 
 interface IndexProps {}
 
 const Index: React.FC<IndexProps> = () => {
   const [form] = Form.useForm();
 
-  const onFinish = async (values: any) => {
+  const onFinish = async (values: LoginDataType) => {
     const res = await reqLogin(values);
     if (res?.code === 200) {
       window.localStorage.setItem('token', res.token);
@@ -45,7 +48,7 @@ const Index: React.FC<IndexProps> = () => {
                   message: 'A prime is a natural number greater than 1 that has no positive divisors other than 1 and itself.',
                 }}
                 // intro='确保这是唯一的用户名'
-                rules={[{ required: true, message: '请填写用户名' }]}
+                rules={login.username}
                 name="username"
                 label="用户名"
                 leftIcon={<UserO />}
@@ -53,7 +56,7 @@ const Index: React.FC<IndexProps> = () => {
                 <Input placeholder="请输入用户名" />
               </Form.Item>
               <Form.Item
-                rules={[{ required: true, message: '请填写密码' }]}
+                rules={login.password}
                 name="password"
                 leftIcon={<UserO />}
                 label="密码"

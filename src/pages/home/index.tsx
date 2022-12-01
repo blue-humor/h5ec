@@ -15,8 +15,6 @@ const Index: React.FC<IndexProps> = props => {
 
   const [swiperImage, setSwiperImage] = useState([]);
 
-  const [goodList, setGoodList] = useState([]);
-
   const handleImage = async () => {
     const res = await reqSwiper({});
     setSwiperImage(res);
@@ -29,7 +27,6 @@ const Index: React.FC<IndexProps> = props => {
 
   useEffect(() => {
     handleImage();
-    // handleGoodsList({ pageIndex: 1, pageSize: 20 })
     return () => {};
   }, []);
 

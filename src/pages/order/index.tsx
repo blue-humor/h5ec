@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Tabs, Cell, Typography, Card, ProductCard, Flex, Button, Image } from 'react-vant';
 
 import NavBar from '@/components/NavBar';
+
+import { reqOrder } from '@/services/order';
 
 import styles from './index.less';
 
@@ -17,32 +19,29 @@ const tabs = [
 ];
 
 const Index: React.FC<IndexProps> = props => {
+  const [defaultTab, setDefaultTab] = useState<number>(-1);
+
+  const handleOrder = async (params: any) => {
+    setDefaultTab(params);
+    const res = await reqOrder({ orderStatus: defaultTab, memberId: 1 });
+    console.log(res);
+  };
+
+  useEffect(() => {
+    handleOrder({ orderStatus: defaultTab, memberId: 1 });
+    return () => {};
+  }, []);
+
   return (
     <div className={styles.order_nav}>
       <NavBar title="我的订单" />
-      <Tabs sticky swipeable={true} color="#000000" offsetTop="10">
+      <Tabs defaultActive={-1} sticky swipeable={true} color="#000000" offsetTop="10" onChange={v => handleOrder(v)}>
         {tabs.map(item => (
-          <Tabs.TabPane key={item.key} title={item.text}>
+          <Tabs.TabPane key={item.key} name={item.key} title={item.text}>
             <Card className={styles.order_card}>
               <Cell title="订单号 AAAAAAAAAA" value={<Typography.Text type="danger">{item.text}</Typography.Text>} />
-              <Flex className="demo-product-card" align="stretch">
-                <Image width={100} src="https://img.yzcdn.cn/vant/ipad.jpeg" className="demo-product-card__img" />
-                <Flex direction="column" justify="between" className="demo-product-card__content">
-                  <div>
-                    <Typography.Title level={5}>商品标题</Typography.Title>
-                    <Typography.Text type="secondary">这里是商品描述</Typography.Text>
-                  </div>
-                  <Flex justify="between" align="center">
-                    <Typography.Text strong size="lg">
-                      ¥2.00
-                    </Typography.Text>
-                    <Typography.Text size="sm" type="secondary">
-                      x2
-                    </Typography.Text>
-                  </Flex>
-                </Flex>
-              </Flex>
-              <div style={{ margin: '20px 0 0 0 ' }}>
+              <ProductCard num="2" price="2.00" desc="描述信息" title="商品名称" thumb="https://img.yzcdn.cn/vant/ipad.jpeg" />
+              <Flex style={{ margin: '20px 16px 0 0 ' }} justify="end" align="center">
                 <Typography.Text size="xs">总价¥:100.00，</Typography.Text>
                 <Typography.Text size="xs" style={{ margin: '0 6px 0 0 ' }}>
                   运费¥:10.00
@@ -50,15 +49,15 @@ const Index: React.FC<IndexProps> = props => {
                 <Typography.Text size="md" type="danger">
                   实付¥:100.00
                 </Typography.Text>
-              </div>
-              <div style={{ margin: '8px 0 0 0 ' }}>
+              </Flex>
+              <Flex style={{ margin: '14px 10px 0 0 ' }} justify="end">
                 <Button size="small" round plain style={{ marginRight: 2 }}>
                   取消订单
                 </Button>
                 <Button className={styles.button_width} size="small" round color="linear-gradient(to right, #ff6034, #ee0a24)">
                   付款
                 </Button>
-              </div>
+              </Flex>
             </Card>
           </Tabs.TabPane>
         ))}

@@ -17,6 +17,8 @@ interface IndexProps {}
 
 const Index: React.FC<IndexProps> = props => {
   const [form] = Form.useForm();
+  const { query } = history.location;
+  const { orderId }: any = query;
 
   const [showClose, setShowClose] = useState(false);
 
@@ -24,8 +26,6 @@ const Index: React.FC<IndexProps> = props => {
 
   const [orderDetail, setOrderDetail] = useState<any>(null);
   const [orderAddress, setOrderAddress] = useState<any>(null);
-
-  const [orderId, setOrderId] = useState<any>(null);
 
   const [addressId, setAddressId] = useState<number>(0);
 
@@ -43,9 +43,10 @@ const Index: React.FC<IndexProps> = props => {
   const handlerOrderDetail = async (params: any) => {
     const res = await reqOrderDetail(params);
     if (res?.code === 200) {
-      setAddressId(res.data.addressId);
-      setOrderDetail(res.data.goods);
-      setOrderAddress(res.data.address);
+      const { addressId, goods, address } = res?.data;
+      setAddressId(addressId);
+      setOrderDetail(goods);
+      setOrderAddress(address);
     }
   };
 
@@ -60,8 +61,6 @@ const Index: React.FC<IndexProps> = props => {
   };
 
   useEffect(() => {
-    const { query } = history.location;
-    setOrderId(query?.orderId);
     handlerOrderDetail(query);
 
     return () => {};
@@ -80,6 +79,7 @@ const Index: React.FC<IndexProps> = props => {
       />
       {addressId === 0 || undefined ? (
         <Cell
+          key={'addaddress'}
           className={styles.payAdd}
           title="添加收获地址"
           isLink
@@ -92,6 +92,7 @@ const Index: React.FC<IndexProps> = props => {
       ) : (
         <Card className={styles.addressCard}>
           <Cell
+            key={'address'}
             className={styles.payAdd}
             center
             onClick={e => {
@@ -100,8 +101,8 @@ const Index: React.FC<IndexProps> = props => {
             }}
             title={
               <>
-                {orderAddress?.city.map((item: any) => {
-                  return <Typography.Text>{item}</Typography.Text>;
+                {orderAddress?.city.map((item: any, index: number) => {
+                  return <Typography.Text key={index}>{item}</Typography.Text>;
                 })}
                 <Typography.Text style={{ margin: '0 0 0 4px' }}>{orderAddress?.detailAddress}</Typography.Text>
               </>
