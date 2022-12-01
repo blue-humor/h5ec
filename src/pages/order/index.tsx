@@ -23,19 +23,19 @@ const Index: React.FC<IndexProps> = props => {
 
   const handleOrder = async (params: any) => {
     setDefaultTab(params);
-    const res = await reqOrder({ orderStatus: defaultTab, memberId: 1 });
+    const res = await reqOrder({ orderStatus: params, memberId: 1 });
     console.log(res);
   };
 
   useEffect(() => {
-    handleOrder({ orderStatus: defaultTab, memberId: 1 });
+    handleOrder(defaultTab);
     return () => {};
   }, []);
 
   return (
     <div className={styles.order_nav}>
       <NavBar title="我的订单" />
-      <Tabs defaultActive={-1} sticky swipeable={true} color="#000000" offsetTop="10" onChange={v => handleOrder(v)}>
+      <Tabs defaultActive={-1} lazyRender lazyRenderPlaceholder sticky swipeable color="#000000" offsetTop="10" onChange={v => handleOrder(v)}>
         {tabs.map(item => (
           <Tabs.TabPane key={item.key} name={item.key} title={item.text}>
             <Card className={styles.order_card}>
