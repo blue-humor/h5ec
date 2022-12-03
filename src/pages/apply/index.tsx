@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 
-import { Card, Tabs, Button, Input, Form, Uploader, Picker, Typography, Checkbox } from 'react-vant';
+import { Card, Tabs, Button, Input, Dialog, Form, Uploader, Picker, Typography, Checkbox, Toast } from 'react-vant';
 
-import { reqProjects } from '@/services/apply';
+import { reqProjects, reqApply } from '@/services/apply';
+
+import { apply } from '@/utils/rules';
 
 interface IndexProps {}
 
@@ -14,8 +16,26 @@ const Index: React.FC<IndexProps> = props => {
     projectType: '',
   });
 
-  const onFinish = (values: any) => {
-    console.log(values);
+  const handleOnFinish = async (values: any) => {
+    console.log(values.projectNames);
+
+    if (values.groupName === undefined) {
+      Dialog.alert({
+        message: '请选择参赛队伍',
+      });
+      return;
+    } else if (values.projectNames === undefined) {
+      Dialog.alert({
+        message: '请选择项目',
+      });
+      return;
+    }
+    const res = await reqApply(values);
+    if (res?.code === 200) {
+      Toast.success(res?.message);
+    } else {
+      Toast.fail(res?.message);
+    }
   };
 
   const handleProjects = async (parmas: any) => {
@@ -27,13 +47,13 @@ const Index: React.FC<IndexProps> = props => {
 
   return (
     <>
-      <Tabs active="c" lazyRender lazyRenderPlaceholder swipeable color="#000000" offsetTop="10">
+      <Tabs active="c" sticky lazyRender lazyRenderPlaceholder swipeable color="#000000" offsetTop="0">
         <Tabs.TabPane title={`非校内参赛队注册`}>
           <Card style={{ margin: '20px 10px 44px 10px ' }}>
             <Form
               layout="vertical"
               form={form}
-              onFinish={onFinish}
+              onFinish={handleOnFinish}
               footer={
                 <div style={{ margin: '16px 0 10px 0' }}>
                   <Button round nativeType="submit" type="info" block>
@@ -46,13 +66,14 @@ const Index: React.FC<IndexProps> = props => {
                 isLink
                 name="groupName"
                 label="选择队伍"
+                rules={apply.groupName}
                 trigger="onConfirm"
                 onClick={(_, action: any) => {
                   action.current?.open();
                 }}
               >
                 <Picker onConfirm={(v: string) => handleProjects({ groupName: v })} popup columns={['甲', '乙', '丙', '丁']}>
-                  {val => val || '请选择队伍'}
+                  {val => val || '选择队伍'}
                 </Picker>
               </Form.Item>
 
@@ -79,7 +100,7 @@ const Index: React.FC<IndexProps> = props => {
                     {groupProject?.registerProjectList.map((item: any, index: number) => {
                       return (
                         <>
-                          <Checkbox key={item?.key} shape="round" labelPosition="right" name={item?.key} style={{ margin: '10px' }}>
+                          <Checkbox checkedColor="#ee0a24" key={item?.key} shape="round" labelPosition="right" name={item?.key} style={{ margin: '10px' }}>
                             {item?.projectName}
                           </Checkbox>
                         </>
@@ -88,60 +109,37 @@ const Index: React.FC<IndexProps> = props => {
                   </Checkbox.Group>
                 )}
               </Form.Item>
-              <Form.Item
-                // rules={[{ required: true, message: '请填写密码' }]}
-                name="clubName"
-                label="俱乐部名称"
-              >
-                <Input placeholder="请输入俱乐部名称" />
+              <Form.Item name="clubName" label="俱乐部名称">
+                <Input placeholder="输入中文名称/英文全写/英文简写" />
               </Form.Item>
-              <Form.Item
-                // rules={[{ required: true, message: '请填写密码' }]}
-                name="teamName"
-                label="队伍名称"
-              >
-                <Input placeholder="请输入队伍名称" />
+              <Form.Item rules={apply.teamName} name="teamName" label="队伍名称">
+                <Input placeholder="输入队伍名称" />
               </Form.Item>
-              <Form.Item
-                // rules={[{ required: true, message: '请填写密码' }]}
-                name="leader"
-                label="负责人/领队姓名"
-              >
-                <Input placeholder="请输入负责人/领队姓名" />
+              <Form.Item rules={apply.leader} name="leader" label="负责人/领队姓名">
+                <Input placeholder="输入负责人/领队姓名" />
               </Form.Item>
-              <Form.Item
-                // rules={[{ required: true, message: '请填写密码' }]}
-                name="contactPhone"
-                label="联系电话"
-              >
-                <Input placeholder="请输入联系电话" />
+              <Form.Item rules={apply.contactPhone} name="contactPhone" label="联系电话">
+                <Input maxLength={11} placeholder="输入联系电话" />
               </Form.Item>
               <Form.Item
                 isLink
-                name="sex   "
+                name="sex"
                 label="性别"
+                rules={apply.sex}
                 trigger="onConfirm"
                 onClick={(_, action: any) => {
                   action.current?.open();
                 }}
               >
                 <Picker popup columns={['男', '女']}>
-                  {val => val || '请选择性别'}
+                  {val => val || '选择性别'}
                 </Picker>
               </Form.Item>
-              <Form.Item
-                // rules={[{ required: true, message: '请填写密码' }]}
-                name="email"
-                label="电子邮箱"
-              >
-                <Input placeholder="请输入电子邮箱" />
+              <Form.Item rules={apply.email} name="email" label="电子邮箱">
+                <Input placeholder="输入电子邮箱" />
               </Form.Item>
-              <Form.Item
-                // rules={[{ required: true, message: '请填写密码' }]}
-                name="idNo"
-                label="身份证号码"
-              >
-                <Input placeholder="请输入身份证号码" />
+              <Form.Item rules={apply.idNo} name="idNo" label="身份证号码">
+                <Input placeholder="输入身份证号码" />
               </Form.Item>
               <Form.Item
                 name="teamLogo"

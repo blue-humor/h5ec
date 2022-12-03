@@ -54,6 +54,7 @@
     totalAmout: 372891739281;
   }
 }
+//报名
 {
   type: 2;
   clubName: undefined;

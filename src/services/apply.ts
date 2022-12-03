@@ -7,3 +7,11 @@ export async function reqProjects(data: any, options?: any) {
     ...(options || {}),
   });
 }
+
+export async function reqApply(data: any, options?: any) {
+  return request('/v1/register/apply', {
+    method: 'post',
+    data,
+    ...(options || {}),
+  });
+}

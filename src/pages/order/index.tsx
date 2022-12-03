@@ -40,7 +40,7 @@ const Index: React.FC<IndexProps> = props => {
   return (
     <div className={styles.order_nav}>
       <NavBar title="我的订单" />
-      <Tabs defaultActive={-1} lazyRender lazyRenderPlaceholder sticky swipeable color="#000000" offsetTop="10" onChange={v => handleOrder(v)}>
+      <Tabs defaultActive={-1} lazyRender lazyRenderPlaceholder sticky swipeable color="#000000" offsetTop="0" onChange={v => handleOrder(v)}>
         {tabs.map(item => (
           <Tabs.TabPane key={item.key} name={item.key} title={item.text}>
             {ordersList.map((item: any) => {

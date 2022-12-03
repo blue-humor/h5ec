@@ -5,6 +5,7 @@ import { history } from 'umi';
 import { Tabbar } from 'react-vant';
 import { Bars, WapHome, Cart, Friends } from '@react-vant/icons';
 
+import IconFont from '@/utils/iconFont';
 import './index.less';
 
 interface IndexProps {
@@ -31,7 +32,7 @@ const Layout: React.FC<IndexProps> = props => {
     <>
       {props.children}
       <div className="demo-tabbar">
-        <Tabbar placeholder value={name} activeColor="#fa4126" inactiveColor="#cec8c8" safeAreaInsetBottom onChange={c => handleHistory(c)}>
+        <Tabbar placeholder fixed value={name} activeColor="#fa4126" inactiveColor="#cec8c8" safeAreaInsetBottom onChange={c => handleHistory(c)}>
           <Tabbar.Item name="home" icon={<WapHome />}>
             首页
           </Tabbar.Item>
@@ -44,7 +45,7 @@ const Layout: React.FC<IndexProps> = props => {
           <Tabbar.Item name="user" icon={<Friends />}>
             个人中心
           </Tabbar.Item>
-          <Tabbar.Item name="apply" icon={<Friends />}>
+          <Tabbar.Item name="apply" icon={<IconFont name="icon-baoming" />}>
             报名
           </Tabbar.Item>
         </Tabbar>

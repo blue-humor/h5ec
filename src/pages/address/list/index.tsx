@@ -92,7 +92,7 @@ const Index: React.FC<IndexProps> = props => {
               >
                 <Card className={styles.addressCard} key={item.id}>
                   <Flex align="center" justify="around">
-                    {query?.orderId ? <Flex.Item> {<Radio name={item?.id} />}</Flex.Item> : null}
+                    {query?.orderId ? <Flex.Item> {<Radio checkedColor="#ee0a24" name={item?.id} />}</Flex.Item> : null}
                     <Flex.Item className={styles.addressInfo} onClick={e => handleOnChange(item?.id)}>
                       <Typography.Title level={6}>
                         {item?.name} <span>{item?.phone}</span>

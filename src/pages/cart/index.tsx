@@ -99,7 +99,7 @@ const Index: React.FC<IndexProps> = props => {
             <Card className={styles.card_cart} key={item?.id} onClick={() => handleRaedo(item)}>
               <Flex align="center">
                 <Flex.Item>
-                  <Checkbox checked={item?.isChecked} />
+                  <Checkbox checkedColor="#ee0a24" checked={item?.isChecked} />
                 </Flex.Item>
                 <Flex.Item>
                   <ProductCard className={styles.product_card} num={item?.num} price={item?.price} desc={item?.desc} title={item?.title} thumb="https://img.yzcdn.cn/vant/ipad.jpeg" />
@@ -111,7 +111,7 @@ const Index: React.FC<IndexProps> = props => {
       </div>
       <div>
         <SubmitBar
-          style={{ bottom: '70px', zIndex: -1 }}
+          style={{ bottom: '60px', zIndex: 1 }}
           safeAreaInsetBottom
           price={allPrice * 100}
           buttonText="提交订单"
@@ -122,7 +122,7 @@ const Index: React.FC<IndexProps> = props => {
           //   </>
           // }
         >
-          <Checkbox checked={allCheked} onChange={v => handleSelectAll(v)}>
+          <Checkbox checked={allCheked} checkedColor="#ee0a24" onChange={v => handleSelectAll(v)}>
             全选
           </Checkbox>
         </SubmitBar>
