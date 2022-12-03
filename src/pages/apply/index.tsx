@@ -47,7 +47,7 @@ const Index: React.FC<IndexProps> = props => {
 
   return (
     <>
-      <Tabs active="c" sticky lazyRender lazyRenderPlaceholder swipeable color="#000000" offsetTop="0">
+      <Tabs active="c" sticky lazyRender lazyRenderPlaceholder swipeable color="#000000" offsetTop="1">
         <Tabs.TabPane title={`非校内参赛队注册`}>
           <Card style={{ margin: '20px 10px 44px 10px ' }}>
             <Form
