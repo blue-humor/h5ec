@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { SubmitBar, Checkbox, Flex, Typography, Toast, ProductCard, Cell, Image, Card } from 'react-vant';
+import { SubmitBar, Checkbox, Flex, Typography, Toast, ProductCard, Cell, Stepper, Card } from 'react-vant';
 import { ShopO } from '@react-vant/icons';
 
 import styles from './index.less';
@@ -36,94 +36,97 @@ const Index: React.FC<IndexProps> = props => {
   ]);
 
   const [allPrice, setAllPrice] = useState(0);
-
-  const handlePrice = (params: any) => {
-    const allPriceData = params.reduce((sum: any, currentItem: any) => {
-      if (currentItem?.isChecked === true) {
-        return sum + currentItem.price * currentItem.num;
-      } else {
-        return 0;
-      }
-    }, 0);
-    setAllPrice(allPriceData);
-  };
+  const [selectList, setSelectList] = useState([]);
+  const [allCheked, setAllCheked] = useState(false);
 
   //全选 全不选择
   const handleSelectAll = (v: boolean) => {
+    setAllCheked(v);
     const data = cartData.map((item: any) => {
-      return {
-        ...item,
-        isChecked: v,
-      };
+      item.isChecked = v;
+      return item;
     });
-
     setCartData(data);
-    handlePrice(data);
+    handleAllPrice();
   };
 
   //单选
   const handleRaedo = (params: any) => {
-    let data = cartData.map((item: any) => {
-      // 调试
-      if (params.id === item.id) {
+    const data = cartData.map((item: any) => {
+      if (params.id == item?.id) {
         item.isChecked = !item.isChecked;
       }
-      return {
-        ...item,
-      };
+      return item;
     });
-
     setCartData(data);
-
-    console.log(data);
+    handleSelect();
+    handleAllPrice();
   };
 
-  useEffect(() => {
-    return () => {};
-  }, [cartData]);
+  // 选中的list
+  const handleSelect = () => {
+    let arr: any = [];
+    cartData.forEach((item: any) => {
+      if (item?.isChecked === true) {
+        arr.push(item.id);
+      }
+    });
+
+    if (arr.length === cartData.length) {
+      setAllCheked(true);
+    } else {
+      setAllCheked(false);
+    }
+    setSelectList(arr);
+  };
+
+  const handleAllPrice = () => {
+    let total = 0;
+    cartData.forEach((item: any) => {
+      if (item.isChecked === true) {
+        total += item.price * item.num;
+      }
+    });
+    setAllPrice(total);
+  };
 
   return (
     <div className={styles.cartNav}>
       <div>
-        {cartData.map(
-          (item: {
-            id: React.Key | null | undefined;
-            isChecked: boolean | undefined;
-            num: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined;
-            price: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined;
-            desc: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined;
-            title: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined;
-          }) => {
-            return (
-              <Card className={styles.card_cart} key={item?.id} onClick={() => handleRaedo(item)}>
-                <Flex align="center">
-                  <Flex.Item>
-                    <Checkbox checked={item?.isChecked} />
-                  </Flex.Item>
-                  <Flex.Item>
-                    <ProductCard className={styles.product_card} num={item?.num} price={item?.price} desc={item?.desc} title={item?.title} thumb="https://img.yzcdn.cn/vant/ipad.jpeg" />
-                  </Flex.Item>
-                </Flex>
-              </Card>
-            );
-          }
-        )}
+        <Cell title="商家" icon={<ShopO />} />
+        {cartData.map((item: { id: number; isChecked: boolean; num: number; price: number; desc: string; title: string }) => {
+          return (
+            <Card className={styles.card_cart} key={item?.id} onClick={() => handleRaedo(item)}>
+              <Flex align="center">
+                <Flex.Item>
+                  <Checkbox checked={item?.isChecked} />
+                </Flex.Item>
+                <Flex.Item>
+                  <ProductCard className={styles.product_card} num={item?.num} price={item?.price} desc={item?.desc} title={item?.title} thumb="https://img.yzcdn.cn/vant/ipad.jpeg" />
+                </Flex.Item>
+              </Flex>
+            </Card>
+          );
+        })}
       </div>
-
-      <SubmitBar
-        style={{ bottom: '56px' }}
-        safeAreaInsetBottom
-        price={allPrice * 100}
-        buttonText="提交订单"
-        tip={
-          <>
-            你的收货地址不支持同城送,
-            <span style={{ color: '#1989fa' }}>修改地址</span>
-          </>
-        }
-      >
-        <Checkbox onChange={v => handleSelectAll(v)}>全选</Checkbox>
-      </SubmitBar>
+      <div>
+        <SubmitBar
+          style={{ bottom: '70px', zIndex: -1 }}
+          safeAreaInsetBottom
+          price={allPrice * 100}
+          buttonText="提交订单"
+          // tip={
+          //   <>
+          //     你的收货地址不支持同城送,
+          //     <span style={{ color: '#1989fa' }}>修改地址</span>
+          //   </>
+          // }
+        >
+          <Checkbox checked={allCheked} onChange={v => handleSelectAll(v)}>
+            全选
+          </Checkbox>
+        </SubmitBar>
+      </div>
     </div>
   );
 };

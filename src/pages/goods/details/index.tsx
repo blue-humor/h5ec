@@ -15,6 +15,8 @@ import SkuGoods from './components/SkuGoods';
 
 import { reqDetails } from '@/services/goods/details';
 
+import { priceFormat } from '@/utils';
+
 import styles from './index.less';
 
 interface IndexProps {}
@@ -100,10 +102,10 @@ const Index: React.FC<IndexProps> = props => {
             <Flex justify="between" align="center">
               <Flex.Item>
                 <Typography.Text type="danger">
-                  <span className={styles.card_currentPrice}>¥{detailsParams?.price}</span>起
+                  <span className={styles.card_currentPrice}>¥{priceFormat(detailsParams?.price, 2)}</span>起
                 </Typography.Text>{' '}
                 <Typography.Text delete className={styles.card_originalPrice}>
-                  ¥{detailsParams?.originPrice}
+                  ¥{priceFormat(detailsParams?.originPrice, 2)}
                 </Typography.Text>
               </Flex.Item>
               <Flex.Item>

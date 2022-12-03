@@ -4,6 +4,9 @@ import { history } from 'umi';
 
 import { Tabbar } from 'react-vant';
 import { Bars, WapHome, Cart, Friends } from '@react-vant/icons';
+
+import './index.less';
+
 interface IndexProps {
   children: any;
 }
@@ -40,6 +43,9 @@ const Layout: React.FC<IndexProps> = props => {
           </Tabbar.Item>
           <Tabbar.Item name="user" icon={<Friends />}>
             个人中心
+          </Tabbar.Item>
+          <Tabbar.Item name="apply" icon={<Friends />}>
+            报名
           </Tabbar.Item>
         </Tabbar>
       </div>

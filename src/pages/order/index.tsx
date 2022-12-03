@@ -21,10 +21,15 @@ const tabs = [
 const Index: React.FC<IndexProps> = props => {
   const [defaultTab, setDefaultTab] = useState<number>(-1);
 
+  const [ordersList, setOrdersList] = useState<any>([]);
+
   const handleOrder = async (params: any) => {
     setDefaultTab(params);
     const res = await reqOrder({ orderStatus: params, memberId: 1 });
-    console.log(res);
+    if (res?.data === 200) {
+      const { orders } = res?.data;
+      setOrdersList(orders);
+    }
   };
 
   useEffect(() => {
@@ -38,27 +43,31 @@ const Index: React.FC<IndexProps> = props => {
       <Tabs defaultActive={-1} lazyRender lazyRenderPlaceholder sticky swipeable color="#000000" offsetTop="10" onChange={v => handleOrder(v)}>
         {tabs.map(item => (
           <Tabs.TabPane key={item.key} name={item.key} title={item.text}>
-            <Card className={styles.order_card}>
-              <Cell title="订单号 AAAAAAAAAA" value={<Typography.Text type="danger">{item.text}</Typography.Text>} />
-              <ProductCard num="2" price="2.00" desc="描述信息" title="商品名称" thumb="https://img.yzcdn.cn/vant/ipad.jpeg" />
-              <Flex style={{ margin: '20px 16px 0 0 ' }} justify="end" align="center">
-                <Typography.Text size="xs">总价¥:100.00，</Typography.Text>
-                <Typography.Text size="xs" style={{ margin: '0 6px 0 0 ' }}>
-                  运费¥:10.00
-                </Typography.Text>
-                <Typography.Text size="md" type="danger">
-                  实付¥:100.00
-                </Typography.Text>
-              </Flex>
-              <Flex style={{ margin: '14px 10px 0 0 ' }} justify="end">
-                <Button size="small" round plain style={{ marginRight: 2 }}>
-                  取消订单
-                </Button>
-                <Button className={styles.button_width} size="small" round color="linear-gradient(to right, #ff6034, #ee0a24)">
-                  付款
-                </Button>
-              </Flex>
-            </Card>
+            {ordersList.map((item: any) => {
+              return (
+                <Card className={styles.order_card}>
+                  <Cell title="订单号 AAAAAAAAAA" value={<Typography.Text type="danger">{item.text}</Typography.Text>} />
+                  <ProductCard num="2" price="2.00" desc="描述信息" title="商品名称" thumb="https://img.yzcdn.cn/vant/ipad.jpeg" />
+                  <Flex style={{ margin: '20px 16px 0 0 ' }} justify="end" align="center">
+                    <Typography.Text size="xs">总价¥:100.00，</Typography.Text>
+                    <Typography.Text size="xs" style={{ margin: '0 6px 0 0 ' }}>
+                      运费¥:10.00
+                    </Typography.Text>
+                    <Typography.Text size="md" type="danger">
+                      实付¥:100.00
+                    </Typography.Text>
+                  </Flex>
+                  <Flex style={{ margin: '14px 10px 0 0 ' }} justify="end">
+                    <Button size="small" round plain style={{ marginRight: 2 }}>
+                      取消订单
+                    </Button>
+                    <Button className={styles.button_width} size="small" round color="linear-gradient(to right, #ff6034, #ee0a24)">
+                      付款
+                    </Button>
+                  </Flex>
+                </Card>
+              );
+            })}
           </Tabs.TabPane>
         ))}
       </Tabs>

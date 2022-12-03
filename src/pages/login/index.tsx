@@ -20,11 +20,11 @@ const Index: React.FC<IndexProps> = () => {
     const res = await reqLogin(values);
     if (res?.code === 200) {
       window.localStorage.setItem('token', res.token);
-      Toast.success('登陆成功');
+      Toast(res.message);
       history.push('/home');
       return;
     } else {
-      Toast.fail('登陆失败');
+      Toast(res.message);
     }
   };
   return (

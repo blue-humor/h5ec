@@ -79,7 +79,7 @@ const Index: React.FC<IndexProps> = props => {
       {addressList.length < 1 ? (
         <Empty description="暂无收货地址，赶快添加吧" style={{ background: '#fff' }} />
       ) : (
-        <Radio.Group onChange={(v: string) => handleOnChange(v)} value={radioValue}>
+        <Radio.Group checkedColor="#ee0a24" onChange={(v: string) => handleOnChange(v)} value={radioValue}>
           {addressList.map((item: any) => {
             return (
               <SwipeCell

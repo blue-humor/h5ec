@@ -54,3 +54,16 @@
     totalAmout: 372891739281;
   }
 }
+{
+  type: 2;
+  clubName: undefined;
+  contactPhone: undefined;
+  email: undefined;
+  groupName: '丁';
+  idNo: undefined;
+  leader: undefined;
+  projectNames: ['B2', 'B4', 'D', 'E'];
+  sex: undefined;
+  teamLogo: undefined;
+  teamName: undefined;
+}
