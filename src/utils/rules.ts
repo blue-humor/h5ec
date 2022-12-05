@@ -63,4 +63,7 @@ export const apply = {
       message: '请输入正确的手机号',
     },
   ],
+
+  //校内参赛队员
+  schoolName: [{ required: true, message: '请输入学校名称' }],
 };

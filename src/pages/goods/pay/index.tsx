@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { history } from 'umi';
-import { Card, Cell, Form, Input, ProductCard, ActionBar, Button, Skeleton, Typography, NavBar } from 'react-vant';
+import { Card, Cell, Form, Input, ProductCard, ActionBar, Button, Skeleton, Typography, NavBar, Dialog } from 'react-vant';
 import { Add, ShopO, createFromIconfontCN } from '@react-vant/icons';
 
 // import NavBar from '@/components/NavBar';
@@ -8,6 +8,8 @@ import { Add, ShopO, createFromIconfontCN } from '@react-vant/icons';
 import RemarkModel from './components/RemarkModel';
 
 import { reqOrderDetail } from '@/services/pay';
+
+import { priceFormat } from '@/utils/index';
 
 import styles from './index.less';
 
@@ -36,6 +38,15 @@ const Index: React.FC<IndexProps> = props => {
 
   //提交表单
   const onFinish = (values: any) => {
+    console.log(orderAddress);
+
+    if (orderAddress?.name === null) {
+      Dialog.alert({
+        title: '收货地址信息不能为空',
+        message: '请添加收货人姓名，联系电话及详细地址',
+      });
+      return;
+    }
     console.log({ ...values, remark });
   };
 
@@ -119,7 +130,7 @@ const Index: React.FC<IndexProps> = props => {
         <div>
           <Card style={{ margin: '10px 0 0 0 ' }}>
             <Cell title="店铺名" icon={<ShopO />} />
-            <ProductCard num="2" price={orderDetail?.price} desc={orderDetail?.sku} title={orderDetail?.title} thumb={orderDetail?.imgUrl} />
+            <ProductCard num={orderDetail?.selectedNum} price={orderDetail?.price} desc={orderDetail?.sku} title={orderDetail?.title} thumb={orderDetail?.imgUrl} />
             <Form
               form={form}
               onFinish={onFinish}
@@ -157,7 +168,7 @@ const Index: React.FC<IndexProps> = props => {
               title
               value={
                 <Typography.Title type="danger">
-                  <span className={styles.pay_heji}>合计：</span>¥217271
+                  <span className={styles.pay_heji}>合计：</span>¥{priceFormat(217271, 2)}
                 </Typography.Title>
               }
             />

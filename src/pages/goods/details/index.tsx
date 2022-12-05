@@ -126,7 +126,7 @@ const Index: React.FC<IndexProps> = props => {
           </Card.Header>
         </Card>
 
-        <Cell
+        {/* <Cell
           title={
             <div>
               已选择:
@@ -140,9 +140,9 @@ const Index: React.FC<IndexProps> = props => {
             </div>
           }
           isLink
-        />
+        /> */}
 
-        <Card round>
+        <Card round style={{ margin: '0 0  60px  0' }}>
           <Divider>详情介绍</Divider>
           {detailsParams?.detailsImage?.map((item: any, index: number | undefined) => {
             return (

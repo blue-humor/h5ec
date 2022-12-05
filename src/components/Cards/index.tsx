@@ -4,6 +4,8 @@ import { useModel } from 'umi';
 
 import { Image, Card, Toast, Typography, Flex, PullRefresh, List } from 'react-vant';
 
+import { priceFormat } from '@/utils/index';
+
 import './index.less';
 
 interface IndexProps {
@@ -63,9 +65,9 @@ const Index: React.FC<IndexProps> = ({ handleCardList }) => {
                   <Card.Body>
                     <Typography.Text ellipsis={2}>{item?.title}</Typography.Text>
                     <Typography.Text type="danger">
-                      ¥<span className="card_parice">{Math.ceil(item?.price) / 100}</span>
+                      <span className="card_parice">¥{priceFormat(item?.price, 2)}</span>
                     </Typography.Text>{' '}
-                    <Typography.Text delete>¥{Math.ceil(item?.originPrice) / 100}</Typography.Text>
+                    <Typography.Text delete>¥{priceFormat(item?.originPrice, 2)}</Typography.Text>
                   </Card.Body>
                 </Card>
               </Flex.Item>
