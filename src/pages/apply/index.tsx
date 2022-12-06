@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
-import { Card, Tabs, Button, Input, Dialog, Form, Uploader, Picker, Typography, Checkbox, Toast } from 'react-vant';
+import { history } from 'umi';
+
+import { Card, Tabs, Button, Input, Form, Uploader, Picker, Typography, Checkbox, Toast } from 'react-vant';
 
 import { reqProjects, reqApply } from '@/services/apply';
 
@@ -11,7 +13,7 @@ interface IndexProps {}
 const Index: React.FC<IndexProps> = props => {
   const [form] = Form.useForm();
 
-  const [type, seTtype] = useState<number>(3);
+  const [type, seTtype] = useState<number>(1);
 
   const [groupProject, setGroupProject] = useState<any>({
     registerProjectList: [],
@@ -35,19 +37,28 @@ const Index: React.FC<IndexProps> = props => {
     const res = await reqApply({ ...values, type });
     if (res?.code === 200) {
       Toast.success(res?.message);
-    } else Toast.fail(res?.message);
+      history.push({
+        pathname: '/apply/list',
+        query: {
+          type: type + '',
+          parentId: res?.data?.id,
+        },
+      });
+    } else {
+      Toast.fail(res?.message);
+    }
   };
 
   const handleProjects = async (parmas: any) => {
     const res = await reqProjects(parmas);
-    if (res.code === 200) {
+    if (res?.code === 200) {
       setGroupProject(res.data);
     }
   };
 
   return (
     <>
-      <Tabs active={1} sticky lazyRender lazyRenderPlaceholder swipeable color="#000000" offsetTop="1" onChange={(v: any) => seTtype(v)}>
+      <Tabs active={1} sticky lazyRender lazyRenderPlaceholder swipeable color="#000000" offsetTop="0.1" onChange={(v: any) => seTtype(v)}>
         <Tabs.TabPane title={`校内参赛队注册`} key={1} name={1}>
           <Card style={{ margin: '20px 10px 44px 10px ' }}>
             <Form
@@ -212,7 +223,7 @@ const Index: React.FC<IndexProps> = props => {
                     {groupProject?.registerProjectList.map((item: any, index: number) => {
                       return (
                         <>
-                          <Typography.Text> {item?.projectName}</Typography.Text>
+                          <Typography.Text key={item?.projectName}> {item?.projectName}</Typography.Text>
                           {item.propList.map((item2: any) => {
                             return (
                               <Checkbox checkedColor="#ee0a24" key={item2?.key} shape="round" labelPosition="right" name={item2?.key} style={{ margin: '10px' }}>

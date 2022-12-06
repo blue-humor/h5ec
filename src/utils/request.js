@@ -56,7 +56,7 @@ const request = extend({
 });
 
 request.interceptors.request.use((url, options) => {
-  const token = window.localStorage.getItem('token') || '';
+  const token = window.sessionStorage.getItem('token') || '';
   const headers = {
     token: token,
   };

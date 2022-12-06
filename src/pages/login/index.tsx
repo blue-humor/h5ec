@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { history } from 'umi';
 
-import { Button, Input, Form, Flex, Cell, Toast, Loading, Card } from 'react-vant';
+import { Button, Input, Form, Flex, Toast } from 'react-vant';
 import { UserO } from '@react-vant/icons';
 
 import { reqLogin } from '@/services/login';
@@ -19,9 +19,9 @@ const Index: React.FC<IndexProps> = () => {
   const onFinish = async (values: LoginDataType) => {
     const res = await reqLogin(values);
     if (res?.code === 200) {
-      window.localStorage.setItem('token', res.token);
+      window.sessionStorage.setItem('token', res.token);
       Toast(res?.message);
-      history.push('/home');
+      history.push('/');
       return;
     } else {
       Toast(res?.message);

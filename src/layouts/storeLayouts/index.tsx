@@ -18,7 +18,7 @@ const Layout: React.FC<IndexProps> = props => {
   const handleHistory = (params: any) => {
     setName(params);
     console.log();
-    history.push(`/${params}`);
+    history.push(params);
   };
 
   useEffect(() => {
@@ -33,19 +33,19 @@ const Layout: React.FC<IndexProps> = props => {
       {props.children}
       <div className="demo-tabbar">
         <Tabbar placeholder fixed value={name} activeColor="#fa4126" inactiveColor="#cec8c8" safeAreaInsetBottom onChange={c => handleHistory(c)}>
-          <Tabbar.Item name="home" icon={<WapHome />}>
+          <Tabbar.Item name="/store/home" icon={<WapHome />}>
             首页
           </Tabbar.Item>
-          <Tabbar.Item name="classify" icon={<Bars />}>
+          <Tabbar.Item name="/store/classify" icon={<Bars />}>
             分类
           </Tabbar.Item>
-          <Tabbar.Item name="cart" icon={<Cart />} badge={{ content: 5 }}>
+          <Tabbar.Item name="/store/cart" icon={<Cart />} badge={{ content: 5 }}>
             购物车
           </Tabbar.Item>
-          <Tabbar.Item name="user" icon={<Friends />}>
+          <Tabbar.Item name="/user" icon={<Friends />}>
             个人中心
           </Tabbar.Item>
-          <Tabbar.Item name="apply" icon={<IconFont name="icon-baoming" />}>
+          <Tabbar.Item name="/apply" icon={<IconFont name="icon-baoming" />}>
             报名
           </Tabbar.Item>
         </Tabbar>

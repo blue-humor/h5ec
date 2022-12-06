@@ -29,6 +29,10 @@ export const apply = {
   leader: [{ required: true, message: '请输入负责人/领队姓名' }],
   sex: [{ required: true, message: '请选择性别' }],
   teamLogo: [{ required: true, message: '请上传队伍logo' }],
+  name: [{ required: true, message: '请输入队员姓名' }],
+  supervisorIdNo: [{ required: true, message: '请输入未成年人监护人身份证号' }],
+  supervisorName: [{ required: true, message: '请输入未成年人监护人姓名' }],
+
   email: [
     {
       required: true,
