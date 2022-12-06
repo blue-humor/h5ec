@@ -23,8 +23,10 @@ const Index: React.FC<IndexProps> = props => {
   });
 
   const handleType = v => {
+    form.setFieldsValue({});
+
     seTtype(v);
-    setInitialValues({});
+    setInitialValues({ groupName: '' });
   };
 
   const handleOnFinish = async (values: any) => {
@@ -65,7 +67,7 @@ const Index: React.FC<IndexProps> = props => {
 
   return (
     <>
-      <Tabs active={1} sticky lazyRender lazyRenderPlaceholder swipeable color="#000000" offsetTop="0.1" onChange={(v: any) => handleType(v)}>
+      <Tabs active={1} sticky swipeable color="#000000" offsetTop="0.1" onChange={(v: any) => handleType(v)}>
         <Tabs.TabPane title={`校内参赛队注册`} key={1} name={1}>
           <Card style={{ margin: '20px 10px 44px 10px ' }}>
             <Form
@@ -129,15 +131,15 @@ const Index: React.FC<IndexProps> = props => {
                 )}
               </Form.Item>
 
-              <Form.Item rules={apply.schoolName} name="colleageCnName" label="学校中文名称">
+              <Form.Item name="colleageCnName" label="学校中文名称">
                 <Input placeholder="输入中文名称" />
               </Form.Item>
 
-              <Form.Item rules={apply.schoolName} name="colleageEnName" label="学校英文全写">
+              <Form.Item name="colleageEnName" label="学校英文全写">
                 <Input placeholder="英文全写" />
               </Form.Item>
 
-              <Form.Item rules={apply.schoolName} name="colleageEnShortName" label="学校英文简写">
+              <Form.Item name="colleageEnShortName" label="学校英文简写">
                 <Input placeholder="英文简写" />
               </Form.Item>
 

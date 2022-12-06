@@ -57,8 +57,9 @@ const Index: React.FC<IndexProps> = props => {
             name: info?.name,
             sex: info?.sex,
             idNo: info?.idNo,
-            // colleageName: params?.colleageName,
-            // supervisorIdNo: params?.supervisorIdNo
+            colleageName: info?.colleageName,
+            supervisorIdNo: info?.supervisorIdNo,
+            supervisorName: info?.supervisorName,
           }}
           footer={
             <div style={{ margin: '16px 16px 0' }}>
