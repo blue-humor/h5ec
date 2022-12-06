@@ -15,10 +15,17 @@ const Index: React.FC<IndexProps> = props => {
 
   const [type, seTtype] = useState<number>(1);
 
+  const [initialValues, setInitialValues] = useState({});
+
   const [groupProject, setGroupProject] = useState<any>({
     registerProjectList: [],
     projectType: '',
   });
+
+  const handleType = v => {
+    seTtype(v);
+    setInitialValues({});
+  };
 
   const handleOnFinish = async (values: any) => {
     console.log(values);
@@ -58,12 +65,13 @@ const Index: React.FC<IndexProps> = props => {
 
   return (
     <>
-      <Tabs active={1} sticky lazyRender lazyRenderPlaceholder swipeable color="#000000" offsetTop="0.1" onChange={(v: any) => seTtype(v)}>
+      <Tabs active={1} sticky lazyRender lazyRenderPlaceholder swipeable color="#000000" offsetTop="0.1" onChange={(v: any) => handleType(v)}>
         <Tabs.TabPane title={`校内参赛队注册`} key={1} name={1}>
           <Card style={{ margin: '20px 10px 44px 10px ' }}>
             <Form
               layout="vertical"
               form={form}
+              initialValues={initialValues}
               onFinish={handleOnFinish}
               footer={
                 <div style={{ margin: '10px 0 10px 0' }}>
@@ -83,7 +91,7 @@ const Index: React.FC<IndexProps> = props => {
                   action.current?.open();
                 }}
               >
-                <Picker onConfirm={(v: string) => handleProjects({ groupName: v })} popup columns={['甲', '乙', '丙', '丁']}>
+                <Picker key={'groupName'} onConfirm={(v: string) => handleProjects({ groupName: v })} popup columns={['甲', '乙', '丙', '丁']}>
                   {val => val || '选择队伍'}
                 </Picker>
               </Form.Item>
@@ -191,6 +199,7 @@ const Index: React.FC<IndexProps> = props => {
         <Tabs.TabPane title={`非校内参赛队注册`} key={2} name={2}>
           <Card style={{ margin: '20px 10px 44px 10px ' }}>
             <Form
+              initialValues={initialValues}
               layout="vertical"
               form={form}
               onFinish={handleOnFinish}
@@ -308,6 +317,7 @@ const Index: React.FC<IndexProps> = props => {
         <Tabs.TabPane title={`邀请赛俱乐部注册`} key={3} name={3}>
           <Card style={{ margin: '20px 10px 44px 10px ' }}>
             <Form
+              initialValues={initialValues}
               layout="vertical"
               form={form}
               onFinish={handleOnFinish}
