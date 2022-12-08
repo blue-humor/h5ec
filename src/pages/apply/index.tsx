@@ -420,11 +420,11 @@ const Index: React.FC<IndexProps> = props => {
                 label="队伍logo"
                 // rules={[{ required: true, message: '请上传队伍logo' }]}
               >
-                <Uploader accept="image/png" maxCount={1} />
-                <Typography.Text underline style={{ margin: '54px 0 0 10px' }}>
-                  上传图片png格式
-                </Typography.Text>
+                <Uploader previewImage accept="image/png" maxCount={1} />
               </Form.Item>
+              <Typography.Text underline style={{ margin: '0 0 0 10px' }}>
+                上传图片png格式
+              </Typography.Text>
             </Form>
           </Card>
         </Tabs.TabPane>

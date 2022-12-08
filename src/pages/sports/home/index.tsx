@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { history } from 'umi';
 
 import { Swiper, Image, Search, Card, Grid, Cell, Typography } from 'react-vant';
 
@@ -9,6 +10,8 @@ import { reqSwiper, reqGoodsList } from '@/services/home';
 import IconFont from '@/utils/iconFont';
 
 import styles from './index.less';
+
+const src = 'https://n.sinaimg.cn/sports/2_img/upload/a7a65bdb/107/w1024h683/20221208/df90-c7609c9425dfdc5e0fa7b14d03957b68.jpg';
 
 interface IndexProps {}
 
@@ -59,22 +62,22 @@ const Index: React.FC<IndexProps> = props => {
           <Grid.Item icon={<IconFont name="icon-hezuo" />} text="合作培训" />
           <Grid.Item icon={<IconFont name="icon-kecheng" />} text="精选课程" />
         </Grid>
-        <Cell center title={<Typography.Title level={6}>最新赛事</Typography.Title>} rightIcon={<IconFont name="icon-shuangjiantouyou" />} isLink />
+        <Cell isLink center title={<Typography.Title level={5}>最新赛事</Typography.Title>} rightIcon={<IconFont name="icon-shuangjiantouyou" />} onClick={() => history.push('/sports/list')} />
         <Grid border={false} columnNum={2}>
           <Grid.Item className={styles.eventsNav}>
-            <Image src="https://img.yzcdn.cn/vant/apple-1.jpg" className={styles.eventsImage} height={'120px'}>
+            <Image src={src} className={styles.eventsImage} height={'120px'}>
               <Typography.Title className={styles.eventsTitle}>清晨点支烟</Typography.Title>
               <Typography.Text className={styles.eventsText}>人气：12万</Typography.Text>
             </Image>
           </Grid.Item>
           <Grid.Item className={styles.eventsNav}>
-            <Image src="https://img.yzcdn.cn/vant/apple-1.jpg" className={styles.eventsImage} height={'120px'}>
+            <Image src={src} className={styles.eventsImage} height={'120px'}>
               <Typography.Title className={styles.eventsTitle}>清晨点支烟</Typography.Title>
               <Typography.Text className={styles.eventsText}>人气：12万</Typography.Text>
             </Image>
           </Grid.Item>
         </Grid>
-        <Cell center title={<Typography.Title level={6}>热门课程</Typography.Title>} rightIcon={<IconFont name="icon-shuangjiantouyou" />} isLink />
+        <Cell center title={<Typography.Title level={5}>热门课程</Typography.Title>} rightIcon={<IconFont name="icon-shuangjiantouyou" />} isLink />
         <NewsCard />
       </div>
     </>
