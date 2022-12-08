@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { history } from 'umi';
 
-import { Card, Tabs, Button, Input, Form, Uploader, Picker, Typography, Checkbox, Toast } from 'react-vant';
+import { Card, Tabs, Button, Input, Form, Uploader, Picker, Typography, Checkbox, Toast, Dialog } from 'react-vant';
 
 import { reqProjects, reqApply } from '@/services/apply';
 
@@ -23,26 +23,23 @@ const Index: React.FC<IndexProps> = props => {
   });
 
   const handleType = v => {
-    form.setFieldsValue({});
-
     seTtype(v);
-    setInitialValues({ groupName: '' });
   };
 
   const handleOnFinish = async (values: any) => {
     console.log(values);
 
-    // if (values.groupName === undefined) {
-    //   Dialog.alert({
-    //     message: '请选择参赛队伍',
-    //   });
-    //   return;
-    // } else if (values.projectNames === undefined || values.projectNames?.length <= 0) {
-    //   Dialog.alert({
-    //     message: '请选择参赛项目',
-    //   });
-    //   return;
-    // }
+    if (values.groupName === undefined) {
+      Dialog.alert({
+        message: '请选择参赛队伍',
+      });
+      return;
+    } else if (values.projectNames === undefined || values.projectNames?.length <= 0) {
+      Dialog.alert({
+        message: '请选择参赛项目',
+      });
+      return;
+    }
     const res = await reqApply({ ...values, type });
     if (res?.code === 200) {
       Toast.success(res?.message);
@@ -67,7 +64,7 @@ const Index: React.FC<IndexProps> = props => {
 
   return (
     <>
-      <Tabs active={1} sticky swipeable color="#000000" offsetTop="0.1" onChange={(v: any) => handleType(v)}>
+      <Tabs active={1} sticky swipeable color="#000000" offsetTop="0.1" onChange={(v: number) => handleType(v)}>
         <Tabs.TabPane title={`校内参赛队注册`} key={1} name={1}>
           <Card style={{ margin: '20px 10px 44px 10px ' }}>
             <Form

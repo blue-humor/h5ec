@@ -13,7 +13,7 @@ interface IndexProps {
 }
 
 const Layout: React.FC<IndexProps> = props => {
-  const [name, setName] = useState<string>('home');
+  const [name, setName] = useState<string>('/sports/home');
 
   const handleHistory = (params: any) => {
     setName(params);
@@ -33,7 +33,7 @@ const Layout: React.FC<IndexProps> = props => {
       {props.children}
       <div className="demo-tabbar">
         <Tabbar placeholder fixed value={name} activeColor="#fa4126" inactiveColor="#cec8c8" safeAreaInsetBottom onChange={c => handleHistory(c)}>
-          <Tabbar.Item name="/store/home" icon={<WapHome />}>
+          <Tabbar.Item name="/sports/home" icon={<WapHome />}>
             首页
           </Tabbar.Item>
           <Tabbar.Item name="/store/classify" icon={<Bars />}>
@@ -42,11 +42,11 @@ const Layout: React.FC<IndexProps> = props => {
           <Tabbar.Item name="/store/cart" icon={<Cart />} badge={{ content: 5 }}>
             购物车
           </Tabbar.Item>
-          <Tabbar.Item name="/user" icon={<Friends />}>
-            个人中心
-          </Tabbar.Item>
           <Tabbar.Item name="/apply" icon={<IconFont name="icon-baoming" />}>
             报名
+          </Tabbar.Item>
+          <Tabbar.Item name="/user" icon={<Friends />}>
+            个人中心
           </Tabbar.Item>
         </Tabbar>
       </div>

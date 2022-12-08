@@ -13,18 +13,16 @@ export default [
   { exact: true, path: '/apply/list', title: '订单', component: '@/pages/apply/list' },
   { exact: true, path: '/apply/editor', title: '订单', component: '@/pages/apply/editor' },
 
-  // {},
-
   {
     exact: false,
     component: '@/layouts/storeLayouts',
     routes: [
-      { exact: true, path: '/store/home', title: '首页', component: '@/pages/store/home' },
+      { exact: true, path: '/sports/home', title: '首页', component: '@/pages/sports/home' },
       { exact: true, path: '/store/classify', title: '分类', component: '@/pages/store/classify' },
       { exact: true, path: '/store/cart', title: '购物车', component: '@/pages/store/cart' },
       { exact: true, path: '/user', title: '个人中心', component: '@/pages/user' },
       { exact: true, path: '/apply', title: '报名', component: '@/pages/apply' },
-      { path: '/', redirect: '/store/home' },
+      { path: '/', redirect: '/sports/home' },
       { component: './404' },
     ],
   },
