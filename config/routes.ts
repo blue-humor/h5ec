@@ -21,7 +21,7 @@ export default [
     routes: [
       { exact: true, path: '/sports/home', title: '首页', component: '@/pages/sports/home' },
       { exact: true, path: '/store/classify', title: '分类', component: '@/pages/store/classify' },
-      { exact: true, path: '/store/cart', title: '购物车', component: '@/pages/store/cart' },
+      // { exact: true, path: '/store/cart', title: '购物车', component: '@/pages/store/cart' },
       { exact: true, path: '/user', title: '个人中心', component: '@/pages/user' },
       { exact: true, path: '/apply', title: '报名', component: '@/pages/apply' },
       { path: '/', redirect: '/sports/home' },

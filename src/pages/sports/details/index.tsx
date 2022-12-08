@@ -1,37 +1,55 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
+import { history } from 'umi';
 
 import { Image, Cell, Typography, Divider, FloatingBall, Flex, Toast } from 'react-vant';
 
 import NavBar from '@/components/NavBar';
 import Ball from '@/components/Ball';
 
+import { reqArticle } from '@/services/sports/details';
+
 import styles from './index.less';
 
 interface IndexProps {}
 
 const Index: React.FC<IndexProps> = props => {
+  const { query } = history.location;
+
+  const [article, setArticle] = useState<any>({});
+
+  const handleArticle = async () => {
+    const res = await reqArticle(query);
+    if (res?.code === 200) {
+      setArticle(res?.data);
+    }
+  };
+
+  useEffect(() => {
+    handleArticle();
+
+    return () => {};
+  }, []);
+
   return (
     <>
       <NavBar title="赛事新闻" />
-      <Typography.Title style={{ textAlign: 'center', lineHeight: '2' }}>标题</Typography.Title>
+      <Typography.Title level={3} className={styles.detailsTitle}>
+        {article?.title}
+      </Typography.Title>
       <Cell
         center
-        title={`Avatar`}
+        className={styles.userInfo}
+        title={article?.member?.username}
         rightIcon={
           <>
-            <Typography.Text>2022-11-11</Typography.Text>
+            <Typography.Text>{article?.createtime}</Typography.Text>
           </>
         }
-        icon={<Image width={44} height={44} src="/demo_1.jpg" round />}
+        icon={<Image width={44} height={44} src={article?.member?.headimg} round />}
       />
-      <Image width={'100%'} height={180} src="/demo_1.jpg" />
-      <p className={styles.sportsDetailsText}>
-        其中:text-indent:2em定义了文本缩进2em，em是相对长度单位，在这里你设置的字体大小有多大(px)，1em就是多大。我们中文段落一般每段前空两个汉字。实际上，就是首行缩进了2em。这段代码可以控制整个页面的段落缩进，也可以单独控制某个盒子(div)内的段落缩进。
-        其中:text-indent:2em定义了文本缩进2em，em是相对长度单位，在这里你设置的字体大小有多大(px)，1em就是多大。我们中文段落一般每段前空两个汉字。实际上，就是首行缩进了2em。这段代码可以控制整个页面的段落缩进，也可以单独控制某个盒子(div)内的段落缩进。
-        其中:text-indent:2em定义了文本缩进2em，em是相对长度单位，在这里你设置的字体大小有多大(px)，1em就是多大。我们中文段落一般每段前空两个汉字。实际上，就是首行缩进了2em。这段代码可以控制整个页面的段落缩进，也可以单独控制某个盒子(div)内的段落缩进。
-        其中:text-indent:2em定义了文本缩进2em，em是相对长度单位，在这里你设置的字体大小有多大(px)，1em就是多大。我们中文段落一般每段前空两个汉字。实际上，就是首行缩进了2em。这段代码可以控制整个页面的段落缩进，也可以单独控制某个盒子(div)内的段落缩进。
-        其中:text-indent:2em定义了文本缩进2em，em是相对长度单位，在这里你设置的字体大小有多大(px)，1em就是多大。我们中文段落一般每段前空两个汉字。实际上，就是首行缩进了2em。这段代码可以控制整个页面的段落缩进，也可以单独控制某个盒子(div)内的段落缩进。
-      </p>
+      <Image width={'100%'} src={article?.thumb} />
+      <p className={styles.sportsDetailsText}>{article?.content}</p>
       <Divider />
       <Ball />
     </>

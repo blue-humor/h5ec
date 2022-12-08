@@ -22,7 +22,7 @@ const Index: React.FC<IndexProps> = props => {
     projectType: '',
   });
 
-  const handleType = v => {
+  const handleType = (v: number) => {
     seTtype(v);
   };
 
@@ -39,6 +39,10 @@ const Index: React.FC<IndexProps> = props => {
         message: '请选择参赛项目',
       });
       return;
+    } else if (values.schoolDocument === undefined && type === 1) {
+      Dialog.alert({
+        message: '请上传学校公章证明文件',
+      });
     }
     const res = await reqApply({ ...values, type });
     if (res?.code === 200) {
@@ -172,24 +176,31 @@ const Index: React.FC<IndexProps> = props => {
 
               <Form.Item
                 name="schoolDocument"
-                label="学校公章证明文件"
-                // rules={[{ required: true, message: '请上传队伍logo' }]}
+                label={
+                  <>
+                    学校公章证明文件
+                    <Typography.Text type="danger" underline style={{ margin: '0 0 0 10px' }}>
+                      上传扫描和清晰照片
+                    </Typography.Text>
+                  </>
+                }
               >
                 <Uploader accept="image/png" maxCount={1} />
-                <Typography.Text underline style={{ margin: '54px 0 0 10px' }}>
-                  上传扫描和清晰照片
-                </Typography.Text>
               </Form.Item>
 
               <Form.Item
                 name="teamLogo"
-                label="队伍logo"
-                // rules={[{ required: true, message: '请上传队伍logo' }]}
+                label={
+                  <>
+                    队伍logo
+                    <Typography.Text type="danger" underline style={{ margin: '0 0 0 10px' }}>
+                      上传图片png格式
+                    </Typography.Text>
+                  </>
+                }
+                rules={[{ required: true, message: '请上传队伍logo' }]}
               >
                 <Uploader accept="image/png" maxCount={1} />
-                <Typography.Text underline style={{ margin: '54px 0 0 10px' }}>
-                  上传图片png格式
-                </Typography.Text>
               </Form.Item>
             </Form>
           </Card>
@@ -301,13 +312,18 @@ const Index: React.FC<IndexProps> = props => {
               </Form.Item>
               <Form.Item
                 name="teamLogo"
-                label="队伍logo"
-                // rules={[{ required: true, message: '请上传队伍logo' }]}
+                label={
+                  <>
+                    {' '}
+                    队伍logo
+                    <Typography.Text type="danger" underline style={{ margin: '0 0 0 10px' }}>
+                      上传图片png格式
+                    </Typography.Text>
+                  </>
+                }
+                rules={[{ required: true, message: '请上传队伍logo' }]}
               >
                 <Uploader accept="image/png" maxCount={1} />
-                <Typography.Text underline style={{ margin: '54px 0 0 10px' }}>
-                  上传图片png格式
-                </Typography.Text>
               </Form.Item>
             </Form>
           </Card>
@@ -417,14 +433,18 @@ const Index: React.FC<IndexProps> = props => {
               </Form.Item>
               <Form.Item
                 name="teamLogo"
-                label="队伍logo"
-                // rules={[{ required: true, message: '请上传队伍logo' }]}
+                label={
+                  <>
+                    队伍logo
+                    <Typography.Text type="danger" underline style={{ margin: '0 0 0 10px' }}>
+                      上传图片png格式
+                    </Typography.Text>
+                  </>
+                }
+                rules={[{ required: true, message: '请上传队伍logo' }]}
               >
                 <Uploader previewImage accept="image/png" maxCount={1} />
               </Form.Item>
-              <Typography.Text underline style={{ margin: '0 0 0 10px' }}>
-                上传图片png格式
-              </Typography.Text>
             </Form>
           </Card>
         </Tabs.TabPane>
