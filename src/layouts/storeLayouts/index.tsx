@@ -39,9 +39,9 @@ const Layout: React.FC<IndexProps> = props => {
           <Tabbar.Item name="/store/classify" icon={<Bars />}>
             分类
           </Tabbar.Item>
-          <Tabbar.Item name="/store/cart" icon={<Cart />} badge={{ content: 5 }}>
+          {/* <Tabbar.Item name="/store/cart" icon={<Cart />} badge={{ content: 5 }}>
             购物车
-          </Tabbar.Item>
+          </Tabbar.Item> */}
           <Tabbar.Item name="/apply" icon={<IconFont name="icon-baoming" />}>
             报名
           </Tabbar.Item>

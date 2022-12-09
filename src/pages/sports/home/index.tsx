@@ -42,6 +42,16 @@ const Index: React.FC<IndexProps> = props => {
     }
   };
 
+  const huandlePush = (params: string, title: string) => {
+    history.push({
+      pathname: '/sports/list',
+      query: {
+        type: params,
+        barTitle: title,
+      },
+    });
+  };
+
   useEffect(() => {
     handleImage();
     handleHomeList({});
@@ -62,7 +72,7 @@ const Index: React.FC<IndexProps> = props => {
         />
         <Card>
           <Swiper autoplay={5000}>
-            {swiperImage?.map((item: any, index) => (
+            {swiperImage?.map((item: any) => (
               <Swiper.Item key={item?.id}>
                 <Image lazyload fit="fill" src={item?.img} width="100%" />
               </Swiper.Item>
@@ -70,10 +80,10 @@ const Index: React.FC<IndexProps> = props => {
           </Swiper>
         </Card>
         <Grid>
-          <Grid.Item icon={<IconFont name="icon-zizhutuiguang" />} text="投稿集锦" />
-          <Grid.Item icon={<IconFont name="icon-newspaper4" />} text="赛事新闻" />
-          <Grid.Item icon={<IconFont name="icon-hezuo" />} text="合作培训" />
-          <Grid.Item icon={<IconFont name="icon-kecheng" />} text="精选课程" />
+          <Grid.Item icon={<IconFont name="icon-zizhutuiguang" />} text="投稿集锦" onClick={() => huandlePush('1', '投稿集锦')} />
+          <Grid.Item icon={<IconFont name="icon-newspaper4" />} text="赛事新闻" onClick={() => huandlePush('2', '赛事新闻')} />
+          <Grid.Item icon={<IconFont name="icon-hezuo" />} text="合作培训" onClick={() => huandlePush('3', '合作培训')} />
+          <Grid.Item icon={<IconFont name="icon-kecheng" />} text="精选课程" onClick={() => huandlePush('4', '精选课程')} />
         </Grid>
 
         <Cell
@@ -86,14 +96,7 @@ const Index: React.FC<IndexProps> = props => {
             </Typography.Title>
           }
           rightIcon={<IconFont name="icon-shuangjiantouyou" />}
-          onClick={() =>
-            history.push({
-              pathname: '/sports/list',
-              query: {
-                type: '2',
-              },
-            })
-          }
+          onClick={() => huandlePush('2', '赛事新闻')}
         />
         <Grid border={false} columnNum={2}>
           {newList?.articles1?.map((item: any) => {
@@ -118,21 +121,7 @@ const Index: React.FC<IndexProps> = props => {
             );
           })}
         </Grid>
-        <Cell
-          style={{ padding: '6px 10px' }}
-          center
-          title={<Typography.Title level={5}>热门课程</Typography.Title>}
-          rightIcon={<IconFont name="icon-shuangjiantouyou" />}
-          isLink
-          onClick={() =>
-            history.push({
-              pathname: '/sports/list',
-              query: {
-                type: '4',
-              },
-            })
-          }
-        />
+        <Cell style={{ padding: '6px 10px' }} center title={<Typography.Title level={5}>热门课程</Typography.Title>} rightIcon={<IconFont name="icon-shuangjiantouyou" />} isLink onClick={() => huandlePush('4', '精选课程')} />
         <NewsCard newList={newList?.articles2} />
       </div>
     </>
