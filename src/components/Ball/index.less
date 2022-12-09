@@ -1,4 +1,4 @@
-@shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+@shadow: 0 3px 8px rgba(0, 0, 0, 0.28);
 
 .demo-floating-box {
   .main-button {
@@ -13,7 +13,7 @@
     .main-button {
       font-size: 28px;
       color: #fff;
-      background-color: #3f45ff;
+      background-color: #ffffff;
 
       svg {
         transition: all 0.2s ease-in-out;
@@ -45,4 +45,42 @@
       font-size: 24px;
     }
   }
+}
+
+@keyframes shake {
+  /* 垂直抖动，核心代码 */
+  10%,
+  90% {
+    transform: translate3d(0, -1px, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(0, +2px, 0);
+  }
+
+  30%,
+  70% {
+    transform: translate3d(0, -4px, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(0, +4px, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -4px, 0);
+  }
+}
+
+.shake {
+  animation: shake 1000ms ease-in-out;
+  width: 30px;
+  height: 30px;
+}
+
+.shakHidden {
+  width: 28px;
+  height: 28px;
 }

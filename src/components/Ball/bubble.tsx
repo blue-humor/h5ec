@@ -1,9 +1,17 @@
-import { Flex, FloatingBall } from 'react-vant';
+import react, { useState } from 'react';
+import { Image, Flex, FloatingBall, Typography } from 'react-vant';
+
 import { Chat } from '@react-vant/icons';
+
+import ZanHong from '@/common/imgs/zanhong.png';
+
+import ZanBai from '@/common/imgs/zanbai.png';
 
 import './index.less';
 
 export default (props: any) => {
+  const [isShow, setIsShow] = useState<boolean>(false);
+
   return (
     <FloatingBall
       className="demo-floating-box-bubble"
@@ -22,8 +30,8 @@ export default (props: any) => {
       }}
       {...props}
     >
-      <Flex align="center" justify="center" className="main-button">
-        <Chat />
+      <Flex align="center" justify="center" className="main-button" onClick={() => setIsShow(!isShow)}>
+        <Image src={isShow ? ZanHong : ZanBai} fit="cover" className={`${isShow ? 'shake' : 'shakHidden'}`} />
       </Flex>
     </FloatingBall>
   );

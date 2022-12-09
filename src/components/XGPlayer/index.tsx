@@ -15,8 +15,9 @@ const Index: React.FC<IndexProps> = ({ poster, url }) => {
       id: 'mse',
       url: url,
       playsinline: true,
-      // "width": 381,
-      // "height": 226,
+      whitelist: [''],
+
+      // pip: true,
       poster: poster,
       volume: 0.6,
       // fluid: true,
