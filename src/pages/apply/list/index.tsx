@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { history, useModel } from 'umi';
-import { Radio, SwipeCell, Button, Typography, Card, Flex, ActionBar, Dialog, Toast, Empty } from 'react-vant';
+import React, { useEffect, useState } from 'react';
+import { history } from 'umi';
+import { SwipeCell, Button, Typography, Card, Flex, ActionBar, Toast, Empty } from 'react-vant';
 
 import IconFont from '@/utils/iconFont';
 
@@ -12,13 +12,11 @@ import styles from './index.less';
 
 interface IndexProps {}
 
-const Index: React.FC<IndexProps> = props => {
+const Index: React.FC<IndexProps> = () => {
   const { query } = history.location;
-  const { parentId, type } = query;
+  const { parentId, type }: any = query;
 
-  const [applyList, setapplyList] = useState([]);
-
-  const [radioValue, setRadioValue] = useState<any>(null);
+  const [applyList, setapplyList] = useState<any>([]);
 
   // 获取地址列表
   const handleapplyList = async () => {
@@ -35,7 +33,7 @@ const Index: React.FC<IndexProps> = props => {
     const res = await reqApplyDel({ id: params });
     if (res?.code === 200) {
       setapplyList(applyList.filter((item: any) => item?.id !== params));
-      Toast.success(res.message);
+      Toast.success(res?.message);
     }
   };
 
@@ -63,7 +61,7 @@ const Index: React.FC<IndexProps> = props => {
       {applyList.length < 1 ? (
         <Empty description="暂无队员，赶快添加吧" style={{ background: '#fff' }} />
       ) : (
-        applyList?.map(item => {
+        applyList?.map((item: any) => {
           return (
             <SwipeCell
               key={item?.id}
@@ -75,7 +73,7 @@ const Index: React.FC<IndexProps> = props => {
             >
               <Card className={styles.addressCard}>
                 <Flex align="center" justify="around">
-                  <Flex.Item className={styles.addressInfo} onClick={e => handleApplyEditorPush(item)}>
+                  <Flex.Item className={styles.addressInfo} onClick={() => handleApplyEditorPush(item)}>
                     <Typography.Title level={6}>队员姓名：{item?.name}</Typography.Title>
                     <Typography.Title level={6}>队员性别：{item?.sex}</Typography.Title>
                     <Typography.Title level={6}>队员身份证号：{item?.idNo}</Typography.Title>
@@ -88,7 +86,7 @@ const Index: React.FC<IndexProps> = props => {
                     ) : null}
                   </Flex.Item>
                   <Flex.Item>
-                    <IconFont width={'20px'} height={'60px'} name="icon-wenbenbianjitianchong" />
+                    <IconFont width={'20px'} height={'60px'} name="icon-wenbenbianjitianchong" onClick={() => handleApplyEditorPush(item)} />
                   </Flex.Item>
                 </Flex>
               </Card>

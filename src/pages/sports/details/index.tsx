@@ -6,6 +6,7 @@ import { Image, Cell, Typography, Divider, FloatingBall, Flex, Toast } from 'rea
 
 import NavBar from '@/components/NavBar';
 import Ball from '@/components/Ball';
+import XGPlayer from '@/components/XGPlayer';
 
 import { reqArticle } from '@/services/sports/details';
 
@@ -13,7 +14,7 @@ import styles from './index.less';
 
 interface IndexProps {}
 
-const Index: React.FC<IndexProps> = props => {
+const Index: React.FC<IndexProps> = () => {
   const { query } = history.location;
 
   const [article, setArticle] = useState<any>({});
@@ -48,9 +49,10 @@ const Index: React.FC<IndexProps> = props => {
         }
         icon={<Image width={44} height={44} src={article?.member?.headimg} round />}
       />
-      <Image width={'100%'} src={article?.thumb} />
+      {article?.video ? <XGPlayer url={article?.video} poster={article?.thumb} /> : <Image width={'100%'} src={article?.thumb} />}
+
       <p className={styles.sportsDetailsText}>{article?.content}</p>
-      <Divider />
+      <Divider></Divider>
       <Ball />
     </>
   );

@@ -4,6 +4,7 @@ import routes from './routes';
 
 import px2vw from 'postcss-px-to-viewport';
 export default defineConfig({
+  hash: true,
   nodeModulesTransform: {
     type: 'none',
   },
@@ -12,6 +13,7 @@ export default defineConfig({
   routes,
   layout: false,
   // mfsu: {},
+
   targets: {
     ie: 11,
   },

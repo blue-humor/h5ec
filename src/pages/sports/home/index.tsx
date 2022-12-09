@@ -5,15 +5,13 @@ import { Swiper, Image, Search, Card, Grid, Cell, Typography } from 'react-vant'
 
 import NewsCard from '@/components/NewsCard';
 
-import { reqSwiper, reqGoodsList } from '@/services/home';
+import { reqSwiper } from '@/services/home';
 
 import IconFont from '@/utils/iconFont';
 
 import styles from './index.less';
 
 import { reqHomeData } from '@/services/sports/home';
-
-const src = 'https://n.sinaimg.cn/sports/2_img/upload/a7a65bdb/107/w1024h683/20221208/df90-c7609c9425dfdc5e0fa7b14d03957b68.jpg';
 
 interface IndexProps {}
 
@@ -33,11 +31,9 @@ const Index: React.FC<IndexProps> = props => {
   };
 
   const handleHomeList = async (params: any) => {
-    const res = await reqHomeData(params);
+    const res: any = await reqHomeData(params);
     if (res?.code === 200) {
       const { list } = res?.data;
-      console.log(list);
-
       setNewList(list);
     }
   };
@@ -55,6 +51,9 @@ const Index: React.FC<IndexProps> = props => {
   useEffect(() => {
     handleImage();
     handleHomeList({});
+    const { openid, token }: any = history?.location?.query;
+    window.sessionStorage.setItem('token', token);
+    window.sessionStorage.setItem('openid', openid);
     return () => {};
   }, []);
 

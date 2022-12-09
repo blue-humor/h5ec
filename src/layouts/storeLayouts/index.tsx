@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { history } from 'umi';
 
 import { Tabbar } from 'react-vant';
-import { Bars, WapHome, Cart, Friends } from '@react-vant/icons';
+import { Bars, WapHome, Friends } from '@react-vant/icons';
 
 import IconFont from '@/utils/iconFont';
 import './index.less';
@@ -12,19 +12,29 @@ interface IndexProps {
   children: any;
 }
 
-const Layout: React.FC<IndexProps> = props => {
+const Layout: React.FC<IndexProps> = (props: { children: any }) => {
   const [name, setName] = useState<string>('/sports/home');
+
+  const { openid, token }: any = history?.location?.query;
+  window.sessionStorage.setItem('token', token);
+  window.sessionStorage.setItem('openid', openid);
 
   const handleHistory = (params: any) => {
     setName(params);
-    console.log();
-    history.push(params);
+    history.push({
+      pathname: params,
+      query: {
+        token,
+        openid,
+      },
+    });
   };
 
   useEffect(() => {
     const pathName = history.location.pathname;
     const name = pathName.substring(1);
     setName(name);
+
     return () => {};
   }, []);
 

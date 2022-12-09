@@ -1,15 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-import { Sku, SkuInstance } from 'react-vant';
+import { SkuInstance } from 'react-vant';
 
 import { history } from 'umi';
 
-import { Toast, Swiper, ImagePreview, Image, Card, Typography, ActionBar, Flex, Divider, Cell } from 'react-vant';
-import { CartO, WapHomeO } from '@react-vant/icons';
+import { Swiper, ImagePreview, Image, Card, Typography, ActionBar, Flex, Divider } from 'react-vant';
+import { WapHomeO } from '@react-vant/icons';
 
 import NavBar from '@/components/NavBar';
-
-import GoodsSku from './components/GoodsSku';
 
 import SkuGoods from './components/SkuGoods';
 
@@ -109,7 +107,7 @@ const Index: React.FC<IndexProps> = props => {
                 </Typography.Text>
               </Flex.Item>
               <Flex.Item>
-                <Typography.Text>已售{499}</Typography.Text>
+                <Typography.Text>已售{detailsParams?.sellOutAmount}</Typography.Text>
               </Flex.Item>
             </Flex>
           </Card.Body>
@@ -164,7 +162,7 @@ const Index: React.FC<IndexProps> = props => {
 
         <ActionBar safeAreaInsetBottom>
           <ActionBar.Icon icon={<WapHomeO />} text="首页" onClick={() => history.push('/')} />
-          <ActionBar.Icon icon={<CartO />} badge={{ content: 5 }} text="购物车" onClick={() => history.push('/cart')} />
+          {/* <ActionBar.Icon icon={<CartO />} badge={{ content: 5 }} text="购物车" onClick={() => history.push('/cart')} /> */}
           {/* <ActionBar.Button type='warning' text='加入购物车' onClick={() => handleShowShopping(true, 0)} /> */}
           {/* <ActionBar.Button type='danger' text='立即购买' onClick={() => handleShowShopping(true, 1)} /> */}
 

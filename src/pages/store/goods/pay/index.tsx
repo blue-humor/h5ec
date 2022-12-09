@@ -17,7 +17,7 @@ interface IndexProps {}
 
 // const content = 'React Vant 是一套轻量、可靠的移动端 React 组件库，提供了丰富的基础组件和业务组件，帮助开发者快速搭建移动应用，使用过程中发现任何问题都可以提 Issue 给我们，当然，我们也非常欢迎你给我们发 PR。';
 
-const Index: React.FC<IndexProps> = props => {
+const Index: React.FC<IndexProps> = () => {
   const [form] = Form.useForm();
   const { query } = history.location;
   const { orderId }: any = query;
@@ -30,6 +30,8 @@ const Index: React.FC<IndexProps> = props => {
   const [orderAddress, setOrderAddress] = useState<any>(null);
 
   const [addressId, setAddressId] = useState<number>(0);
+
+  const [amountTotal, setAmountTotal] = useState<any>(null);
 
   //关闭弹框
   const handleShowClose = (params: boolean) => {
@@ -52,12 +54,13 @@ const Index: React.FC<IndexProps> = props => {
 
   // 生成订单
   const handlerOrderDetail = async (params: any) => {
-    const res = await reqOrderDetail(params);
+    const res: any = await reqOrderDetail(params);
     if (res?.code === 200) {
       const { addressId, goods, address } = res?.data;
       setAddressId(addressId);
       setOrderDetail(goods);
       setOrderAddress(address);
+      setAmountTotal(res?.data);
     }
   };
 
@@ -135,7 +138,7 @@ const Index: React.FC<IndexProps> = props => {
               form={form}
               onFinish={onFinish}
               initialValues={{
-                rental: `¥${18888888888}`,
+                rental: `¥${orderDetail?.totalAmout}`,
                 freight: orderDetail?.freight,
                 // invoice: '暂不开发票',
                 // remark: 's1s1s1'
@@ -168,7 +171,7 @@ const Index: React.FC<IndexProps> = props => {
               title
               value={
                 <Typography.Title type="danger">
-                  <span className={styles.pay_heji}>合计：</span>¥{priceFormat(217271, 2)}
+                  <span className={styles.pay_heji}>合计：</span>¥{priceFormat(amountTotal?.price, 2)}
                 </Typography.Title>
               }
             />

@@ -17,14 +17,13 @@ const Index: React.FC<IndexProps> = () => {
   const [form] = Form.useForm();
 
   const onFinish = async (values: LoginDataType) => {
-    const res = await reqLogin(values);
+    const res: any = await reqLogin(values);
     if (res?.code === 200) {
-      window.sessionStorage.setItem('token', res.token);
-      Toast(res?.message);
+      // window.sessionStorage.setItem('token', res.token);
       history.push('/');
       return;
     } else {
-      Toast(res?.message);
+      Toast.fail(res?.message);
     }
   };
   return (

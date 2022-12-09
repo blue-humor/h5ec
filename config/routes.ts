@@ -28,6 +28,6 @@ export default [
       { component: './404' },
     ],
   },
-
+  { path: '/', redirect: '/sports/home' },
   { component: './404' },
 ];

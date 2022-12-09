@@ -19,7 +19,7 @@ const codeMessage = {
   504: '网关超时。',
 };
 
-const errorHandler = async error => {
+const errorHandler = async (error: { response: any }) => {
   const { response } = error;
   if (response && response.status) {
     let errorText = codeMessage[response.status] || response.statusText;
@@ -68,8 +68,9 @@ request.interceptors.request.use((url, options) => {
     },
   };
 });
-request.interceptors.response.use(async response => {
-  const res = await response?.clone()?.json();
+
+request.interceptors.response.use(async (response: any) => {
+  const res: any = await response?.clone()?.json();
   if (response.status == 200) {
     return res;
   } else {

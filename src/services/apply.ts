@@ -1,6 +1,6 @@
 import request from '@/utils/request';
 
-export async function reqProjects(data: any, options?: any) {
+export async function reqProjects(data: any, options?: any): Promise<API.Res> {
   return request('/v1/register/getProjects', {
     method: 'post',
     data,
@@ -8,7 +8,7 @@ export async function reqProjects(data: any, options?: any) {
   });
 }
 
-export async function reqApply(data: any, options?: any) {
+export async function reqApply(data: any, options?: any): Promise<API.Res> {
   return request('/v1/register/apply', {
     method: 'post',
     data,
@@ -17,7 +17,7 @@ export async function reqApply(data: any, options?: any) {
 }
 
 // 队员信息列表
-export async function reqApplyList(data: any, options?: any) {
+export async function reqApplyList(data: any, options?: any): Promise<API.Res> {
   return request('/v1/getSubmemberList', {
     method: 'post',
     data,
@@ -26,7 +26,7 @@ export async function reqApplyList(data: any, options?: any) {
 }
 
 //添加队员信息信息
-export async function reqApplyAdd(data: any, options?: any) {
+export async function reqApplyAdd(data: any, options?: any): Promise<API.Res> {
   return request('/v1/addSubmember', {
     method: 'post',
     data,
@@ -35,7 +35,7 @@ export async function reqApplyAdd(data: any, options?: any) {
 }
 
 //编辑队员信息信息
-export async function reqApplyEditor(data: any, options?: any) {
+export async function reqApplyEditor(data: any, options?: any): Promise<API.Res> {
   return request('/v1/editSubmember', {
     method: 'post',
     data,
@@ -44,7 +44,7 @@ export async function reqApplyEditor(data: any, options?: any) {
 }
 
 // 删除reqApplyDel
-export async function reqApplyDel(data: any, options?: any) {
+export async function reqApplyDel(data: any, options?: any): Promise<API.Res> {
   return request('/v1/delSubmember', {
     method: 'post',
     data,
