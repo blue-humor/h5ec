@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { history } from 'umi';
 
 import { Card, Cell, Typography, Image, Flex, Button, Badge } from 'react-vant';
 
 import IconFont from '@/utils/iconFont';
+
+import { reqUserInfo } from '@/services/user';
 
 interface IndexProps {}
 
@@ -18,11 +20,27 @@ const flow = [
 ];
 
 const Index: React.FC<IndexProps> = props => {
+  const { openid }: any = history?.location?.query;
+  const [userInfo, setUserInfo] = useState<any>({});
+
+  const handleUserInfo = async () => {
+    const res = await reqUserInfo({ openid });
+    if (res?.code === 200) {
+      setUserInfo(res.data);
+    }
+  };
+
+  useEffect(() => {
+    handleUserInfo();
+
+    return () => {};
+  }, []);
+
   return (
     <>
       <div className={styles.user_nav}>
         <div className={styles.user_bg}></div>
-        <Cell style={{ alignItems: 'end' }} className={styles.user_avater} title={<Typography.Title> 大潘</Typography.Title>} icon={<Image width={'60px'} height={'60px'} src="https://we-retail-static-1300977798.cos.ap-guangzhou.myqcloud.com/retail-ui/components-exp/avatar/avatar-1.jpg" round />} />
+        <Cell style={{ alignItems: 'end' }} className={styles.user_avater} title={<Typography.Title> {userInfo?.nickName}</Typography.Title>} icon={<Image width={'60px'} height={'60px'} src={userInfo?.headimg} round />} />
         <Card className={styles.user_card}>
           <Cell title={<Typography.Title level={6}>我的订单</Typography.Title>} isLink value="全部订单" onClick={() => history.push('/user/order')} />
 

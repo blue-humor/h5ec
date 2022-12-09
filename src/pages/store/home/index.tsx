@@ -11,9 +11,9 @@ import styles from './index.less';
 interface IndexProps {}
 
 const Index: React.FC<IndexProps> = props => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState<any>('');
 
-  const [swiperImage, setSwiperImage] = useState([]);
+  const [swiperImage, setSwiperImage] = useState<any>([]);
 
   const handleImage = async () => {
     const res = await reqSwiper({});

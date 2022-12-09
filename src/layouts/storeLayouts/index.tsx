@@ -16,9 +16,6 @@ const Layout: React.FC<IndexProps> = (props: { children: any }) => {
   const [name, setName] = useState<string>('/sports/home');
 
   const { openid, token }: any = history?.location?.query;
-  window.sessionStorage.setItem('token', token);
-  window.sessionStorage.setItem('openid', openid);
-
   const handleHistory = (params: any) => {
     setName(params);
     history.push({

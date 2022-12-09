@@ -1,6 +1,8 @@
 import { extend } from 'umi-request';
 import { Toast } from 'react-vant';
 
+import wx from 'weixin-js-sdk';
+
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -19,8 +21,11 @@ const codeMessage = {
   504: '网关超时。',
 };
 
-const errorHandler = async (error: { response: any }) => {
+const errorHandler = async (error: any) => {
   const { response } = error;
+  wx.miniProgram.redirectTo({
+    url: '/pages/index/index',
+  });
   if (response && response.status) {
     let errorText = codeMessage[response.status] || response.statusText;
     const { status, url } = response;
@@ -35,10 +40,11 @@ const errorHandler = async (error: { response: any }) => {
       errorText += `[{${errs}}]`;
     }
 
-    if (status === 400) {
+    if (status === 404) {
       errorText += `[{${result.message}}]`;
     }
 
+    return;
     // message.error(errorText);
   } else if (!response && status === undefined) {
     Toast.fail({
@@ -71,6 +77,7 @@ request.interceptors.request.use((url, options) => {
 
 request.interceptors.response.use(async (response: any) => {
   const res: any = await response?.clone()?.json();
+
   if (response.status == 200) {
     return res;
   } else {

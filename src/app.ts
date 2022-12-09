@@ -3,6 +3,8 @@ import { history } from 'umi';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 
+import wx from 'weixin-js-sdk';
+
 export const render = async (oldRender: any) => {
   const token = window.sessionStorage.getItem('token');
   if (!token) {
@@ -14,6 +16,13 @@ export const render = async (oldRender: any) => {
 };
 
 export function onRouteChange({ action }) {
+  const token = window.sessionStorage.getItem('token');
+  if (!token) {
+    wx.miniProgram.switchTab({
+      url: '/pages/index/index',
+    });
+  }
+
   NProgress.start();
   if (action === 'PUSH' || action === 'POP') {
     NProgress.done();
