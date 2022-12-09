@@ -51,9 +51,6 @@ const Index: React.FC<IndexProps> = props => {
   useEffect(() => {
     handleImage();
     handleHomeList({});
-    const { openid, token }: any = history?.location?.query;
-    window.sessionStorage.setItem('token', token);
-    window.sessionStorage.setItem('openid', openid);
     return () => {};
   }, []);
 

@@ -20,10 +20,10 @@ const Layout: React.FC<IndexProps> = (props: { children: any }) => {
     setName(params);
     history.push({
       pathname: params,
-      query: {
-        token,
-        openid,
-      },
+      // query: {
+      //   token,
+      //   openid,
+      // },
     });
   };
 

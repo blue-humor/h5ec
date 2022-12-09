@@ -20,8 +20,9 @@ const flow = [
 ];
 
 const Index: React.FC<IndexProps> = props => {
-  const { openid }: any = history?.location?.query;
   const [userInfo, setUserInfo] = useState<any>({});
+
+  const openid = window.sessionStorage.getItem('openid');
 
   const handleUserInfo = async () => {
     const res = await reqUserInfo({ openid });

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { history } from 'umi';
-import { Card, Cell, Form, Input, ProductCard, ActionBar, Button, Skeleton, Typography, NavBar, Dialog } from 'react-vant';
+import { Card, Cell, Form, Input, ProductCard, ActionBar, Button, Skeleton, Typography, Dialog, NavBar } from 'react-vant';
 import { Add, ShopO, createFromIconfontCN } from '@react-vant/icons';
 
 // import NavBar from '@/components/NavBar';
@@ -89,7 +89,14 @@ const Index: React.FC<IndexProps> = () => {
         safeAreaInsetTop
         title={<Typography.Text>{'订单确认'}</Typography.Text>}
         // leftText="返回"
-        onClickLeft={() => history.push('/user')}
+        onClickLeft={() =>
+          history.push({
+            pathname: '/user',
+            // query: {
+            //   openid: window.sessionStorage.getItem('openid')
+            // }
+          })
+        }
       />
       {addressId === 0 || undefined ? (
         <Cell

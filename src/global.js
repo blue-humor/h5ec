@@ -3,9 +3,4 @@ new Vconsole();
 import NProgress from 'nprogress'; // 引入nprogress插件
 NProgress.configure({ easing: 'ease', showSpinner: false });
 
-import wx from 'weixin-js-sdk';
-
-// document.addEventListener('click', e => {
-// //   console.log('document');
-
-// });
+// import wx from 'weixin-js-sdk';
