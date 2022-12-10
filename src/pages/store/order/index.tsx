@@ -25,7 +25,7 @@ const Index: React.FC<IndexProps> = props => {
 
   const handleOrder = async (params: any) => {
     setDefaultTab(params);
-    const res = await reqOrder({ orderStatus: params, memberId: 1 });
+    const res = await reqOrder({ orderStatus: params });
     if (res?.data === 200) {
       const { orders } = res?.data;
       setOrdersList(orders);

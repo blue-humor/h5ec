@@ -18,7 +18,7 @@ import { priceFormat } from '@/utils';
 import styles from './index.less';
 
 interface IndexProps {}
-const Index: React.FC<IndexProps> = props => {
+const Index: React.FC<IndexProps> = () => {
   const skuRef = useRef<SkuInstance>(null);
 
   const [detailsParams, setDetailsParams] = useState<any>({

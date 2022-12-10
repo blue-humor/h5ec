@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { history } from 'umi';
 
-import { Image, Cell, Typography, Divider, FloatingBall, Flex, Toast } from 'react-vant';
+import { Image, Cell, Typography, Divider } from 'react-vant';
 
 import NavBar from '@/components/NavBar';
 import Ball from '@/components/Ball';

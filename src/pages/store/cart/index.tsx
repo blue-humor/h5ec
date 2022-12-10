@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-import { SubmitBar, Checkbox, Flex, Typography, Toast, ProductCard, Cell, Stepper, Card } from 'react-vant';
+import { SubmitBar, Checkbox, Flex, ProductCard, Cell, Card } from 'react-vant';
 import { ShopO } from '@react-vant/icons';
 
 import styles from './index.less';

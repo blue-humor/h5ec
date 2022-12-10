@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-import { history, useModel } from 'umi';
+import { history } from 'umi';
 
-import { Card, Form, Input, Picker, Button, Switch, Toast, Skeleton } from 'react-vant';
+import { Card, Form, Input, Picker, Button, Toast } from 'react-vant';
 
 import NavBar from '@/components/NavBar';
 
@@ -38,7 +38,7 @@ const Index: React.FC<IndexProps> = props => {
   };
 
   const handleOnFinish = (params: any) => {
-    if (query?.info?.id) {
+    if (info?.id) {
       handleApplyEdit({ ...params, register_memberId, id: info?.id });
     } else {
       handleApplyAdd({ ...params, register_memberId, type });

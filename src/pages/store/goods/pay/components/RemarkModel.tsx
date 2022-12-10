@@ -1,5 +1,5 @@
 import React from 'react';
-import { Cell, Popup, Input } from 'react-vant';
+import { Popup } from 'react-vant';
 
 interface RemarkModelProps {
   showClose: boolean;

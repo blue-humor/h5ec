@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { Swiper, Image, Search, Toast, Card, Tabs } from 'react-vant';
+import { Swiper, Image, Search, Card, Tabs } from 'react-vant';
 
 import Cards from '@/components/Cards';
 
@@ -42,7 +42,7 @@ const Index: React.FC<IndexProps> = props => {
         />
         <Card>
           <Swiper autoplay={5000}>
-            {swiperImage?.map((item: any, index) => (
+            {swiperImage?.map((item: any) => (
               <Swiper.Item key={item?.id}>
                 <Image lazyload fit="fill" src={item?.img} width="100%" />
               </Swiper.Item>

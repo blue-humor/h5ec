@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { history, useModel } from 'umi';
 import { Radio, SwipeCell, Button, Typography, Card, Flex, ActionBar, Dialog, Toast, Empty } from 'react-vant';
 
@@ -26,7 +26,7 @@ const Index: React.FC<IndexProps> = props => {
   // 获取地址列表
   const handleAddressList = async () => {
     // 备注
-    const res = await reqAddressList({ memberId: 1 });
+    const res = await reqAddressList();
     if ((res.code = 200)) {
       setAddressList(res.data);
     }

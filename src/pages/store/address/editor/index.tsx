@@ -40,9 +40,9 @@ const Index: React.FC<IndexProps> = props => {
 
   const handleOnFinish = (params: any) => {
     if (query?.id) {
-      handleAddressEdit({ ...params, memberId: 1, id: query.id });
+      handleAddressEdit({ ...params, id: query.id });
     } else {
-      handleAddressAdd({ ...params, memberId: 1 });
+      handleAddressAdd({ ...params });
     }
   };
   return (

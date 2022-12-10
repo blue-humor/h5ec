@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { history } from 'umi';
 import { Card, Cell, Form, Input, ProductCard, ActionBar, Button, Skeleton, Typography, Dialog, NavBar } from 'react-vant';
-import { Add, ShopO, createFromIconfontCN } from '@react-vant/icons';
+import { Add, ShopO } from '@react-vant/icons';
 
 // import NavBar from '@/components/NavBar';
 

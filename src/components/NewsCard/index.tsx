@@ -13,14 +13,6 @@ interface IndexProps {
 }
 
 const Index: React.FC<IndexProps> = ({ newList }) => {
-  const [pageIndex, setPageIndex] = useState<number>(1);
-
-  const [finished, setFinished] = useState<boolean>(false);
-
-  const [total, setTotal] = useState<number>(0);
-
-  const handleOnLoad = async () => {};
-
   const handlePush = (params: string) => {
     history.push({
       pathname: '/sports/details',
@@ -47,7 +39,8 @@ const Index: React.FC<IndexProps> = ({ newList }) => {
                   <Typography.Text>{item?.createtime}</Typography.Text>
                 </Flex.Item>
                 <Flex.Item>
-                  <IconFont name="icon-dianzan" width={22} height={22} style={{ margin: '0 6px' }} />
+                  {/* <IconFont name="icon-dianzan" width={22} height={22} style={{ margin: '0 6px' }} /> */}
+
                   <Typography.Text>{item?.likecount}</Typography.Text>
                 </Flex.Item>
               </Flex>
