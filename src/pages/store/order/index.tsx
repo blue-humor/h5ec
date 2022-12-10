@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-import { Tabs, Cell, Typography, Card, ProductCard, Flex, Button, Image } from 'react-vant';
+import { Tabs, Cell, Typography, Card, ProductCard, Flex, Button, Divider } from 'react-vant';
 
 import NavBar from '@/components/NavBar';
+import Refresh from '@/components/Refresh';
+
+import { priceFormat } from '@/utils/index';
 
 import { reqOrder } from '@/services/order';
 
@@ -22,39 +25,42 @@ const Index: React.FC<IndexProps> = props => {
   const [defaultTab, setDefaultTab] = useState<number>(-1);
 
   const [ordersList, setOrdersList] = useState<any>([]);
+  const [params, setParams] = useState({
+    current: 1,
+    pageSize: 20,
+  });
 
-  const handleOrder = async (params: any) => {
-    setDefaultTab(params);
-    const res = await reqOrder({ orderStatus: params });
-    if (res?.data === 200) {
-      const { orders } = res?.data;
-      setOrdersList(orders);
+  const handleOrder = async (params: any, v: any) => {
+    setDefaultTab(v);
+    const res = await reqOrder({ status: v, ...params });
+    if (res?.code === 200) {
+      setOrdersList(res?.data);
     }
   };
 
   useEffect(() => {
-    handleOrder(defaultTab);
+    handleOrder(params, defaultTab);
     return () => {};
   }, []);
 
   return (
     <div className={styles.order_nav}>
       <NavBar title="我的订单" />
-      <Tabs defaultActive={-1} lazyRender lazyRenderPlaceholder sticky swipeable color="#000000" offsetTop="0" onChange={v => handleOrder(v)}>
+      <Tabs style={{ zIndex: '1' }} sticky defaultActive={-1} lazyRender lazyRenderPlaceholder swipeable color="#000000" offsetTop="48" onChange={(v: any) => handleOrder(params, v)}>
         {tabs.map(item => (
           <Tabs.TabPane key={item.key} name={item.key} title={item.text}>
-            {ordersList.map((item: any) => {
+            {ordersList?.map((item: any) => {
               return (
-                <Card className={styles.order_card}>
-                  <Cell title="订单号 AAAAAAAAAA" value={<Typography.Text type="danger">{item.text}</Typography.Text>} />
-                  <ProductCard num="2" price="2.00" desc="描述信息" title="商品名称" thumb="https://img.yzcdn.cn/vant/ipad.jpeg" />
+                <Card className={styles.order_card} key={item?.id}>
+                  <Cell title={`订单号：${item?.orderNo} `} value={<Typography.Text type="danger">{item?.orderStatusName}</Typography.Text>} />
+                  <ProductCard num={`${item?.buyQuantity}`} price={`${priceFormat(item?.itemPaymentAmount, 2)}`} title={`${item?.goodsName}`} thumb={`${item?.goodsPictureUrl}`} />
                   <Flex style={{ margin: '20px 16px 0 0 ' }} justify="end" align="center">
-                    <Typography.Text size="xs">总价¥:100.00，</Typography.Text>
+                    <Typography.Text size="xs">总价¥:{priceFormat(item?.paymentAmount, 2)}，</Typography.Text>
                     <Typography.Text size="xs" style={{ margin: '0 6px 0 0 ' }}>
-                      运费¥:10.00
+                      运费¥:0
                     </Typography.Text>
                     <Typography.Text size="md" type="danger">
-                      实付¥:100.00
+                      实付¥:{priceFormat(item?.paymentAmount, 2)}
                     </Typography.Text>
                   </Flex>
                   <Flex style={{ margin: '14px 10px 0 0 ' }} justify="end">
@@ -62,12 +68,13 @@ const Index: React.FC<IndexProps> = props => {
                       取消订单
                     </Button>
                     <Button className={styles.button_width} size="small" round color="linear-gradient(to right, #ff6034, #ee0a24)">
-                      付款
+                      {item?.orderStatusName}
                     </Button>
                   </Flex>
                 </Card>
               );
             })}
+            <Divider dashed>暂无更多订单</Divider>
           </Tabs.TabPane>
         ))}
       </Tabs>

@@ -6,6 +6,8 @@ import { Card, Image, Toast, Divider, List, Cell, Tag, Typography, Flex } from '
 
 import IconFont from '@/utils/iconFont';
 
+import VideoPng from '@/common/imgs/video.png';
+
 import styles from './index.less';
 
 interface IndexProps {
@@ -24,11 +26,12 @@ const Index: React.FC<IndexProps> = ({ newList }) => {
 
   return (
     <>
-      {newList.map((item: any) => {
+      {newList?.map((item: any) => {
         return (
           <Card key={item?.id}>
-            <Card.Cover onClick={() => handlePush(item?.id)}>
-              <Image src={item?.thumb} fit="cover" width="100%" height="58vw" />
+            <Card.Cover onClick={() => handlePush(item?.id)} className={styles.newsCover}>
+              <Image src={item?.thumb} fit="cover" width="100%" height="58vw" className={styles.newsImage} />
+              {item?.video ? <Image src={VideoPng} fit="cover" className={styles.newsVideoPng} width="80" height="80" /> : null}
             </Card.Cover>
             <Card.Body className={styles.newsFontSize}>
               <Typography.Title level={6} ellipsis={2} onClick={() => handlePush(item?.id)}>
@@ -39,8 +42,6 @@ const Index: React.FC<IndexProps> = ({ newList }) => {
                   <Typography.Text>{item?.createtime}</Typography.Text>
                 </Flex.Item>
                 <Flex.Item>
-                  {/* <IconFont name="icon-dianzan" width={22} height={22} style={{ margin: '0 6px' }} /> */}
-
                   <Typography.Text>{item?.likecount}</Typography.Text>
                 </Flex.Item>
               </Flex>

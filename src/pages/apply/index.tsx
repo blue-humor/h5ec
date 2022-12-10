@@ -68,7 +68,7 @@ const Index: React.FC<IndexProps> = props => {
 
   return (
     <>
-      <Tabs active={1} sticky swipeable color="#000000" offsetTop="0.1" onChange={(v: number) => handleType(v)}>
+      <Tabs active={1} sticky swipeable color="#000000" offsetTop="0.1" onChange={(v: any) => handleType(v)}>
         <Tabs.TabPane title={`校内参赛队注册`} key={1} name={1}>
           <Card style={{ margin: '20px 10px 44px 10px ' }}>
             <Form
@@ -78,7 +78,7 @@ const Index: React.FC<IndexProps> = props => {
               onFinish={handleOnFinish}
               footer={
                 <div style={{ margin: '10px 0 10px 0' }}>
-                  <Button round nativeType="submit" type="info" block>
+                  <Button round nativeType="submit" type="info" block color="linear-gradient(to right, #000000, #fa4126)">
                     保存并添加队伍信息
                   </Button>
                 </div>

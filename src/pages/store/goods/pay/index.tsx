@@ -7,7 +7,7 @@ import { Add, ShopO } from '@react-vant/icons';
 
 import RemarkModel from './components/RemarkModel';
 
-import { reqOrderDetail } from '@/services/pay';
+import { reqOrderDetail, reqProceedOrder } from '@/services/pay';
 
 import { priceFormat } from '@/utils/index';
 
@@ -39,9 +39,7 @@ const Index: React.FC<IndexProps> = () => {
   };
 
   //提交表单
-  const onFinish = (values: any) => {
-    console.log(orderAddress);
-
+  const onFinish = async (values: any) => {
     if (orderAddress?.name === null) {
       Dialog.alert({
         title: '收货地址信息不能为空',
@@ -49,7 +47,8 @@ const Index: React.FC<IndexProps> = () => {
       });
       return;
     }
-    console.log({ ...values, remark });
+    const res = await reqProceedOrder({ addressId, orderId, remark });
+    console.log(res);
   };
 
   // 生成订单
@@ -140,12 +139,12 @@ const Index: React.FC<IndexProps> = () => {
         <div>
           <Card style={{ margin: '10px 0 0 0 ' }}>
             <Cell title="店铺名" icon={<ShopO />} />
-            <ProductCard num={orderDetail?.selectedNum} price={orderDetail?.price} desc={orderDetail?.sku} title={orderDetail?.title} thumb={orderDetail?.imgUrl} />
+            <ProductCard num={orderDetail?.selectedNum} price={priceFormat(orderDetail?.price, 2)} desc={orderDetail?.sku} title={orderDetail?.title} thumb={orderDetail?.imgUrl} />
             <Form
               form={form}
               onFinish={onFinish}
               initialValues={{
-                rental: `¥${orderDetail?.totalAmout}`,
+                rental: `¥${priceFormat(orderDetail?.totalAmout, 2)}`,
                 freight: orderDetail?.freight,
                 // invoice: '暂不开发票',
                 // remark: 's1s1s1'

@@ -40,12 +40,7 @@ const Index: React.FC<IndexProps> = props => {
   }, []);
 
   return (
-    <div>
-      {/* <NavBar
-                fixed
-                safeAreaInsetTop
-                leftText="返回"
-            /> */}
+    <>
       <Sidebar
         sideClassName="classify_sidebar"
         value={active}
@@ -76,7 +71,7 @@ const Index: React.FC<IndexProps> = props => {
           );
         })}
       </Sidebar>
-    </div>
+    </>
   );
 };
 

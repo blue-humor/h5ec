@@ -23,9 +23,7 @@ const codeMessage = {
 
 const errorHandler = async (error: any) => {
   const { response } = error;
-  wx.miniProgram.redirectTo({
-    url: '/pages/index/index',
-  });
+
   if (response && response.status) {
     let errorText = codeMessage[response.status] || response.statusText;
     const { status, url } = response;
@@ -76,13 +74,19 @@ request.interceptors.request.use((url, options) => {
 });
 
 request.interceptors.response.use(async (response: any) => {
-  const res: any = await response?.clone()?.json();
+  if (response.status === 404) {
+    wx.miniProgram.redirectTo({
+      url: '/pages/index/index',
+    });
+    return;
+  }
 
+  const res: any = await response?.clone()?.json();
   if (response.status == 200) {
     return res;
   } else {
     Toast.fail({
-      message: res.message,
+      message: res.error,
     });
   }
 });

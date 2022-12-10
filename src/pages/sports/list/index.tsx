@@ -15,7 +15,7 @@ import styles from './index.less';
 interface IndexProps {}
 
 const Index: React.FC<IndexProps> = () => {
-  const { query } = history.location;
+  const { query }: any = history.location;
   const { barTitle }: any = query;
 
   const [articleList, setarticleList] = useState<any>([]);
@@ -27,7 +27,7 @@ const Index: React.FC<IndexProps> = () => {
 
   return (
     <div className={styles.sportsList}>
-      <NavBar title={barTitle} query={query} />
+      <NavBar title={barTitle} />
       <Refresh handleList={handleArticleList} setList={setarticleList}>
         {articleList?.map((item: any) => {
           return (

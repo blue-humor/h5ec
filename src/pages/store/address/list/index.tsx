@@ -26,8 +26,8 @@ const Index: React.FC<IndexProps> = props => {
   // 获取地址列表
   const handleAddressList = async () => {
     // 备注
-    const res = await reqAddressList();
-    if ((res.code = 200)) {
+    const res = await reqAddressList({});
+    if (res?.code === 200) {
       setAddressList(res.data);
     }
   };
@@ -37,7 +37,7 @@ const Index: React.FC<IndexProps> = props => {
     if (query?.orderId) {
       setRadioValue(params);
       Dialog.confirm({
-        // title: '标题',
+        title: '收货地址',
         message: '是否确认当前地址为收货地址？',
       })
         .then(async () => {

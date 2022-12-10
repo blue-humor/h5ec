@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { history } from 'umi';
 
@@ -6,40 +6,26 @@ import { Tabbar } from 'react-vant';
 import { Bars, WapHome, Friends } from '@react-vant/icons';
 
 import IconFont from '@/utils/iconFont';
-import './index.less';
 
 interface IndexProps {
   children: any;
 }
 
 const Layout: React.FC<IndexProps> = (props: { children: any }) => {
-  const [name, setName] = useState<string>('/sports/home');
+  const [name, setName] = useState<string>('');
 
-  const { openid, token }: any = history?.location?.query;
-  const handleHistory = (params: any) => {
+  const handleHistory = (params: string) => {
     setName(params);
     history.push({
       pathname: params,
-      // query: {
-      //   token,
-      //   openid,
-      // },
     });
   };
-
-  useEffect(() => {
-    const pathName = history.location.pathname;
-    const name = pathName.substring(1);
-    setName(name);
-
-    return () => {};
-  }, []);
 
   return (
     <>
       {props.children}
       <div className="demo-tabbar">
-        <Tabbar placeholder fixed value={name} activeColor="#fa4126" inactiveColor="#cec8c8" safeAreaInsetBottom onChange={c => handleHistory(c)}>
+        <Tabbar defaultValue={'/sports/home'} placeholder fixed value={name} activeColor="#fa4126" inactiveColor="#cec8c8" safeAreaInsetBottom onChange={(c: any) => handleHistory(c)}>
           <Tabbar.Item name="/sports/home" icon={<WapHome />}>
             首页
           </Tabbar.Item>

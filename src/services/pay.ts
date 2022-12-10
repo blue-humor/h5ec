@@ -16,3 +16,11 @@ export async function reqOrderDetail(data?: any, options?: any): Promise<API.Res
     ...(options || {}),
   });
 }
+
+export async function reqProceedOrder(data?: any, options?: any): Promise<API.Res> {
+  return request('/v1/proceedOrder', {
+    method: 'post',
+    data,
+    ...(options || {}),
+  });
+}

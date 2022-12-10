@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 
 import { history } from 'umi';
 
-import { Image, Cell, Typography, Divider } from 'react-vant';
+import { Image, Cell, Typography, Divider, Sticky } from 'react-vant';
 
 import NavBar from '@/components/NavBar';
-import Ball from '@/components/Ball';
+import Bubble from '@/components/Ball/bubble';
 import XGPlayer from '@/components/XGPlayer';
 
 import { reqArticle } from '@/services/sports/details';
@@ -49,11 +49,17 @@ const Index: React.FC<IndexProps> = () => {
         }
         icon={<Image width={44} height={44} src={article?.member?.headimg} round />}
       />
-      {article?.video ? <XGPlayer url={article?.video} poster={article?.thumb} /> : <Image width={'100%'} src={article?.thumb} />}
+      {article?.video ? (
+        <div className={styles.newsPlary}>
+          <XGPlayer url={article?.video} poster={article?.thumb} />
+        </div>
+      ) : (
+        <Image width={'100%'} src={article?.thumb} />
+      )}
 
       <p className={styles.sportsDetailsText}>{article?.content}</p>
       <Divider></Divider>
-      <Ball />
+      <Bubble articleId={query?.id} like={article?.like} />
     </>
   );
 };

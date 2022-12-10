@@ -63,7 +63,7 @@ const Index: React.FC<IndexProps> = props => {
           }}
           footer={
             <div style={{ margin: '16px 16px 0' }}>
-              <Button round nativeType="submit" color="linear-gradient(to right, #000000, #ee0a24)" block>
+              <Button round nativeType="submit" color="linear-gradient(to right, #000000, #fa4126)" block>
                 保存
               </Button>
             </div>
