@@ -10,6 +10,7 @@ import RemarkModel from './components/RemarkModel';
 import { reqOrderDetail, reqProceedOrder } from '@/services/pay';
 
 import { priceFormat } from '@/utils/index';
+import wx from 'weixin-js-sdk';
 
 import styles from './index.less';
 
@@ -33,12 +34,15 @@ const Index: React.FC<IndexProps> = () => {
 
   const [amountTotal, setAmountTotal] = useState<any>(null);
 
+  const token = window.sessionStorage.getItem('token');
+  const openid = window.sessionStorage.getItem('openid');
+
   //关闭弹框
   const handleShowClose = (params: boolean) => {
     setShowClose(params);
   };
 
-  //提交表单
+  //提交支付表单
   const onFinish = async (values: any) => {
     if (orderAddress?.name === null) {
       Dialog.alert({
@@ -48,7 +52,11 @@ const Index: React.FC<IndexProps> = () => {
       return;
     }
     const res = await reqProceedOrder({ addressId, orderId, remark });
-    console.log(res);
+    if (res?.code === 200) {
+      wx.miniProgram.redirectTo({
+        url: `/pages/pay/index?payParams=${encodeURIComponent(JSON.stringify(res?.data))}&token=${token}&openid=${openid}`,
+      });
+    }
   };
 
   // 生成订单

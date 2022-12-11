@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import { history } from 'umi';
+
 import { Tabs, Cell, Typography, Card, ProductCard, Flex, Button, Divider } from 'react-vant';
 
 import NavBar from '@/components/NavBar';
@@ -67,8 +69,21 @@ const Index: React.FC<IndexProps> = props => {
                     <Button size="small" round plain style={{ marginRight: 2 }}>
                       取消订单
                     </Button>
-                    <Button className={styles.button_width} size="small" round color="linear-gradient(to right, #ff6034, #ee0a24)">
-                      {item?.orderStatusName}
+                    <Button
+                      className={styles.button_width}
+                      size="small"
+                      round
+                      color="linear-gradient(to right, #ff6034, #ee0a24)"
+                      onClick={() =>
+                        history.push({
+                          pathname: '/goods/pay',
+                          query: {
+                            orderId: item?.id,
+                          },
+                        })
+                      }
+                    >
+                      待付款
                     </Button>
                   </Flex>
                 </Card>

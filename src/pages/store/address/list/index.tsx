@@ -103,7 +103,7 @@ const Index: React.FC<IndexProps> = props => {
                       //   collapseText: '收起',
                       //   expandText: '展开',
                       // }}
-                      >{`${item?.countryName} ${item?.cityName}  ${item?.detailAddress}`}</Typography.Text>
+                      >{`${item?.provinceName} ${item?.cityName}  ${item?.detailAddress}`}</Typography.Text>
                     </Flex.Item>
                     <Flex.Item>
                       <IconFont width={'20px'} height={'60px'} name="icon-wenbenbianjitianchong" onClick={() => handleClickEdit(item)} />

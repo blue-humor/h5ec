@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { history } from 'umi';
 
@@ -21,12 +21,16 @@ const Layout: React.FC<IndexProps> = (props: { children: any }) => {
     });
   };
 
+  useEffect(() => {
+    setName(history.location.pathname);
+  }, [name]);
+
   return (
     <>
       {props.children}
       <div className="demo-tabbar">
-        <Tabbar defaultValue={'/sports/home'} placeholder fixed value={name} activeColor="#fa4126" inactiveColor="#cec8c8" safeAreaInsetBottom onChange={(c: any) => handleHistory(c)}>
-          <Tabbar.Item name="/sports/home" icon={<WapHome />}>
+        <Tabbar defaultValue={'/home'} placeholder fixed value={name} activeColor="#fa4126" inactiveColor="#cec8c8" safeAreaInsetBottom onChange={(c: any) => handleHistory(c)}>
+          <Tabbar.Item name="/home" icon={<WapHome />}>
             首页
           </Tabbar.Item>
           <Tabbar.Item name="/store/classify" icon={<Bars />}>

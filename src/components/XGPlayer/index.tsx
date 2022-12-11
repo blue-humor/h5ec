@@ -16,7 +16,7 @@ const Index: React.FC<IndexProps> = ({ poster, url }) => {
       url: url,
       playsinline: true,
       whitelist: [''],
-      autoplay: true,
+      autoplay: false,
       // pip: true,
       poster: poster,
       volume: 0.6,

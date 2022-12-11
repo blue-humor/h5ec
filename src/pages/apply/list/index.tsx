@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { history } from 'umi';
-import { SwipeCell, Button, Typography, Card, Flex, ActionBar, Toast, Empty } from 'react-vant';
+import { SwipeCell, Button, Typography, Card, Flex, ActionBar, Toast, Empty, Image } from 'react-vant';
 
 import IconFont from '@/utils/iconFont';
 
@@ -9,6 +9,7 @@ import NavBar from '@/components/NavBar';
 import { reqApplyList, reqApplyDel } from '@/services/apply';
 
 import styles from './index.less';
+import TeamSvg from '@/common/svg/team.svg';
 
 interface IndexProps {}
 
@@ -59,7 +60,7 @@ const Index: React.FC<IndexProps> = () => {
       <NavBar title="队员信息列表" />
 
       {applyList.length < 1 ? (
-        <Empty description="暂无队员，赶快添加吧" style={{ background: '#fff' }} />
+        <Empty description="暂无队员，赶快添加吧！" imageSize={280} image={<Image src={TeamSvg} />} />
       ) : (
         applyList?.map((item: any) => {
           return (
