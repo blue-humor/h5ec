@@ -16,15 +16,16 @@ import styles from './index.less';
 interface IndexProps {}
 
 const tabs = [
-  { key: -1, text: '全部' },
-  { key: 5, text: '待付款' },
-  { key: 10, text: '待发货' },
-  { key: 40, text: '待收货' },
-  { key: 50, text: '已完成' },
+  { key: '-1', text: '全部' },
+  { key: '5', text: '待付款' },
+  { key: '10', text: '待发货' },
+  { key: '40', text: '待收货' },
+  { key: '50', text: '已完成' },
 ];
 
 const Index: React.FC<IndexProps> = props => {
-  const [defaultTab, setDefaultTab] = useState<number>(-1);
+  const { defaultType }: any = history.location.query;
+  const [defaultTab, setDefaultTab] = useState<string>(defaultType);
 
   const [ordersList, setOrdersList] = useState<any>([]);
   const [params, setParams] = useState({
@@ -48,7 +49,7 @@ const Index: React.FC<IndexProps> = props => {
   return (
     <div className={styles.order_nav}>
       <NavBar title="我的订单" />
-      <Tabs style={{ zIndex: '1' }} sticky defaultActive={-1} lazyRender lazyRenderPlaceholder swipeable color="#000000" offsetTop="48" onChange={(v: any) => handleOrder(params, v)}>
+      <Tabs style={{ zIndex: '1' }} sticky defaultActive={defaultTab} lazyRender lazyRenderPlaceholder swipeable color="#000000" offsetTop="48" onChange={(v: any) => handleOrder(params, v)}>
         {tabs.map(item => (
           <Tabs.TabPane key={item.key} name={item.key} title={item.text}>
             {ordersList?.map((item: any) => {

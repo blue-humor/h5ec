@@ -13,10 +13,10 @@ interface IndexProps {}
 import styles from './index.less';
 
 const flow = [
-  { id: 1, name: 'icon-gouwuche_daifukuan', text: '待付款', type: 1 },
-  { id: 2, name: 'icon-daifahuo', text: '代发货', type: 2 },
-  { id: 3, name: 'icon-daishouhuo', text: '代收货', type: 3 },
-  { id: 4, name: 'icon-yiwancheng', text: '已完成', type: 4 },
+  { id: 1, name: 'icon-gouwuche_daifukuan', text: '待付款', type: 5 },
+  { id: 2, name: 'icon-daifahuo', text: '代发货', type: 10 },
+  { id: 3, name: 'icon-daishouhuo', text: '代收货', type: 40 },
+  { id: 4, name: 'icon-yiwancheng', text: '已完成', type: 50 },
 ];
 
 const Index: React.FC<IndexProps> = props => {
@@ -31,6 +31,15 @@ const Index: React.FC<IndexProps> = props => {
     }
   };
 
+  const handlePush = (params: number) => {
+    history.push({
+      pathname: '/user/order',
+      query: {
+        defaultType: params + '',
+      },
+    });
+  };
+
   useEffect(() => {
     handleUserInfo();
 
@@ -41,16 +50,16 @@ const Index: React.FC<IndexProps> = props => {
     <>
       <div className={styles.user_nav}>
         <div className={styles.user_bg}></div>
-        <Cell style={{ alignItems: 'end' }} className={styles.user_avater} title={<Typography.Title> {userInfo?.nickName}</Typography.Title>} icon={<Image width={'60px'} height={'60px'} src={userInfo?.headimg} round />} />
+        <Cell style={{ alignItems: 'center' }} className={styles.user_avater} title={<Typography.Title> {userInfo?.nickName}</Typography.Title>} icon={<Image width={'60px'} height={'60px'} src={userInfo?.headimg} round />} />
         <Card className={styles.user_card}>
-          <Cell title={<Typography.Title level={6}>我的订单</Typography.Title>} isLink value="全部订单" onClick={() => history.push('/user/order')} />
+          <Cell title={<Typography.Title level={6}>我的订单</Typography.Title>} isLink value="全部订单" onClick={() => handlePush(-1)} />
 
           <Flex justify="around" style={{ margin: '10px 0 20px  0' }}>
             {flow.map(item => {
               return (
-                <Flex.Item key={item.id}>
+                <Flex.Item key={item.id} onClick={() => handlePush(item?.type)}>
                   <div className={styles.user_iconfont}>
-                    <Badge content={5}>
+                    <Badge>
                       <IconFont name={item.name} width={'32px'} height={'32px'} />
                       <div>{item.text}</div>
                     </Badge>
