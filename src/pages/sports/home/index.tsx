@@ -85,18 +85,7 @@ const Index: React.FC<IndexProps> = props => {
             <Grid.Item icon={<IconFont name="icon-kecheng" />} text="精选课程" onClick={() => huandlePush('4', '精选课程')} />
           </Grid>
 
-          <Cell
-            style={{ padding: '6px 10px' }}
-            isLink
-            center
-            title={
-              <Typography.Title className={styles.title} level={5}>
-                最新赛事
-              </Typography.Title>
-            }
-            rightIcon={<IconFont name="icon-shuangjiantouyou" />}
-            onClick={() => huandlePush('2', '赛事新闻')}
-          />
+          <Cell style={{ padding: '6px 10px' }} isLink center title={<Typography.Title level={5}>最新赛事</Typography.Title>} rightIcon={<IconFont name="icon-shuangjiantouyou" />} onClick={() => huandlePush('2', '赛事新闻')} />
           <Grid border={false} columnNum={2}>
             {newList?.articles1?.map((item: any) => {
               return (
@@ -113,7 +102,9 @@ const Index: React.FC<IndexProps> = props => {
                   }}
                 >
                   <Image src={item?.thumb} className={styles.eventsImage} height={'120px'}>
-                    <Typography.Title className={styles.eventsTitle}>{item?.title}</Typography.Title>
+                    <Typography.Title className={styles.eventsTitle} ellipsis={{ rows: 2 }}>
+                      {item?.title}
+                    </Typography.Title>
                     <Typography.Text className={styles.createtime}>{item?.createtime}</Typography.Text>
                   </Image>
                   {item?.video ? <Image src={VideoPng} fit="cover" className={styles.newsVideoPng} width="40" height="40" /> : null}

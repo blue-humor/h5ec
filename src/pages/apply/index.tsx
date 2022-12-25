@@ -7,6 +7,7 @@ import { Card, Tabs, Button, Input, Form, Uploader, Picker, Typography, Checkbox
 import { reqProjects, reqApply } from '@/services/apply';
 
 import { apply } from '@/utils/rules';
+import styles from './index.less';
 
 interface IndexProps {}
 

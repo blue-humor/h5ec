@@ -23,7 +23,6 @@ const Refresh: React.FC<IndexProps> = ({ handleList, setList, children }) => {
         const { list } = res?.data;
         setList(list);
       }
-      Toast.info('刷新成功');
     }
   };
 
@@ -44,7 +43,7 @@ const Refresh: React.FC<IndexProps> = ({ handleList, setList, children }) => {
   };
 
   return (
-    <PullRefresh onRefresh={async () => handleOnRefresh(true)} onRefreshEnd={() => console.log('onRefreshEnd')}>
+    <PullRefresh onRefresh={async () => handleOnRefresh(true)} onRefreshEnd={() => console.log('onRefreshEnd')} successText="刷新成功">
       <List finished={finished} key="list" onLoad={async () => handleOnLoad()} finishedText="暂无更多">
         {children}
       </List>
