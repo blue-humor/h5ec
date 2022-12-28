@@ -51,7 +51,7 @@ export default (props: any) => {
         }}
         // {...props}
       >
-        <Flex align="center" justify="center" className="main-button" onClick={throttle(handlerLikeIt, 800)}>
+        <Flex align="center" justify="center" className="main-button" onClick={() => handlerLikeIt()}>
           <Image src={isShow ? ZanHong : ZanBai} fit="cover" className={`${isShow ? 'shake' : 'shakHidden'}`} />
         </Flex>
       </FloatingBall>

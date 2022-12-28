@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { history } from 'umi';
 
 import { Card, Tabs, Button, Input, Form, Uploader, Picker, Typography, Checkbox, Toast, Dialog } from 'react-vant';
 
-import { reqProjects, reqApply } from '@/services/apply';
+import { reqProjects, reqApply, reqApplyRegistered } from '@/services/apply';
 
 import { apply } from '@/utils/rules';
 import styles from './index.less';
@@ -66,6 +66,27 @@ const Index: React.FC<IndexProps> = props => {
       setGroupProject(res.data);
     }
   };
+
+  const handleRegistered = async () => {
+    const res = await reqApplyRegistered({});
+    if (res?.code === 200) {
+      if (res.data !== null) {
+        history.push({
+          pathname: '/apply/list',
+          query: {
+            type: type + '',
+            parentId: res?.data?.id,
+          },
+        });
+      }
+    }
+  };
+
+  useEffect(() => {
+    handleRegistered();
+
+    return () => {};
+  }, []);
 
   return (
     <>

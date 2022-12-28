@@ -56,7 +56,7 @@ const Index: React.FC<IndexProps> = props => {
           initialValues={
             query?.id
               ? {
-                  city: [info?.countryName, info?.cityName],
+                  city: [info?.provinceName, info?.cityName],
                   name: info?.name,
                   phone: info?.phone,
                   detailAddress: info?.detailAddress,

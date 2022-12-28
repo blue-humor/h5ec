@@ -51,3 +51,12 @@ export async function reqApplyDel(data: any, options?: any): Promise<API.Res> {
     ...(options || {}),
   });
 }
+
+// 查询状态
+export async function reqApplyRegistered(data: any, options?: any): Promise<API.Res> {
+  return request('/v1/hasRegistered', {
+    method: 'post',
+    data,
+    ...(options || {}),
+  });
+}

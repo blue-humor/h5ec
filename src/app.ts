@@ -15,7 +15,7 @@ export const render = async (oldRender: any) => {
 
 export function onRouteChange({ action }) {
   NProgress.start();
-  if (action === 'PUSH' || action === 'POP') {
+  if (action === 'PUSH' || action === 'POP' || action === 'REPLACE') {
     NProgress.done();
   }
 }

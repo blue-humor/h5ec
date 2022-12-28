@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { history } from 'umi';
-import { SwipeCell, Button, Typography, Card, Flex, ActionBar, Toast, Empty, Image } from 'react-vant';
+import { SwipeCell, Button, Typography, Card, Flex, ActionBar, Toast, Empty, Image, NavBar } from 'react-vant';
 
 import IconFont from '@/utils/iconFont';
 
-import NavBar from '@/components/NavBar';
+// import NavBar from '@/components/NavBar';
 
 import { reqApplyList, reqApplyDel } from '@/services/apply';
 
@@ -24,7 +24,6 @@ const Index: React.FC<IndexProps> = () => {
     const res = await reqApplyList({ current: 1, pageSize: 26, parentId: query?.parentId });
     if (res?.code === 200) {
       const { list } = res?.data;
-
       setapplyList(list);
     }
   };
@@ -57,7 +56,7 @@ const Index: React.FC<IndexProps> = () => {
 
   return (
     <div className={styles.address_list_nav}>
-      <NavBar title="队员信息列表" />
+      <NavBar title="队员信息列表" onClickLeft={() => history.push('/')} />
 
       {applyList.length < 1 ? (
         <Empty description="暂无队员，赶快添加吧！" imageSize={280} image={<Image src={TeamSvg} />} />
@@ -78,11 +77,11 @@ const Index: React.FC<IndexProps> = () => {
                     <Typography.Title level={6}>队员姓名：{item?.name}</Typography.Title>
                     <Typography.Title level={6}>队员性别：{item?.sex}</Typography.Title>
                     <Typography.Title level={6}>队员身份证号：{item?.idNo}</Typography.Title>
-                    {type !== '1' ? (
+                    {type === '1' ? (
                       <>
-                        <Typography.Title level={6}>所属学校：{item?.colleageName}</Typography.Title>
-                        <Typography.Title level={6}>未成年监护人姓名：{item?.supervisorName}</Typography.Title>
-                        <Typography.Title level={6}>监护人身份证号：{item?.supervisorIdNo}</Typography.Title>
+                        <Typography.Text>所属学校：{item?.colleageName}</Typography.Text>
+                        <Typography.Text>未成年监护人姓名：{item?.supervisorName}</Typography.Text>
+                        <Typography.Text>监护人身份证号：{item?.supervisorIdNo}</Typography.Text>
                       </>
                     ) : null}
                   </Flex.Item>
@@ -99,7 +98,7 @@ const Index: React.FC<IndexProps> = () => {
       <ActionBar safeAreaInsetBottom style={{ padding: '16px' }}>
         <Button
           round
-          color="linear-gradient(to right, #000000, #ee0a24)"
+          color="linear-gradient(to right, #aad08f, #87c38f)"
           block
           icon={<IconFont name="icon-tianjia1" />}
           onClick={() => {

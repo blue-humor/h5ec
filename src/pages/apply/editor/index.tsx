@@ -46,7 +46,7 @@ const Index: React.FC<IndexProps> = props => {
   };
   return (
     <>
-      <NavBar title={` ${query?.id ? '编辑收货地址' : '添加收货地址'}`} />
+      <NavBar title={` ${query?.id ? '编辑队员信息' : '添加队员信息'}`} />
 
       <Card className={styles.container}>
         <Form
@@ -89,7 +89,7 @@ const Index: React.FC<IndexProps> = props => {
           <Form.Item rules={apply.idNo} name="idNo" label="队员身份证号码">
             <Input placeholder="输入身份证号码" />
           </Form.Item>
-          {type !== '1' ? (
+          {type === '1' ? (
             <>
               <Form.Item rules={apply.name} name="colleageName" label="队员所属学校">
                 <Input placeholder="请输入队员所属学校" />

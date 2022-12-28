@@ -43,11 +43,11 @@ const Index: React.FC<IndexProps> = () => {
                 })
               }
             >
-              <Flex justify="center">
+              <Flex justify="between">
                 <Flex.Item span={8} style={{ margin: '4px 0 0 0 ' }}>
                   <Image fit="cover" src={item?.thumb} width={120.18} height={66} />
                 </Flex.Item>
-                <Flex.Item span={16}>
+                <Flex.Item span={15}>
                   <Typography.Text ellipsis={3}>{item?.title}</Typography.Text>
                   <div>
                     <Typography.Text className={styles.sportsListTime}>{item?.createtime}</Typography.Text>

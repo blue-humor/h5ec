@@ -67,13 +67,13 @@ const Index: React.FC<IndexProps> = props => {
             value={value}
             onChange={setValue}
             placeholder="请输入搜索关键词"
-            action={<IconFont name="icon--lingdang" style={{ width: '40px' }} />}
+            action={<IconFont name="icon-iconlingdang" style={{ fontSize: '20px' }} />}
           />
           <Card>
             <Swiper autoplay={5000}>
               {swiperImage?.map((item: any) => (
                 <Swiper.Item key={item?.id}>
-                  <Image lazyload fit="fill" src={item?.img} width="100%" />
+                  <Image lazyload fit="cover" src={item?.fileUrl} width="100%" />
                 </Swiper.Item>
               ))}
             </Swiper>
@@ -101,13 +101,13 @@ const Index: React.FC<IndexProps> = props => {
                     });
                   }}
                 >
-                  <Image src={item?.thumb} className={styles.eventsImage} height={'120px'}>
-                    <Typography.Title className={styles.eventsTitle} ellipsis={{ rows: 2 }}>
-                      {item?.title}
-                    </Typography.Title>
+                  <Image fit="cover" src={item?.thumb} className={styles.eventsImage} height={'120px'}>
                     <Typography.Text className={styles.createtime}>{item?.createtime}</Typography.Text>
+                    {item?.video ? <Image src={VideoPng} fit="cover" className={styles.newsVideoPng} width="40" height="40" /> : null}
                   </Image>
-                  {item?.video ? <Image src={VideoPng} fit="cover" className={styles.newsVideoPng} width="40" height="40" /> : null}
+                  <Typography.Title className={styles.eventsTitle} ellipsis={{ rows: 2 }}>
+                    {item?.title}
+                  </Typography.Title>
                 </Grid.Item>
               );
             })}

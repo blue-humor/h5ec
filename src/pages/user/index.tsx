@@ -50,7 +50,7 @@ const Index: React.FC<IndexProps> = props => {
     <>
       <div className={styles.user_nav}>
         <div className={styles.user_bg}></div>
-        <Cell style={{ alignItems: 'center' }} className={styles.user_avater} title={<Typography.Title> {userInfo?.nickName}</Typography.Title>} icon={<Image width={'60px'} height={'60px'} src={userInfo?.headimg} round />} />
+        <Cell style={{ alignItems: 'center' }} className={styles.user_avater} border={false} title={<Typography.Title> {userInfo?.nickName}</Typography.Title>} icon={<Image width={'60px'} height={'60px'} src={userInfo?.headimg} round />} />
         <Card className={styles.user_card}>
           <Cell title={<Typography.Title level={6}>我的订单</Typography.Title>} isLink value="全部订单" onClick={() => handlePush(-1)} />
 
@@ -68,7 +68,7 @@ const Index: React.FC<IndexProps> = props => {
               );
             })}
           </Flex>
-          <Cell isLink title="收获地址" className={styles.harvest_addres} onClick={() => history.push('/address/list')} />
+          <Cell isLink title="收获地址" border className={styles.harvest_addres} onClick={() => history.push('/address/list')} />
         </Card>
       </div>
     </>
