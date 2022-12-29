@@ -4,15 +4,18 @@ import { history } from 'umi';
 
 import { Card, Tabs, Button, Input, Form, Uploader, Picker, Typography, Checkbox, Toast, Dialog } from 'react-vant';
 
-import { reqProjects, reqApply, reqApplyRegistered } from '@/services/apply';
+import { reqProjects, reqApply, reqApplyRegistered, reqUpload } from '@/services/apply';
 
 import { apply } from '@/utils/rules';
+
 import styles from './index.less';
 
 interface IndexProps {}
 
 const Index: React.FC<IndexProps> = props => {
   const [form] = Form.useForm();
+  // const schoolDocument = Form.useWatch('schoolDocument', form)
+  // const setFileImageKey = (fileKey: any) => form.setFieldsValue({ 'schoolDocument': fileKey })
 
   const [type, seTtype] = useState<number>(1);
 
@@ -40,10 +43,11 @@ const Index: React.FC<IndexProps> = props => {
         message: '请选择参赛项目',
       });
       return;
-    } else if (values.schoolDocument === undefined && type === 1) {
+    } else if (values.colleageCert === undefined && type === 1) {
       Dialog.alert({
         message: '请上传学校公章证明文件',
       });
+      return;
     }
     const res = await reqApply({ ...values, type });
     if (res?.code === 200) {
@@ -79,6 +83,17 @@ const Index: React.FC<IndexProps> = props => {
           },
         });
       }
+    }
+  };
+
+  const handleUpload = async (file: any) => {
+    const body = new FormData();
+    body.append('file', file);
+    const res = await reqUpload(body);
+    if (res.code === 200) {
+      return { url: res?.data };
+    } else {
+      return { url: '' };
     }
   };
 
@@ -197,7 +212,7 @@ const Index: React.FC<IndexProps> = props => {
               </Form.Item>
 
               <Form.Item
-                name="schoolDocument"
+                name="colleageCert"
                 label={
                   <>
                     学校公章证明文件
@@ -207,7 +222,7 @@ const Index: React.FC<IndexProps> = props => {
                   </>
                 }
               >
-                <Uploader accept="image/png" maxCount={1} />
+                <Uploader accept="image/png" maxCount={1} upload={handleUpload} />
               </Form.Item>
 
               <Form.Item
@@ -222,7 +237,7 @@ const Index: React.FC<IndexProps> = props => {
                 }
                 rules={[{ required: true, message: '请上传队伍logo' }]}
               >
-                <Uploader accept="image/png" maxCount={1} />
+                <Uploader accept="image/png" maxCount={1} upload={handleUpload} />
               </Form.Item>
             </Form>
           </Card>
@@ -345,7 +360,7 @@ const Index: React.FC<IndexProps> = props => {
                 }
                 rules={[{ required: true, message: '请上传队伍logo' }]}
               >
-                <Uploader accept="image/png" maxCount={1} />
+                <Uploader accept="image/png" maxCount={1} upload={handleUpload} />
               </Form.Item>
             </Form>
           </Card>
@@ -465,7 +480,7 @@ const Index: React.FC<IndexProps> = props => {
                 }
                 rules={[{ required: true, message: '请上传队伍logo' }]}
               >
-                <Uploader previewImage accept="image/png" maxCount={1} />
+                <Uploader previewImage accept="image/png" maxCount={1} upload={handleUpload} />
               </Form.Item>
             </Form>
           </Card>

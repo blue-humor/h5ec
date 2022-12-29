@@ -60,3 +60,13 @@ export async function reqApplyRegistered(data: any, options?: any): Promise<API.
     ...(options || {}),
   });
 }
+
+// 上传
+export async function reqUpload(data: any, options?: any): Promise<API.Res> {
+  return request('/v1/pc/upload', {
+    method: 'post',
+    data,
+    headers: {},
+    ...(options || {}),
+  });
+}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { history } from 'umi';
-import { SwipeCell, Button, Typography, Card, Flex, ActionBar, Toast, Empty, Image, NavBar } from 'react-vant';
+import { SwipeCell, Button, Typography, Card, Flex, ActionBar, Toast, Empty, Image, NavBar, Divider } from 'react-vant';
 
 import IconFont from '@/utils/iconFont';
 
@@ -94,7 +94,7 @@ const Index: React.FC<IndexProps> = () => {
           );
         })
       )}
-
+      <Divider style={{ padding: '0 0 70px 0 ' }}>到底啦～</Divider>
       <ActionBar safeAreaInsetBottom style={{ padding: '16px' }}>
         <Button
           round

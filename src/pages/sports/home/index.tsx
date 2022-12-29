@@ -20,17 +20,18 @@ interface IndexProps {}
 const Index: React.FC<IndexProps> = props => {
   const [value, setValue] = useState('');
 
-  const [swiperImage, setSwiperImage] = useState<any>([]);
+  // const [swiperImage, setSwiperImage] = useState<any>([]);
 
   const [newList, setNewList] = useState<any>({
     articles1: [],
     articles2: [],
+    imagesList: [],
   });
 
-  const handleImage = async () => {
-    const res = await reqSwiper({});
-    setSwiperImage(res);
-  };
+  // const handleImage = async () => {
+  //   const res = await reqSwiper({});
+  //   setSwiperImage(res);
+  // };
 
   const handleHomeList = async (params: any) => {
     const res: any = await reqHomeData(params);
@@ -52,7 +53,7 @@ const Index: React.FC<IndexProps> = props => {
   };
 
   useEffect(() => {
-    handleImage();
+    // handleImage();
     return () => {};
   }, []);
 
@@ -71,7 +72,7 @@ const Index: React.FC<IndexProps> = props => {
           />
           <Card>
             <Swiper autoplay={5000}>
-              {swiperImage?.map((item: any) => (
+              {newList?.imagesList?.map((item: any) => (
                 <Swiper.Item key={item?.id}>
                   <Image lazyload fit="cover" src={item?.fileUrl} width="100%" />
                 </Swiper.Item>

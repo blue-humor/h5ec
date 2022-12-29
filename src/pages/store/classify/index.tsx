@@ -53,12 +53,12 @@ const Index: React.FC<IndexProps> = props => {
           return (
             <Sidebar.Item contentStyle={{ background: '#ffffff', padding: '20px 0 0 0 ' }} key={item.groupId} title={item.name}>
               <Flex justify="around" wrap="wrap">
-                {item?.children?.map((item2: { groupId: React.Key | null | undefined; thumbnail: string | undefined; name: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined }) => {
+                {item?.children?.map((item2: { groupId: React.Key | null | undefined; thumbnail: string | any; name: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined }) => {
                   return (
                     <Flex.Item flex={1} key={item2.groupId}>
                       <Card className="classify_card" onClick={() => handleClassify(item2)}>
                         <Card.Cover>
-                          <Image src={item2.thumbnail} width="20vw">
+                          <Image src={item2.thumbnail[0]?.url} width="20vw">
                             {item2.name}
                           </Image>
                         </Card.Cover>

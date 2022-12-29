@@ -43,9 +43,9 @@ const Index: React.FC<IndexProps> = () => {
                 })
               }
             >
-              <Flex justify="between">
+              <Flex justify="around">
                 <Flex.Item span={8} style={{ margin: '4px 0 0 0 ' }}>
-                  <Image fit="cover" src={item?.thumb} width={120.18} height={66} />
+                  <Image fit="cover" src={item?.thumb} width={'100%'} height={'100%'} />
                 </Flex.Item>
                 <Flex.Item span={15}>
                   <Typography.Text ellipsis={3}>{item?.title}</Typography.Text>
