@@ -67,8 +67,8 @@ const Index: React.FC<IndexProps> = props => {
             // background="#ffffff"
             value={value}
             onChange={setValue}
+            disabled
             placeholder="请输入搜索关键词"
-            action={<IconFont name="icon-iconlingdang" style={{ fontSize: '20px' }} />}
           />
           <Card>
             <Swiper autoplay={5000}>

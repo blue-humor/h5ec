@@ -58,7 +58,7 @@ const Index: React.FC<IndexProps> = () => {
       )}
 
       <p className={styles.sportsDetailsText}>{article?.content}</p>
-      <Divider></Divider>
+      <Divider>到底啦～</Divider>
       <Bubble articleId={query?.id} like={article?.like} />
     </>
   );

@@ -13,10 +13,10 @@ interface IndexProps {}
 import styles from './index.less';
 
 const flow = [
-  { id: 1, name: 'icon-gouwuche_daifukuan', text: '待付款', type: 5 },
-  { id: 2, name: 'icon-daifahuo', text: '代发货', type: 10 },
-  { id: 3, name: 'icon-daishouhuo', text: '代收货', type: 40 },
-  { id: 4, name: 'icon-yiwancheng', text: '已完成', type: 50 },
+  { id: 1, name: 'icon-icon', text: '待付款', type: 5 },
+  { id: 2, name: 'icon-a-daidaohuodaifahuodaishouhuoyunshu', text: '代发货', type: 10 },
+  { id: 3, name: 'icon-daishouhuo1', text: '代收货', type: 40 },
+  { id: 4, name: 'icon-dingdanyiwancheng', text: '已完成', type: 50 },
 ];
 
 const Index: React.FC<IndexProps> = props => {
@@ -61,7 +61,7 @@ const Index: React.FC<IndexProps> = props => {
                   <div className={styles.user_iconfont}>
                     <Badge>
                       <IconFont name={item.name} width={'32px'} height={'32px'} />
-                      <div>{item.text}</div>
+                      <div style={{ color: '#707070' }}>{item.text}</div>
                     </Badge>
                   </div>
                 </Flex.Item>

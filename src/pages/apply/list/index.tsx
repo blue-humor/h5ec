@@ -80,8 +80,11 @@ const Index: React.FC<IndexProps> = () => {
                     {type === '1' ? (
                       <>
                         <Typography.Text>所属学校：{item?.colleageName}</Typography.Text>
+                        <br />
                         <Typography.Text>未成年监护人姓名：{item?.supervisorName}</Typography.Text>
+                        <br />
                         <Typography.Text>监护人身份证号：{item?.supervisorIdNo}</Typography.Text>
+                        <br />
                       </>
                     ) : null}
                   </Flex.Item>

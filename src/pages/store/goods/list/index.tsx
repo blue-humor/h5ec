@@ -5,6 +5,7 @@ import { history } from 'umi';
 import { DropdownMenu } from 'react-vant';
 import NavBar from '@/components/NavBar';
 import Cards from '@/components/Cards';
+import Refresh from '@/components/Refresh';
 
 import { reqGoodList } from '@/services/goods/list';
 
@@ -24,12 +25,11 @@ export const option2 = [
 const Index: React.FC<IndexProps> = props => {
   const [value, setValue] = useState<any>({ type: 0, sort: 0 });
 
-  // const [cardList, setCardList] = useState([])
+  const [cardList, setCardList] = useState([]);
 
   const handleGoodList = async (params: any) => {
     const { query } = history.location;
     const res = await reqGoodList({ ...params, ...query, ...value });
-    console.log({ ...params, ...query, ...value });
 
     return res;
   };
@@ -41,13 +41,15 @@ const Index: React.FC<IndexProps> = props => {
   return (
     <>
       <NavBar title="商品列表" />
-      <DropdownMenu defaultValue={value} value={value} onChange={v => setValue(v)} style={{ margin: '0 0 4px 0' }} activeIcon={''}>
+      {/* <DropdownMenu defaultValue={value} value={value} onChange={v => setValue(v)} style={{ margin: '0 0 4px 0' }} activeIcon={''}>
         <DropdownMenu.Item name="type" options={option1} />
         <DropdownMenu.Item name="sort" options={option2} />
-      </DropdownMenu>
+      </DropdownMenu> */}
       <div></div>
       <div style={{ padding: '10px' }}>
-        <Cards handleCardList={handleGoodList} />
+        <Refresh handleList={handleGoodList} setList={setCardList}>
+          <Cards cardList={cardList} />
+        </Refresh>
       </div>
     </>
   );

@@ -56,10 +56,19 @@ const Index: React.FC<IndexProps> = props => {
               return (
                 <Card className={styles.order_card} key={item?.id}>
                   <Cell title={`订单号：${item?.orderNo} `} value={<Typography.Text type="danger">{item?.orderStatusName}</Typography.Text>} />
-                  <ProductCard num={`${item?.buyQuantity}`} price={`${priceFormat(item?.itemPaymentAmount, 2)}`} title={`${item?.goodsName}`} thumb={`${item?.goodsPictureUrl}`} />
+                  <ProductCard
+                    num={`${item?.buyQuantity}`}
+                    price={`${priceFormat(item?.itemPaymentAmount, 2)}`}
+                    title={
+                      <Typography.Text ellipsis={2} className={styles.orderTitle}>
+                        {item?.goodsName}
+                      </Typography.Text>
+                    }
+                    thumb={`${item?.goodsPictureUrl}`}
+                  />
                   <Flex style={{ margin: '20px 16px 0 0 ' }} justify="end" align="center">
-                    <Typography.Text size="xs">总价¥:{priceFormat(item?.paymentAmount, 2)}，</Typography.Text>
-                    <Typography.Text size="xs" style={{ margin: '0 6px 0 0 ' }}>
+                    <Typography.Text size="sm">总价¥:{priceFormat(item?.paymentAmount, 2)}，</Typography.Text>
+                    <Typography.Text size="sm" style={{ margin: '0 6px 0 0 ' }}>
                       运费¥:0
                     </Typography.Text>
                     <Typography.Text size="md" type="danger">
@@ -74,7 +83,7 @@ const Index: React.FC<IndexProps> = props => {
                       className={styles.button_width}
                       size="small"
                       round
-                      color="linear-gradient(to right, #ff6034, #ee0a24)"
+                      color="linear-gradient(to right, #e05555, #ce3737)"
                       onClick={() =>
                         history.push({
                           pathname: '/goods/pay',
