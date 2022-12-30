@@ -11,6 +11,7 @@ const Index: React.FC<IndexProps> = ({ title }) => {
   return (
     <>
       <NavBar
+        style={{ zIndex: '9' }}
         placeholder
         fixed
         safeAreaInsetTop

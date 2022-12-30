@@ -1,62 +1,121 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { Card, Tabs, Button, Input, Dialog, Form, Uploader, Picker, Typography, Checkbox, Toast } from 'react-vant';
+import { history } from 'umi';
 
-import { reqProjects, reqApply } from '@/services/apply';
+import { Card, Tabs, Button, Input, Form, Uploader, Picker, Typography, Checkbox, Toast, Dialog } from 'react-vant';
+
+import { reqProjects, reqApply, reqApplyRegistered, reqUpload } from '@/services/apply';
 
 import { apply } from '@/utils/rules';
+
+import styles from './index.less';
 
 interface IndexProps {}
 
 const Index: React.FC<IndexProps> = props => {
   const [form] = Form.useForm();
+  // const schoolDocument = Form.useWatch('schoolDocument', form)
+  // const setFileImageKey = (fileKey: any) => form.setFieldsValue({ 'schoolDocument': fileKey })
 
-  const [type, seTtype] = useState<number>(3);
+  const [type, seTtype] = useState<number>(1);
+
+  const [initialValues, setInitialValues] = useState({});
 
   const [groupProject, setGroupProject] = useState<any>({
     registerProjectList: [],
     projectType: '',
   });
 
+  const handleType = (v: number) => {
+    seTtype(v);
+  };
+
   const handleOnFinish = async (values: any) => {
     console.log(values);
 
-    // if (values.groupName === undefined) {
-    //   Dialog.alert({
-    //     message: '请选择参赛队伍',
-    //   });
-    //   return;
-    // } else if (values.projectNames === undefined || values.projectNames?.length <= 0) {
-    //   Dialog.alert({
-    //     message: '请选择参赛项目',
-    //   });
-    //   return;
-    // }
+    if (values.groupName === undefined) {
+      Dialog.alert({
+        message: '请选择参赛队伍',
+      });
+      return;
+    } else if (values.projectNames === undefined || values.projectNames?.length <= 0) {
+      Dialog.alert({
+        message: '请选择参赛项目',
+      });
+      return;
+    } else if (values.colleageCert === undefined && type === 1) {
+      Dialog.alert({
+        message: '请上传学校公章证明文件',
+      });
+      return;
+    }
     const res = await reqApply({ ...values, type });
     if (res?.code === 200) {
       Toast.success(res?.message);
-    } else Toast.fail(res?.message);
+      history.push({
+        pathname: '/apply/list',
+        query: {
+          type: type + '',
+          parentId: res?.data?.id,
+        },
+      });
+    } else {
+      Toast.fail(res?.message);
+    }
   };
 
   const handleProjects = async (parmas: any) => {
     const res = await reqProjects(parmas);
-    if (res.code === 200) {
+    if (res?.code === 200) {
       setGroupProject(res.data);
     }
   };
 
+  const handleRegistered = async () => {
+    const res = await reqApplyRegistered({});
+    if (res?.code === 200) {
+      if (res.data !== null) {
+        history.push({
+          pathname: '/apply/list',
+          query: {
+            type: type + '',
+            parentId: res?.data?.id,
+          },
+        });
+      }
+    }
+  };
+
+  const handleUpload = async (file: any) => {
+    const body = new FormData();
+    body.append('file', file);
+    const res = await reqUpload(body);
+    if (res.code === 200) {
+      return { url: res?.data };
+    } else {
+      return { url: '' };
+    }
+  };
+
+  useEffect(() => {
+    handleRegistered();
+
+    return () => {};
+  }, []);
+
   return (
     <>
-      <Tabs active={1} sticky lazyRender lazyRenderPlaceholder swipeable color="#000000" offsetTop="1" onChange={(v: any) => seTtype(v)}>
+      <Tabs active={1} sticky swipeable color="#87c38f" offsetTop="0.1" onChange={(v: any) => handleType(v)}>
         <Tabs.TabPane title={`校内参赛队注册`} key={1} name={1}>
           <Card style={{ margin: '20px 10px 44px 10px ' }}>
             <Form
               layout="vertical"
               form={form}
+              initialValues={initialValues}
               onFinish={handleOnFinish}
               footer={
                 <div style={{ margin: '10px 0 10px 0' }}>
-                  <Button round nativeType="submit" type="info" block>
+                  <Button round nativeType="submit" type="info" block color="linear-gradient(to right, #aad08f, #87c38f)">
                     保存并添加队伍信息
                   </Button>
                 </div>
@@ -72,7 +131,7 @@ const Index: React.FC<IndexProps> = props => {
                   action.current?.open();
                 }}
               >
-                <Picker onConfirm={(v: string) => handleProjects({ groupName: v })} popup columns={['甲', '乙', '丙', '丁']}>
+                <Picker key={'groupName'} onConfirm={(v: string) => handleProjects({ groupName: v })} popup columns={['甲', '乙', '丙', '丁']}>
                   {val => val || '选择队伍'}
                 </Picker>
               </Form.Item>
@@ -110,15 +169,15 @@ const Index: React.FC<IndexProps> = props => {
                 )}
               </Form.Item>
 
-              <Form.Item rules={apply.schoolName} name="colleageCnName" label="学校中文名称">
+              <Form.Item name="colleageCnName" label="学校中文名称">
                 <Input placeholder="输入中文名称" />
               </Form.Item>
 
-              <Form.Item rules={apply.schoolName} name="colleageEnName" label="学校英文全写">
+              <Form.Item name="colleageEnName" label="学校英文全写">
                 <Input placeholder="英文全写" />
               </Form.Item>
 
-              <Form.Item rules={apply.schoolName} name="colleageEnShortName" label="学校英文简写">
+              <Form.Item name="colleageEnShortName" label="学校英文简写">
                 <Input placeholder="英文简写" />
               </Form.Item>
 
@@ -153,25 +212,32 @@ const Index: React.FC<IndexProps> = props => {
               </Form.Item>
 
               <Form.Item
-                name="schoolDocument"
-                label="学校公章证明文件"
-                // rules={[{ required: true, message: '请上传队伍logo' }]}
+                name="colleageCert"
+                label={
+                  <>
+                    学校公章证明文件
+                    <Typography.Text type="danger" underline style={{ margin: '0 0 0 10px' }}>
+                      上传扫描和清晰照片
+                    </Typography.Text>
+                  </>
+                }
               >
-                <Uploader accept="image/png" maxCount={1} />
-                <Typography.Text underline style={{ margin: '54px 0 0 10px' }}>
-                  上传扫描和清晰照片
-                </Typography.Text>
+                <Uploader accept="image/png" maxCount={1} upload={handleUpload} />
               </Form.Item>
 
               <Form.Item
                 name="teamLogo"
-                label="队伍logo"
-                // rules={[{ required: true, message: '请上传队伍logo' }]}
+                label={
+                  <>
+                    队伍logo
+                    <Typography.Text type="danger" underline style={{ margin: '0 0 0 10px' }}>
+                      上传图片png格式
+                    </Typography.Text>
+                  </>
+                }
+                rules={[{ required: true, message: '请上传队伍logo' }]}
               >
-                <Uploader accept="image/png" maxCount={1} />
-                <Typography.Text underline style={{ margin: '54px 0 0 10px' }}>
-                  上传图片png格式
-                </Typography.Text>
+                <Uploader accept="image/png" maxCount={1} upload={handleUpload} />
               </Form.Item>
             </Form>
           </Card>
@@ -180,12 +246,13 @@ const Index: React.FC<IndexProps> = props => {
         <Tabs.TabPane title={`非校内参赛队注册`} key={2} name={2}>
           <Card style={{ margin: '20px 10px 44px 10px ' }}>
             <Form
+              initialValues={initialValues}
               layout="vertical"
               form={form}
               onFinish={handleOnFinish}
               footer={
                 <div style={{ margin: '10px 0 10px 0' }}>
-                  <Button round nativeType="submit" type="info" block>
+                  <Button round nativeType="submit" type="info" block color="linear-gradient(to right, #aad08f, #87c38f)">
                     保存并添加队伍信息
                   </Button>
                 </div>
@@ -212,7 +279,7 @@ const Index: React.FC<IndexProps> = props => {
                     {groupProject?.registerProjectList.map((item: any, index: number) => {
                       return (
                         <>
-                          <Typography.Text> {item?.projectName}</Typography.Text>
+                          <Typography.Text key={item?.projectName}> {item?.projectName}</Typography.Text>
                           {item.propList.map((item2: any) => {
                             return (
                               <Checkbox checkedColor="#ee0a24" key={item2?.key} shape="round" labelPosition="right" name={item2?.key} style={{ margin: '10px' }}>
@@ -282,13 +349,18 @@ const Index: React.FC<IndexProps> = props => {
               </Form.Item>
               <Form.Item
                 name="teamLogo"
-                label="队伍logo"
-                // rules={[{ required: true, message: '请上传队伍logo' }]}
+                label={
+                  <>
+                    {' '}
+                    队伍logo
+                    <Typography.Text type="danger" underline style={{ margin: '0 0 0 10px' }}>
+                      上传图片png格式
+                    </Typography.Text>
+                  </>
+                }
+                rules={[{ required: true, message: '请上传队伍logo' }]}
               >
-                <Uploader accept="image/png" maxCount={1} />
-                <Typography.Text underline style={{ margin: '54px 0 0 10px' }}>
-                  上传图片png格式
-                </Typography.Text>
+                <Uploader accept="image/png" maxCount={1} upload={handleUpload} />
               </Form.Item>
             </Form>
           </Card>
@@ -297,12 +369,13 @@ const Index: React.FC<IndexProps> = props => {
         <Tabs.TabPane title={`邀请赛俱乐部注册`} key={3} name={3}>
           <Card style={{ margin: '20px 10px 44px 10px ' }}>
             <Form
+              initialValues={initialValues}
               layout="vertical"
               form={form}
               onFinish={handleOnFinish}
               footer={
                 <div style={{ margin: '10px 0 10px  0' }}>
-                  <Button round nativeType="submit" type="info" block>
+                  <Button round nativeType="submit" type="info" block color="linear-gradient(to right, #aad08f, #87c38f)">
                     保存并添加队伍信息
                   </Button>
                 </div>
@@ -397,13 +470,17 @@ const Index: React.FC<IndexProps> = props => {
               </Form.Item>
               <Form.Item
                 name="teamLogo"
-                label="队伍logo"
-                // rules={[{ required: true, message: '请上传队伍logo' }]}
+                label={
+                  <>
+                    队伍logo
+                    <Typography.Text type="danger" underline style={{ margin: '0 0 0 10px' }}>
+                      上传图片png格式
+                    </Typography.Text>
+                  </>
+                }
+                rules={[{ required: true, message: '请上传队伍logo' }]}
               >
-                <Uploader accept="image/png" maxCount={1} />
-                <Typography.Text underline style={{ margin: '54px 0 0 10px' }}>
-                  上传图片png格式
-                </Typography.Text>
+                <Uploader previewImage accept="image/png" maxCount={1} upload={handleUpload} />
               </Form.Item>
             </Form>
           </Card>

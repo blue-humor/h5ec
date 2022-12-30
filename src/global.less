@@ -7,6 +7,13 @@ body {
   width: auto;
   height: 100%;
   overflow-x: hidden;
+  padding: 0;
+
+  ::-webkit-scrollbar {
+    display: none;
+    width: 0px;
+    height: 0px;
+  }
 
   #root {
     // .rv-checkbox {}
@@ -28,8 +35,9 @@ body {
   --rv-nav-bar-text-color: #000000;
   --rv-nav-bar-icon-color: #000000;
   //分类
-  // --rv-sidebar-active-color: #fa4126;
-  // --rv-sidebar-selected-border-color: #000000; // --rv-list-text-line-height: 7.8;
+  --rv-sidebar-active-color: #000000;
+  // --rv-sidebar-selected-text-color: #4a4a4a;
+  --rv-sidebar-selected-border-color: #000000; // --rv-list-text-line-height: 7.8;
   // 商品卡片
   --rv-product-card-background-color: #ffffff;
 }

@@ -22,3 +22,30 @@ export function priceFormat(price: any, fill = 0) {
   }
   return priceFormatValue;
 }
+
+export function throttle(func, delay) {
+  let lastCall: any = new Date();
+  return function (...args: any) {
+    const now: any = new Date();
+    if (now - lastCall < delay) {
+      return;
+    }
+    lastCall = now;
+    return func();
+  };
+}
+
+// export function debounce(func, wait, immediate = false) {
+//   let timeout;
+//   return function (...args) {
+//     clearTimeout(timeout);
+//     timeout = setTimeout(() => {
+//       func.apply(this, args);
+//     }, wait);
+//     // 是否立即执行一次任务
+//     if (immediate) {
+//       immediate = false;
+//       func;
+//     }
+//   };
+// }
