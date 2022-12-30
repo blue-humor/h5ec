@@ -16,6 +16,9 @@ const SkuGoods: React.FC<SkuProps> = ({ skuRef, showButtonType, skuParams }) => 
   const goodId: any = history?.location?.query?.id;
 
   const handleAddOrBay = async (value: any, Type: number) => {
+    console.log(value);
+    console.log('skuParams', skuParams);
+
     const res = await reqDetailsPay(value);
     if (res?.code === 200) {
       const { id } = res?.data;

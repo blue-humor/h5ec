@@ -56,7 +56,7 @@ const Index: React.FC<IndexProps> = () => {
 
   return (
     <div className={styles.address_list_nav}>
-      <NavBar title="队员信息列表" onClickLeft={() => history.push('/')} />
+      <NavBar title="队员信息列表" onClickLeft={() => history.push('/')} fixed placeholder safeAreaInsetTop />
 
       {applyList.length < 1 ? (
         <Empty description="暂无队员，赶快添加吧！" imageSize={280} image={<Image src={TeamSvg} />} />

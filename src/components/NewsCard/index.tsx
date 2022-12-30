@@ -46,7 +46,7 @@ const Index: React.FC<IndexProps> = ({ newList }) => {
                 </Flex.Item>
               </Flex>
             </Card.Body>
-            <Divider dashed />
+            {/* <Divider dashed /> */}
           </Card>
         );
       })}

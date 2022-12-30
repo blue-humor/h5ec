@@ -60,7 +60,7 @@ const Index: React.FC<IndexProps> = props => {
                 <Flex.Item key={item.id} onClick={() => handlePush(item?.type)}>
                   <div className={styles.user_iconfont}>
                     <Badge>
-                      <IconFont name={item.name} width={'32px'} height={'32px'} />
+                      <IconFont name={item.name} style={{ fontSize: '24px' }} />
                       <div style={{ color: '#707070' }}>{item.text}</div>
                     </Badge>
                   </div>

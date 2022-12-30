@@ -70,18 +70,19 @@ const Index: React.FC<IndexProps> = () => {
       <NavBar title="商品详情" />
 
       <div className={styles.goods_detalis_nav}>
-        <Swiper
-          indicator={(total, current) => (
-            <div className={styles.custom_indicator}>
-              {current + 1}/{total}
-            </div>
-          )}
+        {/* <Swiper
+          autoplay={2000}
+        // indicator={(total, current) => (
+        //   <div className={styles.custom_indicator}>
+        //     {current + 1}/{total}
+        //   </div>
+        // )}
         >
           {detailsParams?.imag?.map((item: any, index: number) => {
             return (
               <Swiper.Item key={index}>
                 <Image
-                  lazyload
+                  // lazyload
                   src={item}
                   key={index}
                   onClick={() =>
@@ -93,6 +94,13 @@ const Index: React.FC<IndexProps> = () => {
               </Swiper.Item>
             );
           })}
+        </Swiper> */}
+        <Swiper>
+          {detailsParams?.imag?.map((image: any, index: number) => (
+            <Swiper.Item key={index}>
+              <Image src={image} />
+            </Swiper.Item>
+          ))}
         </Swiper>
 
         <Card className={styles.details_card}>
@@ -140,7 +148,7 @@ const Index: React.FC<IndexProps> = () => {
           isLink
         /> */}
 
-        <Card round style={{ margin: '0 0  60px  0' }}>
+        <Card round style={{ margin: '0 0  70px  0' }}>
           <Divider>详情介绍</Divider>
           {detailsParams?.detailsImage?.map((item: any, index: number | undefined) => {
             return (
@@ -157,7 +165,7 @@ const Index: React.FC<IndexProps> = () => {
               />
             );
           })}
-          <Divider></Divider>
+          <Divider>到底啦～</Divider>
         </Card>
 
         <ActionBar safeAreaInsetBottom>

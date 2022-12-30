@@ -132,7 +132,7 @@ const Index: React.FC<IndexProps> = () => {
                 {orderAddress?.city.map((item: any, index: number) => {
                   return <Typography.Text key={index}>{item}</Typography.Text>;
                 })}
-                <Typography.Text style={{ margin: '0 0 0 4px' }}>{orderAddress?.detailAddress}</Typography.Text>
+                <br /> <Typography.Text>{orderAddress?.detailAddress}</Typography.Text>
               </>
             }
             label={`${orderAddress?.name} ${orderAddress?.phone}`}
@@ -142,7 +142,7 @@ const Index: React.FC<IndexProps> = () => {
       )}
 
       {orderDetail === null ? (
-        <Skeleton row={10} style={{ margin: '40px 0 0 0' }} />
+        <Skeleton row={20} style={{ margin: '40px 0 0 0' }} />
       ) : (
         <div>
           <Card style={{ margin: '10px 0 0 0 ' }}>
