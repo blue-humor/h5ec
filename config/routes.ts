@@ -19,7 +19,7 @@ export default [
       { exact: true, path: '/classify', title: '分类', component: '@/pages/classify' },
       { exact: true, path: '/cart', title: '购物车', component: '@/pages/cart' },
       { exact: true, path: '/user', title: '个人中心', component: '@/pages/user' },
-      { exact: true, path: '/apply', title: '报名', component: '@/pages/apply' },
+      // { exact: true, path: '/apply', title: '报名', component: '@/pages/apply' },
 
       { path: '/', redirect: '/home' },
       { component: './404' },
