@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-import { Swiper, Image, Search, Card, Tabs, List } from 'react-vant';
+import { Image, Search, Card, Tabs, List } from 'react-vant';
 
+import SwiperFade from '@/components/SwiperFade';
 import Cards from '@/components/Cards';
 import Refresh from '@/components/Refresh';
 
@@ -38,13 +39,17 @@ const Index: React.FC<IndexProps> = props => {
             placeholder="请输入搜索关键词"
           />
           <Card>
-            <Swiper autoplay={5000}>
+            {/* <Swiper modules={[Navigation, Pagination, Autoplay, Scrollbar, A11y]}
+              autoplay
+              pagination={{ clickable: true }}
+            >
               {swiperList?.map((item: any) => (
-                <Swiper.Item key={item?.id}>
-                  <Image lazyload fit="fill" src={item?.img} width="100%" />
-                </Swiper.Item>
+                <SwiperSlide key={item?.id}>
+                  <Image fit="fill" src={item?.img} width="100%" />
+                </SwiperSlide>
               ))}
-            </Swiper>
+            </Swiper> */}
+            <SwiperFade list={swiperList} effect="silde" />
             <Tabs color="#000000">
               <Tabs.TabPane title={`精选推荐`}></Tabs.TabPane>
             </Tabs>

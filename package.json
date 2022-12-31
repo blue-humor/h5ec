@@ -29,6 +29,7 @@
     "react-dom": "17.x",
     "react-transition-group": "^4.4.5",
     "react-vant": "^3.0.4",
+    "swiper": "^8.4.5",
     "umi": "^3.5.35",
     "vconsole": "^3.15.0",
     "weixin-js-sdk": "^1.6.0",
