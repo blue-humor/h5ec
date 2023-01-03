@@ -23,14 +23,14 @@ body {
 .swiper-pagination-bullet-active,
 .swiper-pagination-bullet {
   width: 20px;
-  height: 4px;
+  height: 2px;
   border-radius: 100px;
   background-color: #000000;
   opacity: 0.18;
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #d76f5f;
+  background-color: #ffffff;
   opacity: 1;
 }
 
@@ -44,14 +44,19 @@ body {
   }
 }
 
+.rv-sidebar-item:hover {
+  color: #fa4126;
+}
+
 :root:root {
   //导航<
   --rv-nav-bar-text-color: #000000;
   --rv-nav-bar-icon-color: #000000;
   //分类
-  --rv-sidebar-active-color: #000000;
-  // --rv-sidebar-selected-text-color: #4a4a4a;
-  --rv-sidebar-selected-border-color: #000000; // --rv-list-text-line-height: 7.8;
+  --rv-sidebar-active-color: #fa4126;
+  //步进器
+  // --rv-stepper-button-icon-color: #fa4126; // --rv-sidebar-selected-text-color: #4a4a4a;
+  --rv-sidebar-selected-text-color: #fa4126; // --rv-list-text-line-height: 7.8;
   // 商品卡片
   --rv-product-card-background-color: #ffffff;
 }

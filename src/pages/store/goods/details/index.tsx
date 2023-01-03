@@ -42,7 +42,6 @@ const Index: React.FC<IndexProps> = () => {
     },
   });
 
-  const [select, setSelect] = useState([]);
   const [showButtonType, setShowButtonType] = useState(0);
 
   // 打开sku弹框
@@ -71,15 +70,7 @@ const Index: React.FC<IndexProps> = () => {
       <NavBar title="商品详情" />
 
       <div className={styles.goods_detalis_nav}>
-        {/* <Swiper autoplay={1000} >
-          {detailsParams?.imag?.map((image: any, index: number) => (
-            <Swiper.Item key={index}>
-              <Image src={image} />
-            </Swiper.Item>
-          ))}
-        </Swiper> */}
         <SwiperFade list={detailsParams?.imag} effect="fade" />
-
         <Card className={styles.details_card}>
           <Card.Body>
             <Flex justify="between" align="center">

@@ -10,6 +10,7 @@ export default [
   { exact: true, path: '/address/list', title: '地址列表', component: '@/pages/store/address/list' },
   { exact: true, path: '/address/editor', title: '地址编辑', component: '@/pages/store/address/editor' },
   { exact: true, path: '/user/order', title: '订单', component: '@/pages/store/order' },
+  { exact: true, path: '/store/classification', title: '店家分类', component: '@/pages/store/classification' },
 
   {
     exact: false,

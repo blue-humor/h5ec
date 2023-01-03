@@ -20,6 +20,8 @@
     ]
   },
   "dependencies": {
+    "@better-scroll/core": "^2.5.0",
+    "@nutui/nutui-react": "^1.4.1",
     "@react-vant/icons": "^0.0.10",
     "cross-env": "^7.0.3",
     "nprogress": "^0.2.0",

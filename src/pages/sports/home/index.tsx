@@ -7,7 +7,6 @@ import NewsCard from '@/components/NewsCard';
 
 import Refresh from './components/Refresh';
 
-import { reqSwiper } from '@/services/home';
 import { reqHomeData } from '@/services/sports/home';
 
 import IconFont from '@/utils/iconFont';
@@ -27,11 +26,6 @@ const Index: React.FC<IndexProps> = props => {
     articles2: [],
     imagesList: [],
   });
-
-  // const handleImage = async () => {
-  //   const res = await reqSwiper({});
-  //   setSwiperImage(res);
-  // };
 
   const handleHomeList = async (params: any) => {
     const res: any = await reqHomeData(params);

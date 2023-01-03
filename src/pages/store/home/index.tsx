@@ -39,22 +39,11 @@ const Index: React.FC<IndexProps> = props => {
             placeholder="请输入搜索关键词"
           />
           <Card>
-            {/* <Swiper modules={[Navigation, Pagination, Autoplay, Scrollbar, A11y]}
-              autoplay
-              pagination={{ clickable: true }}
-            >
-              {swiperList?.map((item: any) => (
-                <SwiperSlide key={item?.id}>
-                  <Image fit="fill" src={item?.img} width="100%" />
-                </SwiperSlide>
-              ))}
-            </Swiper> */}
             <SwiperFade list={swiperList} effect="silde" />
             <Tabs color="#000000">
               <Tabs.TabPane title={`精选推荐`}></Tabs.TabPane>
             </Tabs>
           </Card>
-
           <div className={styles.home_card_nav}>
             <Cards cardList={list} />
           </div>
