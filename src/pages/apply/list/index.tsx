@@ -11,6 +11,8 @@ import { reqApplyList, reqApplyDel } from '@/services/apply';
 import styles from './index.less';
 import TeamSvg from '@/common/svg/team.svg';
 
+import wx from 'weixin-js-sdk';
+
 interface IndexProps {}
 
 const Index: React.FC<IndexProps> = () => {
@@ -51,6 +53,9 @@ const Index: React.FC<IndexProps> = () => {
   useEffect(() => {
     handleapplyList();
 
+    window.addEventListener('popstate', event => {
+      window.history.pushState({ page: 10 }, 'null', '/');
+    });
     return () => {};
   }, []);
 

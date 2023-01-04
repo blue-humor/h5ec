@@ -7,6 +7,8 @@ import NewsCard from '@/components/NewsCard';
 
 import Refresh from './components/Refresh';
 
+import wx from 'weixin-js-sdk';
+
 import { reqSwiper } from '@/services/home';
 import { reqHomeData } from '@/services/sports/home';
 
@@ -53,7 +55,6 @@ const Index: React.FC<IndexProps> = props => {
   };
 
   useEffect(() => {
-    // handleImage();
     return () => {};
   }, []);
 

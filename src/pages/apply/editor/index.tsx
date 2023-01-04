@@ -46,6 +46,7 @@ const Index: React.FC<IndexProps> = props => {
           parentId: register_memberId,
         },
       });
+      // history.goBack()
     }
   };
 
