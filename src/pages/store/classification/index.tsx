@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-import { NavBar, Sidebar, ProductCard, Stepper, Typography, ImagePreview, Image, Cell, Card, Divider } from 'react-vant';
+import { NavBar, Sidebar, ProductCard, Stepper, Typography, ImagePreview, Image, Cell, Card, Divider, ActionBar, Button } from 'react-vant';
 import BScroll from '@better-scroll/core';
 
 import IconFont from '@/utils/iconFont';
@@ -11,32 +11,33 @@ import list from './data.json';
 
 interface IndexProps {}
 
-var foodScroll: any = '';
+let leftScroll: any = null;
+let rightScroll: any = null;
 
 const Index: React.FC<IndexProps> = props => {
-  const [active, setActive] = useState(0);
   const [scrollY, setScrollY] = useState(0);
   const [tops, setTops] = useState([]);
 
   const refFoods = useRef<any>();
   const refFoodsUl = useRef<any>();
   const refMenu = useRef<any>();
+  const refMenuUl = useRef<any>();
 
   const handleBScroll = () => {
-    foodScroll = new BScroll(refFoods.current, {
+    leftScroll = new BScroll(refFoods.current, {
       scrollY: true,
       click: true,
       probeType: 2,
     });
-    const menuScroll = new BScroll(refMenu.current, {
+    rightScroll = new BScroll(refMenu.current, {
       scrollY: true,
       click: true,
       probeType: 3,
     });
-    foodScroll.on('scroll', ({ x, y }: any) => {
+    leftScroll.on('scroll', ({ x, y }: any) => {
       setScrollY(Math.abs(y));
     });
-    foodScroll.on('scrollEnd', ({ x, y }: any) => {
+    leftScroll.on('scrollEnd', ({ x, y }: any) => {
       setScrollY(Math.abs(y));
     });
   };
@@ -55,6 +56,7 @@ const Index: React.FC<IndexProps> = props => {
   // 计算当前分类下标
   const currentIndex = () => {
     const index = tops.findIndex((top, index) => {
+      // console.log(rightScroll?.scrollToElement(refMenuUl?.current.children[index], 300));
       return scrollY >= top && scrollY < tops[index + 1];
     });
     return index + 1;
@@ -63,14 +65,13 @@ const Index: React.FC<IndexProps> = props => {
   useEffect(() => {
     handleTops();
     handleBScroll();
-
     return () => {};
   }, []);
 
   const foodList = list.goods?.map((goods, goodsIndex) => {
     return (
       <Card key={goodsIndex}>
-        <Cell title={goods?.name} center border={false} />
+        <Cell title={goods?.name} center border={false} className={classNames.footsCell} />
         {goods?.foods?.map((item: any, foodIndex: number) => {
           return (
             <ProductCard
@@ -99,39 +100,44 @@ const Index: React.FC<IndexProps> = props => {
     );
   });
 
+  const goodList = list?.goods.map((item, index) => {
+    return (
+      <div
+        key={index}
+        className={classNames.sildeItem}
+        style={{
+          fontWeight: index === currentIndex() ? 'bold' : '',
+          background: index === currentIndex() ? '#ffffff' : '',
+        }}
+        onClick={() => {
+          let top = refFoodsUl.current.children[index].offsetTop;
+          setScrollY(top);
+          leftScroll.scrollTo(0, -top, 300);
+        }}
+      >
+        {/* <IconFont name='icon-shuxian' /> */}
+        <Typography.Text ellipsis={2}>{item.name}</Typography.Text>
+      </div>
+    );
+  });
+
   return (
     <>
       <NavBar fixed placeholder safeAreaInsetTop className={classNames.navBar} leftText={<IconFont name="icon-fanhui" className={classNames.iconFont} />} />
       <div className={classNames.goodsNav}>
         <div className={classNames.goodsSidebar} ref={refMenu}>
-          <ul>
-            {list?.goods.map((item, index) => {
-              return (
-                <div
-                  key={index}
-                  className={classNames.sildeItem}
-                  style={{
-                    fontWeight: index === currentIndex() ? 'bold' : '',
-                    background: index === currentIndex() ? '#ffffff' : '',
-                  }}
-                  onClick={() => {
-                    let top = refFoodsUl.current.children[index].offsetTop;
-                    setScrollY(top);
-                    foodScroll.scrollTo(0, -top, 300);
-                  }}
-                >
-                  {/* <IconFont name='icon-shuxian' /> */}
-                  <Typography.Text ellipsis={2}>{item.name}</Typography.Text>
-                </div>
-              );
-            })}
-          </ul>
+          <ul ref={refMenuUl}>{goodList}</ul>
         </div>
 
         <div className={classNames.goodFootsList} ref={refFoods}>
           <ul ref={refFoodsUl}>{foodList}</ul>
         </div>
       </div>
+
+      <ActionBar safeAreaInsetBottom>
+        <ActionBar.Button text="查看购物车" />
+        <ActionBar.Button text="20元起送" color="#1677ff" />
+      </ActionBar>
     </>
   );
 };
