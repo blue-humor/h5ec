@@ -74,12 +74,12 @@ const Index: React.FC<IndexProps> = props => {
 
   return (
     <div className={styles.address_list_nav}>
-      <NavBar title="收获地址" />
+      {/* <NavBar title="收获地址" /> */}
 
       {addressList.length < 1 ? (
         <Empty description="暂无收货地址，赶快添加吧" style={{ background: '#fff' }} />
       ) : (
-        <Radio.Group checkedColor="#ee0a24" onChange={(v: string) => handleOnChange(v)} value={radioValue}>
+        <Radio.Group checkedColor="#1654ff" onChange={(v: string) => handleOnChange(v)} value={radioValue}>
           {addressList.map((item: any) => {
             return (
               <SwipeCell
@@ -92,7 +92,7 @@ const Index: React.FC<IndexProps> = props => {
               >
                 <Card className={styles.addressCard} key={item.id}>
                   <Flex align="center" justify="around">
-                    {query?.orderId ? <Flex.Item> {<Radio checkedColor="#ee0a24" name={item?.id} />}</Flex.Item> : null}
+                    {query?.orderId ? <Flex.Item> {<Radio checkedColor="#1654ff" name={item?.id} />}</Flex.Item> : null}
                     <Flex.Item className={styles.addressInfo} onClick={e => handleOnChange(item?.id)}>
                       <Typography.Title level={6}>
                         {item?.name} <span>{item?.phone}</span>
@@ -119,7 +119,7 @@ const Index: React.FC<IndexProps> = props => {
       <ActionBar safeAreaInsetBottom style={{ padding: '16px' }}>
         <Button
           round
-          color="linear-gradient(to right, #ff6034, #ee0a24)"
+          color="linear-gradient(to right, #1654ff, #1654ff)"
           block
           icon={<IconFont name="icon-tianjia1" />}
           onClick={() => {

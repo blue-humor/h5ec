@@ -27,7 +27,7 @@ const Index: React.FC<IndexProps> = () => {
 
   return (
     <div className={styles.sportsList}>
-      <NavBar title={barTitle} />
+      {/* <NavBar title={barTitle} /> */}
       <Refresh handleList={handleArticleList} setList={setarticleList}>
         {articleList?.map((item: any) => {
           return (

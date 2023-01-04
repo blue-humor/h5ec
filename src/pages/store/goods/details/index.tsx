@@ -67,7 +67,7 @@ const Index: React.FC<IndexProps> = () => {
 
   return (
     <>
-      <NavBar title="商品详情" />
+      {/* <NavBar title="商品详情" /> */}
 
       <div className={styles.goods_detalis_nav}>
         {/* <Swiper

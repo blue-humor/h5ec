@@ -34,7 +34,7 @@ const Index: React.FC<IndexProps> = () => {
 
   return (
     <>
-      <NavBar title="赛事新闻" />
+      {/* <NavBar title="赛事新闻" /> */}
       <Typography.Title level={5} className={styles.detailsTitle}>
         {article?.title}
       </Typography.Title>

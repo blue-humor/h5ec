@@ -17,8 +17,8 @@ interface IndexProps {}
 
 const tabs = [
   { key: '-1', text: '全部' },
-  { key: '5', text: '待付款' },
-  { key: '10', text: '待发货' },
+  // { key: '5', text: '待付款' },
+  // { key: '10', text: '待发货' },
   { key: '40', text: '待收货' },
   { key: '50', text: '已完成' },
 ];
@@ -48,8 +48,8 @@ const Index: React.FC<IndexProps> = props => {
 
   return (
     <div className={styles.order_nav}>
-      <NavBar title="我的订单" />
-      <Tabs style={{ zIndex: '1' }} sticky defaultActive={defaultTab} lazyRender lazyRenderPlaceholder swipeable color="#000000" offsetTop="48" onChange={(v: any) => handleOrder(params, v)}>
+      {/* <NavBar title="我的订单" /> */}
+      <Tabs style={{ zIndex: '1' }} sticky defaultActive={defaultTab} lazyRender lazyRenderPlaceholder swipeable color="#000000" onChange={(v: any) => handleOrder(params, v)}>
         {tabs.map(item => (
           <Tabs.TabPane key={item.key} name={item.key} title={item.text}>
             {ordersList?.map((item: any) => {
@@ -76,25 +76,29 @@ const Index: React.FC<IndexProps> = props => {
                     </Typography.Text>
                   </Flex>
                   <Flex style={{ margin: '14px 10px 0 0 ' }} justify="end">
-                    <Button size="small" round plain style={{ marginRight: 2 }}>
-                      取消订单
-                    </Button>
-                    <Button
-                      className={styles.button_width}
-                      size="small"
-                      round
-                      color="linear-gradient(to right, #e05555, #ce3737)"
-                      onClick={() =>
-                        history.push({
-                          pathname: '/goods/pay',
-                          query: {
-                            orderId: item?.id,
-                          },
-                        })
-                      }
-                    >
-                      待付款
-                    </Button>
+                    {/* {
+                      defaultTab === '-1' ? <div>
+                        <Button size="small" round plain style={{ marginRight: 2 }}>
+                          取消订单
+                        </Button>
+                        <Button
+                          className={styles.button_width}
+                          size="small"
+                          round
+                          color="linear-gradient(to right, #e05555, #ce3737)"
+                          onClick={() =>
+                            history.push({
+                              pathname: '/goods/pay',
+                              query: {
+                                orderId: item?.id,
+                              },
+                            })
+                          }
+                        >
+                          待付款
+                        </Button>
+                      </div> : null
+                    } */}
                   </Flex>
                 </Card>
               );

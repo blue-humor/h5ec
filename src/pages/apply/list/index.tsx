@@ -56,12 +56,12 @@ const Index: React.FC<IndexProps> = () => {
 
   return (
     <div className={styles.address_list_nav}>
-      <NavBar title="队员信息列表" onClickLeft={() => history.push('/')} fixed placeholder safeAreaInsetTop />
+      {/* <NavBar title="队员信息列表" onClickLeft={() => history.push('/')} fixed placeholder safeAreaInsetTop /> */}
 
       {applyList.length < 1 ? (
         <Empty description="暂无队员，赶快添加吧！" imageSize={280} image={<Image src={TeamSvg} />} />
       ) : (
-        applyList?.map((item: any) => {
+        applyList?.map((item: any, index: number) => {
           return (
             <SwipeCell
               key={item?.id}
@@ -93,15 +93,16 @@ const Index: React.FC<IndexProps> = () => {
                   </Flex.Item>
                 </Flex>
               </Card>
+              {index + 1 === applyList.length ? <Divider style={{ padding: '0 0 70px 0 ' }}>到底啦～</Divider> : null}
             </SwipeCell>
           );
         })
       )}
-      <Divider style={{ padding: '0 0 70px 0 ' }}>到底啦～</Divider>
+
       <ActionBar safeAreaInsetBottom style={{ padding: '16px' }}>
         <Button
           round
-          color="linear-gradient(to right, #aad08f, #87c38f)"
+          color="linear-gradient(to right, #1654ff, #1654ff)"
           block
           icon={<IconFont name="icon-tianjia1" />}
           onClick={() => {

@@ -13,7 +13,7 @@ export const render = async (oldRender: any) => {
   oldRender();
 };
 
-export function onRouteChange({ action }) {
+export function onRouteChange({ action, routes, location }) {
   NProgress.start();
   if (action === 'PUSH' || action === 'POP' || action === 'REPLACE') {
     NProgress.done();

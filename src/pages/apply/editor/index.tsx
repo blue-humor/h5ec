@@ -46,7 +46,7 @@ const Index: React.FC<IndexProps> = props => {
   };
   return (
     <>
-      <NavBar title={` ${query?.id ? '编辑队员信息' : '添加队员信息'}`} />
+      {/* <NavBar title={` ${query?.id ? '编辑队员信息' : '添加队员信息'}`} /> */}
 
       <Card className={styles.container}>
         <Form
@@ -63,7 +63,7 @@ const Index: React.FC<IndexProps> = props => {
           }}
           footer={
             <div style={{ margin: '16px 16px 0' }}>
-              <Button round nativeType="submit" block color="linear-gradient(to right, #aad08f, #87c38f)">
+              <Button round nativeType="submit" block color="linear-gradient(to right, #1654ff, #1654ff)">
                 保存
               </Button>
             </div>

@@ -90,7 +90,7 @@ const Index: React.FC<IndexProps> = () => {
   return (
     <>
       {/* <NavBar title="订单确认" /> */}
-      <NavBar
+      {/* <NavBar
         placeholder
         fixed
         safeAreaInsetTop
@@ -104,14 +104,14 @@ const Index: React.FC<IndexProps> = () => {
             // }
           })
         }
-      />
+      /> */}
       {addressId === 0 || undefined ? (
         <Cell
           key={'addaddress'}
           className={styles.payAdd}
           title="添加收获地址"
           isLink
-          icon={<Add color="#fa4126" />}
+          icon={<Add color="#1654ff" style={{ fontSize: '24px' }} />}
           style={{ margin: '6px 0 6px 0' }}
           onClick={() => {
             handlePathQuery();
@@ -160,7 +160,7 @@ const Index: React.FC<IndexProps> = () => {
               footer={
                 <>
                   <ActionBar safeAreaInsetBottom style={{ padding: '16px' }}>
-                    <Button round nativeType="submit" color="linear-gradient(to right, #ff6034, #ee0a24)" block>
+                    <Button round nativeType="submit" color="linear-gradient(to right, #1654ff, #1654ff)" block>
                       提交订单
                     </Button>
                   </ActionBar>

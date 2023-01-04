@@ -35,7 +35,6 @@ const Index: React.FC<IndexProps> = props => {
 
   useEffect(() => {
     handleCategory();
-
     return () => {};
   }, []);
 

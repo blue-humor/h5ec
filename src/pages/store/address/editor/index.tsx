@@ -47,7 +47,7 @@ const Index: React.FC<IndexProps> = props => {
   };
   return (
     <>
-      <NavBar title={` ${query?.id ? '编辑收货地址' : '添加收货地址'}`} />
+      {/* <NavBar title={` ${query?.id ? '编辑收货地址' : '添加收货地址'}`} /> */}
 
       <Card className={styles.container}>
         <Form
@@ -66,7 +66,7 @@ const Index: React.FC<IndexProps> = props => {
           }
           footer={
             <div style={{ margin: '16px 16px 0' }}>
-              <Button round nativeType="submit" color="linear-gradient(to right, #ff6034, #ee0a24)" block>
+              <Button round nativeType="submit" color="linear-gradient(to right, #1654ff, #1654ff)" block>
                 保存
               </Button>
             </div>
@@ -96,7 +96,7 @@ const Index: React.FC<IndexProps> = props => {
             <Input.TextArea rows={3} autoSize maxLength={200} showWordLimit />
           </Form.Item>
           <Form.Item name="isDefault" controlAlign="right" label="是否设置默认地址" valuePropName="checked" labelWidth="120px">
-            <Switch size={20} activeColor="#fa4126" inactiveColor="#dcdee0" />
+            <Switch size={20} activeColor="#1654ff" inactiveColor="#dcdee0" />
           </Form.Item>
         </Form>
       </Card>

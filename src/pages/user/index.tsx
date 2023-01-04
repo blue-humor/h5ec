@@ -13,9 +13,9 @@ interface IndexProps {}
 import styles from './index.less';
 
 const flow = [
-  { id: 1, name: 'icon-icon', text: '待付款', type: 5 },
-  { id: 2, name: 'icon-a-daidaohuodaifahuodaishouhuoyunshu', text: '代发货', type: 10 },
-  { id: 3, name: 'icon-daishouhuo1', text: '代收货', type: 40 },
+  // { id: 1, name: 'icon-icon', text: '待付款', type: 5 },
+  // { id: 2, name: 'icon-a-daidaohuodaifahuodaishouhuoyunshu', text: '待发货', type: 10 },
+  { id: 3, name: 'icon-daishouhuo1', text: '待收货', type: 40 },
   { id: 4, name: 'icon-dingdanyiwancheng', text: '已完成', type: 50 },
 ];
 
