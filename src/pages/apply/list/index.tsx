@@ -93,12 +93,11 @@ const Index: React.FC<IndexProps> = () => {
                   </Flex.Item>
                 </Flex>
               </Card>
-              {index + 1 === applyList.length ? <Divider style={{ padding: '0 0 70px 0 ' }}>到底啦～</Divider> : null}
             </SwipeCell>
           );
         })
       )}
-
+      {applyList.length >= 1 ? <Divider style={{ padding: '0 0 70px 0 ' }}>到底啦～</Divider> : null}
       <ActionBar safeAreaInsetBottom style={{ padding: '16px' }}>
         <Button
           round

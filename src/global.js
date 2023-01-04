@@ -11,13 +11,9 @@ if (NODE_ENV === 'development') {
 import NProgress from 'nprogress'; // 引入nprogress插件
 NProgress.configure({ easing: 'ease', showSpinner: false });
 
-// window.addEventListener('popstate', e => {
-//   new Promise((resolve, reject) => {
-//     resolve(() => {
-//       if (location.pathname === '/apply/list') {
-//         history.push('/');
-//         return;
-//       }
-//     });
-//   });
-// });
+window.addEventListener('popstate', e => {
+  if (pathname === '/apply/list' || pathname === '/home') {
+    history.push('/');
+    return;
+  }
+});

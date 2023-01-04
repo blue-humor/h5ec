@@ -1,10 +1,14 @@
-import { defineConfig } from 'umi';
+import { defineConfig, history } from 'umi';
 
 import routes from './routes';
 
 import px2vw from 'postcss-px-to-viewport';
+
 export default defineConfig({
-  hash: true,
+  hash: false,
+  history: { type: 'hash' },
+  title: '峰巍体育',
+
   nodeModulesTransform: {
     type: 'none',
   },

@@ -25,7 +25,13 @@ const Index: React.FC<IndexProps> = props => {
     const res = await reqApplyAdd(params);
     if (res?.code === 200) {
       Toast.success(res.message);
-      history.goBack();
+      history.push({
+        pathname: '/apply/list',
+        query: {
+          type,
+          parentId: register_memberId,
+        },
+      });
     }
   };
   // 添加
@@ -33,7 +39,13 @@ const Index: React.FC<IndexProps> = props => {
     const res = await reqApplyEditor(params);
     if (res.code === 200) {
       Toast.success(res.message);
-      history.goBack();
+      history.push({
+        pathname: '/apply/list',
+        query: {
+          type,
+          parentId: register_memberId,
+        },
+      });
     }
   };
 
@@ -95,11 +107,11 @@ const Index: React.FC<IndexProps> = props => {
                 <Input placeholder="请输入队员所属学校" />
               </Form.Item>
 
-              <Form.Item rules={apply.name} name="supervisorName" label="未成年监护人姓名">
+              <Form.Item rules={apply.supervisorName} name="supervisorName" label="未成年监护人姓名">
                 <Input placeholder="请输入未成年监护人姓名" />
               </Form.Item>
 
-              <Form.Item rules={apply.name} name="supervisorIdNo" label="未成年监护人身份证号">
+              <Form.Item rules={apply.supervisorIdNo} name="supervisorIdNo" label="未成年监护人身份证号">
                 <Input placeholder="请输入未成年监护人身份证号" />
               </Form.Item>
             </>
