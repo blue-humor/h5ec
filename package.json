@@ -3,6 +3,7 @@
   "scripts": {
     "start": "cross-env UMI_ENV=dev umi dev",
     "build": "umi build",
+    "build:pro": " cross-env UMI_ENV=pro umi build",
     "postinstall": "umi generate tmp",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test": "umi-test",

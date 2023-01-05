@@ -50,7 +50,7 @@ const Index: React.FC<IndexProps> = props => {
       >
         {category.map((item: any) => {
           return (
-            <Sidebar.Item contentStyle={{ background: '#ffffff', padding: '20px 0 0 0 ' }} key={item.groupId} title={item.name}>
+            <Sidebar.Item contentStyle={{ background: '#ffffff', padding: '20px 0 0 0' }} key={item.groupId} title={item.name}>
               <Flex justify="around" wrap="wrap">
                 {item?.children?.map((item2: any) => {
                   return (

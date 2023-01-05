@@ -5,8 +5,8 @@ import routes from './routes';
 import px2vw from 'postcss-px-to-viewport';
 
 export default defineConfig({
-  hash: false,
-  // history: { type: 'hash' },
+  hash: true,
+  history: { type: 'hash' },
   title: '峰巍体育',
 
   nodeModulesTransform: {

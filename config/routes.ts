@@ -12,8 +12,8 @@ export default [
   { exact: true, path: '/user/order', title: '订单', component: '@/pages/store/order' },
   { exact: true, path: '/apply/list', title: '报名列表', component: '@/pages/apply/list' },
   { exact: true, path: '/apply/editor', title: '报名编辑', component: '@/pages/apply/editor' },
-  { exact: true, path: '/sports/list', title: '列表', component: '@/pages/sports/list' },
-  { exact: true, path: '/sports/details', title: '详情', component: '@/pages/sports/details' },
+  { exact: true, path: '/sports/list', title: '资讯列表', component: '@/pages/sports/list' },
+  { exact: true, path: '/sports/details', title: '资讯详情', component: '@/pages/sports/details' },
 
   {
     exact: false,

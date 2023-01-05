@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { history } from 'umi';
 
-import { Card, Tabs, Button, Input, Form, Uploader, Picker, Typography, Checkbox, Toast, Dialog, Selector } from 'react-vant';
+import { Card, Button, Input, Form, Uploader, Picker, Typography, Toast, Dialog, Selector } from 'react-vant';
 
 import { reqProjects, reqApply, reqApplyRegistered, reqUpload } from '@/services/apply';
 
@@ -18,7 +18,7 @@ const typeOption = [
     value: 1,
   },
   {
-    label: '校内参赛队',
+    label: '非校内参赛队',
     value: 2,
   },
   {
@@ -32,7 +32,7 @@ const Index: React.FC<IndexProps> = props => {
   // const schoolDocument = Form.useWatch('schoolDocument', form)
   // const setFileImageKey = (fileKey: any) => form.setFieldsValue({ 'schoolDocument': fileKey })
 
-  const [type, setType] = useState<any>(1);
+  const [type, setType] = useState<any>(null);
 
   const [initialValues, setInitialValues] = useState({});
 
@@ -44,16 +44,24 @@ const Index: React.FC<IndexProps> = props => {
   });
 
   const handleOnFinish = async (values: any) => {
-    console.log(values);
+    console.log('value', values);
+    console.log(projectNames?.length, projectNames);
+
+    if (type === null) {
+      Dialog.alert({
+        message: '请选择注册类型',
+      });
+      return;
+    }
 
     if (values.groupName === undefined) {
       Dialog.alert({
         message: '请选择参赛队伍',
       });
       return;
-    } else if (projectNames === undefined || projectNames?.length <= 0) {
+    } else if (projectNames?.length <= 0) {
       Dialog.alert({
-        message: '请选择参赛项目',
+        message: '请选择项目',
       });
       return;
     } else if (values.colleageCert === undefined && type === 1) {
@@ -104,7 +112,6 @@ const Index: React.FC<IndexProps> = props => {
           });
         });
       }
-      console.log(arr);
 
       setGroupProject({
         projectType,
@@ -117,7 +124,7 @@ const Index: React.FC<IndexProps> = props => {
     const res = await reqApplyRegistered({});
     if (res?.code === 200) {
       if (res.data !== null) {
-        history.push({
+        history.replace({
           pathname: '/apply/list',
           query: {
             type: type + '',
@@ -139,8 +146,12 @@ const Index: React.FC<IndexProps> = props => {
     }
   };
 
-  const handleproject = (v: any) => {
-    setProjectNames((pre: any) => [...v, ...pre]);
+  const handleprojectNames = (v: any) => {
+    setProjectNames((pre: any) => [...pre, ...v]);
+  };
+
+  const handleSettled = (v: any) => {
+    setProjectNames(v);
   };
 
   useEffect(() => {
@@ -211,7 +222,7 @@ const Index: React.FC<IndexProps> = props => {
                           }}
                           showCheckMark={false}
                           onChange={v => {
-                            handleproject(v);
+                            handleprojectNames(v);
                           }}
                           options={item?.proList}
                         />
@@ -227,6 +238,7 @@ const Index: React.FC<IndexProps> = props => {
                     '--rv-selector-padding': '5px 15px',
                   }}
                   showCheckMark={false}
+                  onChange={v => handleSettled(v)}
                   options={groupProject?.registerProjectList}
                 />
               )}

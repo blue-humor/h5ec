@@ -62,46 +62,41 @@ const Index: React.FC<IndexProps> = () => {
   return (
     <div className={styles.address_list_nav}>
       {/* <NavBar title="队员信息列表" onClickLeft={() => history.push('/')} fixed placeholder safeAreaInsetTop /> */}
-
-      {applyList.length < 1 ? (
-        <Empty description="暂无队员，赶快添加吧！" imageSize={280} image={<Image src={TeamSvg} />} />
-      ) : (
-        applyList?.map((item: any, index: number) => {
-          return (
-            <SwipeCell
-              key={item?.id}
-              rightAction={
-                <Button style={{ height: '100%' }} square type="danger" onClick={() => handleAplayDel(item?.id)}>
-                  删除
-                </Button>
-              }
-            >
-              <Card className={styles.addressCard}>
-                <Flex align="center" justify="around">
-                  <Flex.Item className={styles.addressInfo} onClick={() => handleApplyEditorPush(item)}>
-                    <Typography.Title level={6}>队员姓名：{item?.name}</Typography.Title>
-                    <Typography.Title level={6}>队员性别：{item?.sex}</Typography.Title>
-                    <Typography.Title level={6}>队员身份证号：{item?.idNo}</Typography.Title>
-                    {type === '1' ? (
-                      <>
-                        <Typography.Text>所属学校：{item?.colleageName}</Typography.Text>
-                        <br />
-                        <Typography.Text>未成年监护人姓名：{item?.supervisorName}</Typography.Text>
-                        <br />
-                        <Typography.Text>监护人身份证号：{item?.supervisorIdNo}</Typography.Text>
-                        <br />
-                      </>
-                    ) : null}
-                  </Flex.Item>
-                  <Flex.Item>
-                    <IconFont width={'20px'} height={'60px'} name="icon-wenbenbianjitianchong" onClick={() => handleApplyEditorPush(item)} />
-                  </Flex.Item>
-                </Flex>
-              </Card>
-            </SwipeCell>
-          );
-        })
-      )}
+      {applyList?.map((item: any, index: number) => {
+        return (
+          <SwipeCell
+            key={item?.id}
+            rightAction={
+              <Button style={{ height: '100%' }} square type="danger" onClick={() => handleAplayDel(item?.id)}>
+                删除
+              </Button>
+            }
+          >
+            <Card className={styles.addressCard}>
+              <Flex align="center" justify="around">
+                <Flex.Item className={styles.addressInfo} onClick={() => handleApplyEditorPush(item)}>
+                  <Typography.Title level={6}>队员姓名：{item?.name}</Typography.Title>
+                  <Typography.Title level={6}>队员性别：{item?.sex}</Typography.Title>
+                  <Typography.Title level={6}>队员身份证号：{item?.idNo}</Typography.Title>
+                  {type === '1' ? (
+                    <>
+                      <Typography.Text>所属学校：{item?.colleageName}</Typography.Text>
+                      <br />
+                      <Typography.Text>未成年监护人姓名：{item?.supervisorName}</Typography.Text>
+                      <br />
+                      <Typography.Text>监护人身份证号：{item?.supervisorIdNo}</Typography.Text>
+                      <br />
+                    </>
+                  ) : null}
+                </Flex.Item>
+                <Flex.Item>
+                  <IconFont width={'20px'} height={'60px'} name="icon-wenbenbianjitianchong" onClick={() => handleApplyEditorPush(item)} />
+                </Flex.Item>
+              </Flex>
+            </Card>
+          </SwipeCell>
+        );
+      })}
       {applyList.length >= 1 ? <Divider style={{ padding: '0 0 70px 0 ' }}>到底啦～</Divider> : null}
       <ActionBar safeAreaInsetBottom style={{ padding: '16px' }}>
         <Button
