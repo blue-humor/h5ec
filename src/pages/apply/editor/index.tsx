@@ -25,13 +25,14 @@ const Index: React.FC<IndexProps> = props => {
     const res = await reqApplyAdd(params);
     if (res?.code === 200) {
       Toast.success(res.message);
-      history.push({
-        pathname: '/apply/list',
-        query: {
-          type,
-          parentId: register_memberId,
-        },
-      });
+      // history.push({
+      //   pathname: '/apply/list',
+      //   query: {
+      //     type,
+      //     parentId: register_memberId,
+      //   },
+      // });
+      history.goBack();
     }
   };
   // 添加
@@ -39,14 +40,14 @@ const Index: React.FC<IndexProps> = props => {
     const res = await reqApplyEditor(params);
     if (res.code === 200) {
       Toast.success(res.message);
-      history.push({
-        pathname: '/apply/list',
-        query: {
-          type,
-          parentId: register_memberId,
-        },
-      });
-      // history.goBack()
+      // history.push({
+      //   pathname: '/apply/list',
+      //   query: {
+      //     type,
+      //     parentId: register_memberId,
+      //   },
+      // });
+      history.goBack();
     }
   };
 

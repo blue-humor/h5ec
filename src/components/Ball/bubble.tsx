@@ -45,7 +45,7 @@ export default (props: any) => {
         }}
         adsorb={{
           // 滚动缩进比例
-          indent: 1,
+          indent: 0,
           // 近边停靠距离
           distance: 10,
         }}

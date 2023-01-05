@@ -11,7 +11,7 @@ import { reqApplyList, reqApplyDel } from '@/services/apply';
 import styles from './index.less';
 import TeamSvg from '@/common/svg/team.svg';
 
-import wx from 'weixin-js-sdk';
+// import wx from 'weixin-js-sdk';
 
 interface IndexProps {}
 
@@ -53,9 +53,6 @@ const Index: React.FC<IndexProps> = () => {
   useEffect(() => {
     handleapplyList();
 
-    window.addEventListener('popstate', event => {
-      window.history.pushState({ page: 10 }, 'null', '/');
-    });
     return () => {};
   }, []);
 
@@ -105,7 +102,7 @@ const Index: React.FC<IndexProps> = () => {
           block
           icon={<IconFont name="icon-tianjia1" />}
           onClick={() => {
-            history.push({
+            history.replace({
               pathname: '/apply/editor',
               query: {
                 register_memberId: parentId,
