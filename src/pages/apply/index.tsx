@@ -32,7 +32,7 @@ const Index: React.FC<IndexProps> = props => {
   // const schoolDocument = Form.useWatch('schoolDocument', form)
   // const setFileImageKey = (fileKey: any) => form.setFieldsValue({ 'schoolDocument': fileKey })
 
-  const [type, setType] = useState<any>(null);
+  const [type, setType] = useState<any>(1);
 
   const [initialValues, setInitialValues] = useState({});
 
@@ -186,6 +186,7 @@ const Index: React.FC<IndexProps> = props => {
               }}
               showCheckMark={false}
               options={typeOption}
+              defaultValue={[type]}
               onChange={v => setType(...v)}
             />
           </Form.Item>
@@ -235,7 +236,7 @@ const Index: React.FC<IndexProps> = props => {
                   style={{
                     '--rv-selector-border-radius': '100px',
                     '--rv-selector-checked-border': 'solid var(--adm-color-primary) 1px',
-                    '--rv-selector-padding': '5px 15px',
+                    '--rv-selector-padding': '5px 18px',
                   }}
                   showCheckMark={false}
                   onChange={v => handleSettled(v)}
@@ -245,7 +246,7 @@ const Index: React.FC<IndexProps> = props => {
             </Form.Item>
           ) : null}
 
-          {type ? (
+          {type === 1 || type === 2 ? (
             <>
               <Form.Item name="colleageCnName" label="学校中文名称">
                 <Input placeholder="输入中文名称" />
