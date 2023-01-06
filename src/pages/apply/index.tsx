@@ -34,13 +34,13 @@ const Index: React.FC<IndexProps> = props => {
 
   const [type, setType] = useState<any>(1);
 
-  const [initialValues, setInitialValues] = useState({});
+  // const [initialValues, setInitialValues] = useState({});
 
   const [projectNames, setProjectNames] = useState<any>([]);
 
   const [groupProject, setGroupProject] = useState<any>({
     registerProjectList: [],
-    projectType: '',
+    projectType: null,
   });
 
   const handleOnFinish = async (values: any) => {
@@ -85,33 +85,25 @@ const Index: React.FC<IndexProps> = props => {
     }
   };
 
-  const handleProjects = async (parmas: any) => {
+  const handleProjectType = async (parmas: any) => {
     let arr: any = [];
+
     const res = await reqProjects(parmas);
     if (res?.code === 200) {
       const { projectType, registerProjectList } = res?.data;
-      if (projectType === '固定项目') {
-        registerProjectList?.forEach((item: any) => {
-          arr.push({
-            label: item?.projectName,
-            value: item?.key,
+      registerProjectList?.forEach((item: any) => {
+        let proList: any = [];
+        arr.push({
+          projectName: item?.projectName,
+          proList,
+        });
+        item?.propList.forEach((item2: { value: any; key: any }) => {
+          proList.push({
+            label: item2?.value,
+            value: item2?.key,
           });
         });
-      } else {
-        registerProjectList?.forEach((item: any) => {
-          let proList: any = [];
-          arr.push({
-            projectName: item?.projectName,
-            proList,
-          });
-          item?.propList.forEach((item2: { value: any; key: any }) => {
-            proList.push({
-              label: item2?.value,
-              value: item2?.key,
-            });
-          });
-        });
-      }
+      });
 
       setGroupProject({
         projectType,
@@ -167,7 +159,7 @@ const Index: React.FC<IndexProps> = props => {
         <Form
           layout="vertical"
           form={form}
-          initialValues={initialValues}
+          // initialValues={initialValues}
           onFinish={handleOnFinish}
           footer={
             <div style={{ margin: '10px 0 10px 0' }}>
@@ -194,55 +186,55 @@ const Index: React.FC<IndexProps> = props => {
           <Form.Item
             isLink
             name="groupName"
-            label="选择队伍"
+            label="选择队伍类型"
             rules={apply.groupName}
             trigger="onConfirm"
             onClick={(_, action: any) => {
               action.current?.open();
             }}
           >
-            <Picker key={'groupName'} onConfirm={(v: string) => handleProjects({ groupName: v })} popup columns={['甲', '乙', '丙', '丁']}>
+            <Picker title="选择队伍类型" key={'groupName'} popup columns={['甲', '乙', '丙', '丁']}>
               {val => val || '选择队伍'}
             </Picker>
           </Form.Item>
 
-          {groupProject?.registerProjectList.length > 0 ? (
-            <Form.Item name="projectNames" label={<Typography.Title>{groupProject?.projectType}</Typography.Title>}>
-              {groupProject?.projectType === '自选项目' ? (
-                <div>
-                  {groupProject?.registerProjectList.map((item: any, index: number) => {
-                    return (
-                      <div key={index}>
-                        <Typography.Text style={{ padding: '10px' }}> {item?.projectName}</Typography.Text>
-                        <Selector
-                          style={{
-                            '--rv-selector-border-radius': '100px',
-                            '--rv-selector-checked-border': 'solid var(--adm-color-primary) 1px',
-                            '--rv-selector-padding': '14px 54px',
-                            '--rv-selector-margin': '10px',
-                          }}
-                          showCheckMark={false}
-                          onChange={v => {
-                            handleprojectNames(v);
-                          }}
-                          options={item?.proList}
-                        />
-                      </div>
-                    );
-                  })}
-                </div>
-              ) : (
-                <Selector
-                  style={{
-                    '--rv-selector-border-radius': '100px',
-                    '--rv-selector-checked-border': 'solid var(--adm-color-primary) 1px',
-                    '--rv-selector-padding': '5px 18px',
-                  }}
-                  showCheckMark={false}
-                  onChange={v => handleSettled(v)}
-                  options={groupProject?.registerProjectList}
-                />
-              )}
+          <Form.Item
+            isLink
+            name="projectType"
+            label="选择项目类型"
+            rules={apply.projectType}
+            trigger="onConfirm"
+            onClick={(_, action: any) => {
+              action.current?.open();
+            }}
+          >
+            <Picker title="选择项目" key={'projectType'} onConfirm={(v: string) => handleProjectType({ projectType: v })} popup columns={['固定项目', '自选项目']}>
+              {val => val || '选择项目类型'}
+            </Picker>
+          </Form.Item>
+
+          {groupProject?.projectType !== null ? (
+            <Form.Item name="projectNames" className={styles.project}>
+              {groupProject?.registerProjectList.map((item: any, index: number) => {
+                return (
+                  <div key={index}>
+                    <Typography.Text style={{ padding: '4px' }}> {item?.projectName}</Typography.Text>
+                    <Selector
+                      style={{
+                        '--rv-selector-border-radius': '100px',
+                        '--rv-selector-checked-border': 'solid var(--adm-color-primary) 1px',
+                        '--rv-selector-padding': '12px 20px',
+                        '--rv-selector-margin': '10px 18px 10px 0',
+                      }}
+                      showCheckMark={false}
+                      onChange={v => {
+                        handleprojectNames(v);
+                      }}
+                      options={item?.proList}
+                    />
+                  </div>
+                );
+              })}
             </Form.Item>
           ) : null}
 

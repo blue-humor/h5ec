@@ -24,6 +24,8 @@ export const addressEditor = {
 
 export const apply = {
   groupName: [{ required: true, message: '请选择队伍' }],
+  projectType: [{ required: true, message: '请选择项目类型' }],
+
   type: [{ required: true, message: '请选择队伍类型' }],
   projectNames: [{ required: true, message: '请选择参赛项目' }],
   teamName: [{ required: true, message: '请输入队伍名称' }],
