@@ -69,6 +69,7 @@ const Index: React.FC<IndexProps> = props => {
             })}
           </Flex>
           <Cell isLink title="收获地址" border className={styles.harvest_addres} onClick={() => history.push('/address/list')} />
+          <Cell isLink title="我的投稿" border onClick={() => history.push('/user/articlesList')} />
         </Card>
       </div>
     </>

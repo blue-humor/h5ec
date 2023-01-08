@@ -39,7 +39,7 @@ const Index: React.FC<IndexProps> = props => {
             placeholder="请输入搜索关键词"
           />
           <Card>
-            <SwiperFade list={swiperList} effect="silde" />
+            <SwiperFade list={swiperList} effect="silde" height={122} />
             <Tabs color="#000000">
               <Tabs.TabPane title={`精选推荐`}></Tabs.TabPane>
             </Tabs>

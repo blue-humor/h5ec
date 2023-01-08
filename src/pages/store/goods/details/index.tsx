@@ -8,7 +8,6 @@ import { ImagePreview, Image, Card, Typography, ActionBar, Flex, Divider } from 
 import { WapHomeO } from '@react-vant/icons';
 
 import SwiperFade from '@/components/SwiperFade';
-import NavBar from '@/components/NavBar';
 
 import SkuGoods from './components/SkuGoods';
 
@@ -70,7 +69,7 @@ const Index: React.FC<IndexProps> = () => {
       {/* <NavBar title="商品详情" /> */}
 
       <div className={styles.goods_detalis_nav}>
-        <SwiperFade list={detailsParams?.imag} effect="fade" />
+        <SwiperFade list={detailsParams?.imag} effect="fade" height={168} />
         <Card className={styles.details_card}>
           <Card.Body>
             <Flex justify="between" align="center">

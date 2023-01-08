@@ -7,3 +7,11 @@ export async function reqUserInfo(data: any, options?: any): Promise<API.Res> {
     ...(options || {}),
   });
 }
+
+export async function reqArticlelist(data: any, options?: any): Promise<API.Res> {
+  return request('/v1/getMyArticleList', {
+    method: 'post',
+    data,
+    ...(options || {}),
+  });
+}

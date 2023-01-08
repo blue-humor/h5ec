@@ -4,6 +4,7 @@ import { history } from 'umi';
 import { Swiper, Image, Search, Card, Grid, Cell, Typography } from 'react-vant';
 
 import NewsCard from '@/components/NewsCard';
+import SwiperFade from '@/components/SwiperFade';
 
 import Refresh from './components/Refresh';
 
@@ -13,6 +14,10 @@ import IconFont from '@/utils/iconFont';
 
 import styles from './index.less';
 import VideoPng from '@/common/imgs/video.png';
+import TouGao from '@/common/svg/tougao.svg';
+import SaiShi from '@/common/svg/saishi.svg';
+import HeZuo from '@/common/svg/hezuo.svg';
+import JingXuan from '@/common/svg/jingxuan.svg';
 
 interface IndexProps {}
 
@@ -68,23 +73,27 @@ const Index: React.FC<IndexProps> = props => {
       />
       <Refresh handleList={handleHomeList} setList={setNewList}>
         <div className={styles.home_nav}>
-          <Card>
-            <Swiper autoplay={5000}>
-              {newList?.imagesList?.map((item: any) => (
-                <Swiper.Item key={item?.id}>
-                  <Image lazyload fit="cover" src={item?.fileUrl} width="100%" round radius={6} />
-                </Swiper.Item>
-              ))}
-            </Swiper>
+          <Card style={{ margin: '0 0 10px 0' }}>
+            <SwiperFade list={newList?.imagesList} effect={'fade'} height={122} />
           </Card>
-          <Grid>
-            <Grid.Item icon={<IconFont name="icon-zizhutuiguang" />} text="投稿集锦" onClick={() => huandlePush('1', '投稿集锦')} />
-            <Grid.Item icon={<IconFont name="icon-newspaper4" />} text="赛事新闻" onClick={() => huandlePush('2', '赛事新闻')} />
-            <Grid.Item icon={<IconFont name="icon-hezuo" />} text="合作培训" onClick={() => huandlePush('3', '合作培训')} />
-            <Grid.Item icon={<IconFont name="icon-kecheng" />} text="精选课程" onClick={() => huandlePush('4', '精选课程')} />
+          <Grid border={false}>
+            <Grid.Item icon={<Image src={TouGao} height={32} width={36} />} text={<Typography.Text className={styles.articlesSvg}>投稿集锦</Typography.Text>} onClick={() => huandlePush('1', '投稿集锦')} />
+            <Grid.Item icon={<Image src={SaiShi} height={32} width={36} />} text={<Typography.Text className={styles.articlesSvg}>赛事新闻</Typography.Text>} onClick={() => huandlePush('2', '赛事新闻')} />
+            <Grid.Item icon={<Image src={HeZuo} height={32} width={36} />} text={<Typography.Text className={styles.articlesSvg}>合作培训</Typography.Text>} onClick={() => huandlePush('3', '合作培训')} />
+            <Grid.Item icon={<Image src={JingXuan} height={32} width={36} />} text={<Typography.Text className={styles.articlesSvg}>精选课程</Typography.Text>} onClick={() => huandlePush('4', '精选课程')} />
           </Grid>
 
-          <Cell style={{ padding: '6px 10px' }} isLink center title={<Typography.Title level={5}>最新赛事</Typography.Title>} rightIcon={<IconFont name="icon-shuangjiantouyou" />} onClick={() => huandlePush('2', '赛事新闻')} />
+          <Cell
+            style={{ padding: '6px 10px' }}
+            center
+            title={
+              <Typography.Text className={styles.articlesTitle}>
+                最新赛事
+                <IconFont name="icon-shuangjiantouyou" style={{ padding: '5px 0 0 0' }} />
+              </Typography.Text>
+            }
+            onClick={() => huandlePush('2', '赛事新闻')}
+          />
           <Grid border={false} columnNum={2}>
             {newList?.articles1?.map((item: any) => {
               return (
@@ -101,7 +110,7 @@ const Index: React.FC<IndexProps> = props => {
                   }}
                 >
                   <Image fit="cover" src={item?.thumb} className={styles.eventsImage} height={'120px'}>
-                    <Typography.Text className={styles.createtime}>{item?.createtime}</Typography.Text>
+                    {/* <Typography.Text className={styles.createtime}>{item?.createtime}</Typography.Text> */}
                     {item?.video ? <Image src={VideoPng} fit="cover" className={styles.newsVideoPng} width="40" height="40" /> : null}
                   </Image>
                   <Typography.Title className={styles.eventsTitle} ellipsis={{ rows: 2 }}>
@@ -111,7 +120,16 @@ const Index: React.FC<IndexProps> = props => {
               );
             })}
           </Grid>
-          <Cell style={{ padding: '6px 10px' }} center title={<Typography.Title level={5}>热门课程</Typography.Title>} rightIcon={<IconFont name="icon-shuangjiantouyou" />} isLink onClick={() => huandlePush('4', '精选课程')} />
+          <Cell
+            style={{ padding: '6px 10px' }}
+            center
+            title={
+              <Typography.Text className={styles.articlesTitle}>
+                热门课程 <IconFont name="icon-shuangjiantouyou" style={{ padding: '5px 0 0 0' }} />
+              </Typography.Text>
+            }
+            onClick={() => huandlePush('4', '精选课程')}
+          />
           <NewsCard newList={newList?.articles2} />
         </div>
       </Refresh>

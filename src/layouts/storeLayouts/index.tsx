@@ -24,19 +24,21 @@ const Layout: React.FC<IndexProps> = (props: { children: any }) => {
   };
 
   useEffect(() => {
+    console.log(history.location.pathname);
+
     setName(history.location.pathname);
-  }, [name]);
+  }, [history.location.pathname]);
 
   return (
     <>
       {props.children}
       <div className="demo-tabbar" style={{ zIndex: 999 }}>
-        <Tabbar defaultValue={'/home'} placeholder value={name} activeColor="#1654ff" inactiveColor="#cec8c8" safeAreaInsetBottom onChange={(c: any) => handleHistory(c)}>
+        <Tabbar defaultValue={'/home'} placeholder fixed value={name} activeColor="#1654ff" inactiveColor="#cec8c8" safeAreaInsetBottom onChange={(c: any) => handleHistory(c)}>
           <Tabbar.Item name="/home" icon={<WapHome />}>
             首页
           </Tabbar.Item>
           <Tabbar.Item name="/store/classify" icon={<Bars />}>
-            分类
+            商城
           </Tabbar.Item>
           {/* <Tabbar.Item name="/store/cart" icon={<Cart />} badge={{ content: 5 }}>
             购物车

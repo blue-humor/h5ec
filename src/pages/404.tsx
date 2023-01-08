@@ -11,7 +11,7 @@ const NoFoundPage: React.FC<IndexProps> = props => {
   return (
     <>
       <Empty className="custom-image" imageSize={380} image={<Image src={NoFound} />}>
-        <Button style={{ width: 160 }} round type="primary" onClick={() => history.push('/')}>
+        <Button style={{ width: 160 }} round type="primary" onClick={() => history.push('/home')}>
           Go Home
         </Button>
       </Empty>

@@ -6,16 +6,17 @@ import 'swiper/swiper-bundle.css';
 
 interface IndexProps {
   list: [];
+  height: number;
   effect: string | any;
 }
 
-const Index: React.FC<IndexProps> = ({ list, effect }) => {
+const Index: React.FC<IndexProps> = ({ list, effect, height }) => {
   return (
     <>
       <Swiper modules={[Navigation, Pagination, Autoplay, Scrollbar, A11y, EffectFade]} effect={effect} autoplay pagination={{ clickable: true }}>
         {list?.map((item: any) => (
           <SwiperSlide key={item?.id}>
-            <Image fit="fill" src={item?.img || item} width="100%" />
+            <Image fit="cover" src={item?.fileUrl || item} height={height} round radius={6} />
           </SwiperSlide>
         ))}
       </Swiper>

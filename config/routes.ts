@@ -10,6 +10,8 @@ export default [
   { exact: true, path: '/address/list', title: '地址列表', component: '@/pages/store/address/list' },
   { exact: true, path: '/address/editor', title: '地址编辑', component: '@/pages/store/address/editor' },
   { exact: true, path: '/user/order', title: '订单', component: '@/pages/store/order' },
+  { exact: true, path: '/user/articlesList', title: '我的投稿', component: '@/pages/user/articlesList' },
+
   { exact: true, path: '/apply/list', title: '报名列表', component: '@/pages/apply/list' },
   { exact: true, path: '/apply/editor', title: '报名编辑', component: '@/pages/apply/editor' },
   { exact: true, path: '/sports/list', title: '资讯列表', component: '@/pages/sports/list' },

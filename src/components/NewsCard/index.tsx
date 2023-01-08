@@ -31,7 +31,7 @@ const Index: React.FC<IndexProps> = ({ newList }) => {
           <Card key={item?.id}>
             <Card.Cover onClick={() => handlePush(item?.id)} className={styles.newsCover}>
               <Image src={item?.thumb} fit="cover" width="100%" height="58vw" className={styles.newsImage} />
-              {item?.video ? <Image src={VideoPng} fit="cover" className={styles.newsVideoPng} width="80" height="80" /> : null}
+              {item?.video ? <Image src={VideoPng} fit="cover" className={styles.newsVideoPng} width="68" height="68" /> : null}
             </Card.Cover>
             <Card.Body className={styles.newsFontSize}>
               <Typography.Title level={6} ellipsis={2} onClick={() => handlePush(item?.id)}>
