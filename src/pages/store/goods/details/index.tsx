@@ -4,9 +4,10 @@ import { SkuInstance } from 'react-vant';
 
 import { history } from 'umi';
 
-import { Swiper, ImagePreview, Image, Card, Typography, ActionBar, Flex, Divider } from 'react-vant';
+import { ImagePreview, Image, Card, Typography, ActionBar, Flex, Divider } from 'react-vant';
 import { WapHomeO } from '@react-vant/icons';
 
+import SwiperFade from '@/components/SwiperFade';
 import NavBar from '@/components/NavBar';
 
 import SkuGoods from './components/SkuGoods';
@@ -41,7 +42,6 @@ const Index: React.FC<IndexProps> = () => {
     },
   });
 
-  const [select, setSelect] = useState([]);
   const [showButtonType, setShowButtonType] = useState(0);
 
   // 打开sku弹框
@@ -70,39 +70,7 @@ const Index: React.FC<IndexProps> = () => {
       {/* <NavBar title="商品详情" /> */}
 
       <div className={styles.goods_detalis_nav}>
-        {/* <Swiper
-          autoplay={2000}
-        // indicator={(total, current) => (
-        //   <div className={styles.custom_indicator}>
-        //     {current + 1}/{total}
-        //   </div>
-        // )}
-        >
-          {detailsParams?.imag?.map((item: any, index: number) => {
-            return (
-              <Swiper.Item key={index}>
-                <Image
-                  // lazyload
-                  src={item}
-                  key={index}
-                  onClick={() =>
-                    ImagePreview.open({
-                      images: detailsParams?.imag,
-                    })
-                  }
-                />
-              </Swiper.Item>
-            );
-          })}
-        </Swiper> */}
-        <Swiper>
-          {detailsParams?.imag?.map((image: any, index: number) => (
-            <Swiper.Item key={index}>
-              <Image src={image} />
-            </Swiper.Item>
-          ))}
-        </Swiper>
-
+        <SwiperFade list={detailsParams?.imag} effect="fade" />
         <Card className={styles.details_card}>
           <Card.Body>
             <Flex justify="between" align="center">

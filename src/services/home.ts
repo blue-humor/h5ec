@@ -9,7 +9,7 @@ export async function reqSwiper(data?: any, options?: any) {
 }
 
 export async function reqGoodsList(data?: any, options?: any) {
-  return request('/v1/getHomeGoodsList', {
+  return request('/v1/getHomeStoreList', {
     method: 'post',
     data,
     ...(options || {}),

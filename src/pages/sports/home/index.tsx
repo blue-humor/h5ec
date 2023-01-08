@@ -7,9 +7,6 @@ import NewsCard from '@/components/NewsCard';
 
 import Refresh from './components/Refresh';
 
-import wx from 'weixin-js-sdk';
-
-import { reqSwiper } from '@/services/home';
 import { reqHomeData } from '@/services/sports/home';
 
 import IconFont from '@/utils/iconFont';
@@ -60,22 +57,22 @@ const Index: React.FC<IndexProps> = props => {
 
   return (
     <>
+      <Search
+        label={<div className={styles.search_label}>峰巍体育</div>}
+        shape="round"
+        // background="#ffffff"
+        value={value}
+        onChange={setValue}
+        disabled
+        placeholder="请输入搜索关键词"
+      />
       <Refresh handleList={handleHomeList} setList={setNewList}>
         <div className={styles.home_nav}>
-          <Search
-            label={<div className={styles.search_label}>峰巍体育</div>}
-            shape="round"
-            // background="#ffffff"
-            value={value}
-            onChange={setValue}
-            disabled
-            placeholder="请输入搜索关键词"
-          />
           <Card>
             <Swiper autoplay={5000}>
               {newList?.imagesList?.map((item: any) => (
                 <Swiper.Item key={item?.id}>
-                  <Image lazyload height={'121px'} fit="cover" src={item?.fileUrl} width="100%" round radius={8} />
+                  <Image lazyload fit="cover" src={item?.fileUrl} width="100%" round radius={6} />
                 </Swiper.Item>
               ))}
             </Swiper>

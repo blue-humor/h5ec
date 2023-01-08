@@ -5,9 +5,10 @@ import { Toast, PullRefresh, List } from 'react-vant';
 interface IndexProps {
   handleList: (params: { current: number; pageSize: number; id?: number }) => Promise<any>;
   setList: any;
+  setSwiperList?: any;
 }
 
-const Index: React.FC<IndexProps> = ({ handleList, setList, children }) => {
+const Index: React.FC<IndexProps> = ({ handleList, setList, children, setSwiperList }) => {
   const [current, setCurrent] = useState<number>(1);
 
   const [finished, setFinished] = useState<boolean>(false);
@@ -27,9 +28,9 @@ const Index: React.FC<IndexProps> = ({ handleList, setList, children }) => {
   // 分页
   const handleOnLoad = async () => {
     const res = await handleList({ current, pageSize: 15 });
-
     if (res?.code === 200) {
-      const { list, total } = res?.data;
+      const { list, total, imageList } = res?.data;
+      imageList ? setSwiperList(imageList) : null;
       setList((v: any) => [...v, ...list]);
       setTotal(total);
       setCurrent(v => v + 1);

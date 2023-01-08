@@ -54,7 +54,7 @@
     totalAmout: 372891739281;
   }
 }
-//报名
+//非校内
 {
   type: 2;
   clubName: undefined;
@@ -67,4 +67,16 @@
   sex: undefined;
   teamLogo: undefined;
   teamName: undefined;
+}
+// 校内
+{
+  contactPhone: '19999999999';
+  email: '1627262726272627@qq.com';
+  idNo: '147362728272827';
+  leader: '1';
+  schoolDocument: undefined;
+  schoolName: '1';
+  sex: '女';
+  teamLogo: undefined;
+  teamName: '1';
 }

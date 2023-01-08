@@ -27,11 +27,24 @@ const Index: React.FC<IndexProps> = ({ cardList }) => {
                 <Image lazyload showError fit="fill" src={item?.thumb} width="100%" />
               </Card.Cover>
               <Card.Body>
-                <Typography.Text ellipsis={2}>{item?.title}</Typography.Text>
-                <Typography.Text type="danger">
-                  <span className="card_parice">¥{priceFormat(item?.price, 2)}</span>
-                </Typography.Text>{' '}
-                <Typography.Text delete>¥{priceFormat(item?.originPrice, 2)}</Typography.Text>
+                <Typography.Title level={6} ellipsis={2}>
+                  {item?.storeName}
+                </Typography.Title>
+                <Typography.Title level={6} ellipsis={2}>
+                  {item?.title}
+                </Typography.Title>
+
+                {item?.deliPrice ? <Typography.Text type="secondary">起送费 ¥{priceFormat(item?.deliPrice, 2)}</Typography.Text> : null}
+                {item?.price ? (
+                  <>
+                    <Typography.Text type="danger">
+                      <span className="card_parice">¥{priceFormat(item?.price, 2)}</span>
+                    </Typography.Text>
+                    <Typography.Text type="secondary" delete>
+                      ¥{priceFormat(item?.originPrice, 2)}
+                    </Typography.Text>
+                  </>
+                ) : null}
               </Card.Body>
             </Card>
           </Flex.Item>
