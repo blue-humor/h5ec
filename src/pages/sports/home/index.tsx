@@ -75,7 +75,7 @@ const Index: React.FC<IndexProps> = props => {
             <Swiper autoplay={5000}>
               {newList?.imagesList?.map((item: any) => (
                 <Swiper.Item key={item?.id}>
-                  <Image lazyload fit="cover" src={item?.fileUrl} width="100%" />
+                  <Image lazyload height={'121px'} fit="cover" src={item?.fileUrl} width="100%" round radius={8} />
                 </Swiper.Item>
               ))}
             </Swiper>

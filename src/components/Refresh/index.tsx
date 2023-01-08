@@ -41,7 +41,7 @@ const Index: React.FC<IndexProps> = ({ handleList, setList, children }) => {
   };
 
   return (
-    <PullRefresh onRefresh={async () => handleOnRefresh(true)} onRefreshEnd={() => console.log('onRefreshEnd')} successText="刷新成功" pullDistance={100}>
+    <PullRefresh onRefresh={async () => handleOnRefresh(true)} onRefreshEnd={() => console.log('onRefreshEnd')} successText="刷新成功">
       <List finished={finished} key="list" onLoad={async () => handleOnLoad()} finishedText="暂无更多">
         {children}
       </List>

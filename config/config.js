@@ -5,6 +5,8 @@ import routes from './routes';
 import px2vw from 'postcss-px-to-viewport';
 
 export default defineConfig({
+  outputPath: 'dist',
+
   hash: true,
   history: { type: 'hash' },
   title: '峰巍体育',
@@ -12,8 +14,6 @@ export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
-  // headScripts: [`https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js`],
-  // styles: ['stylesheet', 'https://cdn.jsdelivr.net/npm/pace-js@latest/pace-theme-default.min.css'],
   routes,
   layout: false,
   // mfsu: {},
@@ -21,9 +21,6 @@ export default defineConfig({
   targets: {
     ie: 11,
   },
-  //<script data-pace-options='{ "ajax": false }' src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
-
-  // headScripts: [`data-pace-options='{ "ajax": false }`, `https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js`],
   metas: [
     {
       name: 'viewport',
