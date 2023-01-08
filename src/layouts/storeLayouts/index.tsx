@@ -33,7 +33,7 @@ const Layout: React.FC<IndexProps> = (props: { children: any }) => {
     <>
       {props.children}
       <div className="demo-tabbar" style={{ zIndex: 999 }}>
-        <Tabbar defaultValue={'/home'} placeholder fixed value={name} activeColor="#1654ff" inactiveColor="#cec8c8" safeAreaInsetBottom onChange={(c: any) => handleHistory(c)}>
+        <Tabbar defaultValue={'/home'} placeholder fixed value={name} activeColor="#7490eb" inactiveColor="#cec8c8" safeAreaInsetBottom onChange={(c: any) => handleHistory(c)}>
           <Tabbar.Item name="/home" icon={<WapHome />}>
             首页
           </Tabbar.Item>

@@ -81,9 +81,9 @@ const Index: React.FC<IndexProps> = () => {
                   ¥{priceFormat(detailsParams?.originPrice, 2)}
                 </Typography.Text>
               </Flex.Item>
-              <Flex.Item>
+              {/* <Flex.Item>
                 <Typography.Text>已售{detailsParams?.sellOutAmount}</Typography.Text>
-              </Flex.Item>
+              </Flex.Item> */}
             </Flex>
           </Card.Body>
           <Card.Header>
@@ -121,8 +121,8 @@ const Index: React.FC<IndexProps> = () => {
             return (
               <Image
                 key={index}
-                style={{ margin: '10px 0' }}
                 src={item}
+                fit="cover"
                 onClick={() =>
                   ImagePreview.open({
                     images: detailsParams?.detailsImage,

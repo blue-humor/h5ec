@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 
 import { history } from 'umi';
 
-import { Card, Button, Input, Form, Uploader, Picker, Typography, Toast, Dialog, Selector } from 'react-vant';
+import { Card, Button, Input, Form, Uploader, Picker, Typography, Toast, Dialog, Selector, Flex } from 'react-vant';
 
 import { reqProjects, reqApply, reqApplyRegistered, reqUpload } from '@/services/apply';
 
 import { apply } from '@/utils/rules';
+import { optionalEvents, fixedEvents } from './option';
 
 import styles from './index.less';
 
@@ -22,7 +23,7 @@ const typeOption = [
     value: 2,
   },
   {
-    label: '邀请赛俱乐部',
+    label: '俱乐部组',
     value: 3,
   },
 ];
@@ -36,16 +37,12 @@ const Index: React.FC<IndexProps> = props => {
 
   // const [initialValues, setInitialValues] = useState({});
 
-  const [projectNames, setProjectNames] = useState<any>([]);
+  // const [projectNames, setProjectNames] = useState<any>([]);
 
-  const [groupProject, setGroupProject] = useState<any>({
-    registerProjectList: [],
-    projectType: null,
-  });
+  const [groupProject, setGroupProject] = useState<string | null>(null);
 
   const handleOnFinish = async (values: any) => {
-    console.log('value', values);
-    console.log(projectNames?.length, projectNames);
+    console.log(values);
 
     if (type === null) {
       Dialog.alert({
@@ -59,18 +56,13 @@ const Index: React.FC<IndexProps> = props => {
         message: '请选择参赛队伍',
       });
       return;
-    } else if (projectNames?.length <= 0) {
-      Dialog.alert({
-        message: '请选择项目',
-      });
-      return;
     } else if (values.colleageCert === undefined && type === 1) {
       Dialog.alert({
         message: '请上传学校公章证明文件',
       });
       return;
     }
-    const res = await reqApply({ ...values, type, projectNames });
+    const res = await reqApply({ ...values, type });
     if (res?.code === 200) {
       Toast.success(res?.message);
       history.push({
@@ -85,31 +77,30 @@ const Index: React.FC<IndexProps> = props => {
     }
   };
 
-  const handleProjectType = async (parmas: any) => {
-    let arr: any = [];
+  const handleProjectType = async (v: string) => {
+    setGroupProject(v);
+    // const res = await reqProjects(parmas);
+    // if (res?.code === 200) {
+    //   const { projectType, registerProjectList } = res?.data;
+    //   registerProjectList?.forEach((item: any) => {
+    //     let proList: any = [];
+    //     arr.push({
+    //       projectName: item?.projectName,
+    //       proList,
+    //     });
+    //     item?.propList.forEach((item2: { value: any; key: any }) => {
+    //       proList.push({
+    //         label: item2?.value,
+    //         value: item2?.key,
+    //       });
+    //     });
+    //   });
 
-    const res = await reqProjects(parmas);
-    if (res?.code === 200) {
-      const { projectType, registerProjectList } = res?.data;
-      registerProjectList?.forEach((item: any) => {
-        let proList: any = [];
-        arr.push({
-          projectName: item?.projectName,
-          proList,
-        });
-        item?.propList.forEach((item2: { value: any; key: any }) => {
-          proList.push({
-            label: item2?.value,
-            value: item2?.key,
-          });
-        });
-      });
-
-      setGroupProject({
-        projectType,
-        registerProjectList: arr,
-      });
-    }
+    //   setGroupProject({
+    //     projectType,
+    //     registerProjectList: arr,
+    //   });
+    // }
   };
 
   const handleRegistered = async () => {
@@ -138,12 +129,45 @@ const Index: React.FC<IndexProps> = props => {
     }
   };
 
-  const handleprojectNames = (v: any) => {
-    setProjectNames((pre: any) => [...pre, ...v]);
-  };
-
-  const handleSettled = (v: any) => {
-    setProjectNames(v);
+  const handlegroupProject = () => {
+    if (groupProject === '固定项目') {
+      return fixedEvents.map(item => {
+        return (
+          <Form.Item name={item?.name} key={item?.name} label={item?.title}>
+            <Selector
+              showCheckMark={false}
+              style={{
+                '--rv-selector-border-radius': '100px',
+                '--rv-selector-checked-border': 'solid var(--adm-color-primary) 1px',
+                '--rv-selector-padding': '10px 54px',
+                '--rv-selector-margin': '0px 32px 8px 0',
+              }}
+              options={item?.option}
+            />
+          </Form.Item>
+        );
+      });
+    } else if (groupProject === '自选项目') {
+      return optionalEvents.map(item => {
+        return (
+          <Form.Item name={item?.name} key={item?.name} label={item?.title}>
+            <Selector
+              showCheckMark={false}
+              className={item?.name === 'lalacao' ? `${styles.laCaoPadding}` : `${styles.eventsPadding}`}
+              style={{
+                '--rv-selector-border-radius': '100px',
+                '--rv-selector-checked-border': 'solid var(--adm-color-primary) 1px',
+                // '--rv-selector-padding': '10px 54px',
+                // '--rv-selector-margin': '10px 32px 8px 0'
+              }}
+              options={item?.option}
+            />
+          </Form.Item>
+        );
+      });
+    } else {
+      return;
+    }
   };
 
   useEffect(() => {
@@ -208,35 +232,12 @@ const Index: React.FC<IndexProps> = props => {
               action.current?.open();
             }}
           >
-            <Picker title="选择项目" key={'projectType'} onConfirm={(v: string) => handleProjectType({ projectType: v })} popup columns={['固定项目', '自选项目']}>
+            <Picker title="选择项目" key={'projectType'} onConfirm={(v: string) => handleProjectType(v)} popup columns={['固定项目', '自选项目']}>
               {val => val || '选择项目类型'}
             </Picker>
           </Form.Item>
 
-          {groupProject?.projectType !== null ? (
-            <Form.Item name="projectNames" className={styles.project}>
-              {groupProject?.registerProjectList.map((item: any, index: number) => {
-                return (
-                  <div key={index}>
-                    <Typography.Text style={{ padding: '4px' }}> {item?.projectName}</Typography.Text>
-                    <Selector
-                      style={{
-                        '--rv-selector-border-radius': '100px',
-                        '--rv-selector-checked-border': 'solid var(--adm-color-primary) 1px',
-                        '--rv-selector-padding': '12px 20px',
-                        '--rv-selector-margin': '10px 18px 10px 0',
-                      }}
-                      showCheckMark={false}
-                      onChange={v => {
-                        handleprojectNames(v);
-                      }}
-                      options={item?.proList}
-                    />
-                  </div>
-                );
-              })}
-            </Form.Item>
-          ) : null}
+          {handlegroupProject()}
 
           {type === 1 || type === 2 ? (
             <>

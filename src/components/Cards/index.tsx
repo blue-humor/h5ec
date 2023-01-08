@@ -18,7 +18,7 @@ const Index: React.FC<IndexProps> = ({ cardList }) => {
   }));
 
   return (
-    <Flex gutter={10} wrap="wrap">
+    <Flex gutter={10} wrap="wrap" style={{ padding: '10px 0 0 0' }}>
       {cardList?.map((item: any) => {
         return (
           <Flex.Item span={12} key={item?.id}>
@@ -38,10 +38,10 @@ const Index: React.FC<IndexProps> = ({ cardList }) => {
                 {item?.price ? (
                   <>
                     <Typography.Text type="danger">
-                      <span className="card_parice">¥{priceFormat(item?.price, 2)}</span>
+                      <span className="card_parice">{item?.price ? `¥${priceFormat(item?.price, 2)}` : null}</span>
                     </Typography.Text>
                     <Typography.Text type="secondary" delete>
-                      ¥{priceFormat(item?.originPrice, 2)}
+                      {item?.originPrice ? `¥${priceFormat(item?.originPrice, 2)}` : null}
                     </Typography.Text>
                   </>
                 ) : null}

@@ -77,10 +77,10 @@ const Index: React.FC<IndexProps> = props => {
             <SwiperFade list={newList?.imagesList} effect={'fade'} height={122} />
           </Card>
           <Grid border={false}>
-            <Grid.Item icon={<Image src={TouGao} height={32} width={36} />} text={<Typography.Text className={styles.articlesSvg}>投稿集锦</Typography.Text>} onClick={() => huandlePush('1', '投稿集锦')} />
-            <Grid.Item icon={<Image src={SaiShi} height={32} width={36} />} text={<Typography.Text className={styles.articlesSvg}>赛事新闻</Typography.Text>} onClick={() => huandlePush('2', '赛事新闻')} />
-            <Grid.Item icon={<Image src={HeZuo} height={32} width={36} />} text={<Typography.Text className={styles.articlesSvg}>合作培训</Typography.Text>} onClick={() => huandlePush('3', '合作培训')} />
-            <Grid.Item icon={<Image src={JingXuan} height={32} width={36} />} text={<Typography.Text className={styles.articlesSvg}>精选课程</Typography.Text>} onClick={() => huandlePush('4', '精选课程')} />
+            <Grid.Item icon={<Image src={TouGao} height={'32px'} width={'36px'} />} text={<Typography.Text className={styles.articlesSvg}>投稿集锦</Typography.Text>} onClick={() => huandlePush('1', '投稿集锦')} />
+            <Grid.Item icon={<Image src={SaiShi} height={'32px'} width={'36px'} />} text={<Typography.Text className={styles.articlesSvg}>赛事新闻</Typography.Text>} onClick={() => huandlePush('2', '赛事新闻')} />
+            <Grid.Item icon={<Image src={HeZuo} height={'32px'} width={'36px'} />} text={<Typography.Text className={styles.articlesSvg}>合作培训</Typography.Text>} onClick={() => huandlePush('3', '合作培训')} />
+            <Grid.Item icon={<Image src={JingXuan} height={'32px'} width={'36px'} />} text={<Typography.Text className={styles.articlesSvg}>精选课程</Typography.Text>} onClick={() => huandlePush('4', '精选课程')} />
           </Grid>
 
           <Cell

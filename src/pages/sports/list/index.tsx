@@ -45,10 +45,10 @@ const Index: React.FC<IndexProps> = () => {
             >
               <Flex justify="around">
                 <Flex.Item span={8} style={{ margin: '4px 0 0 0 ' }}>
-                  <Image fit="cover" src={item?.thumb} width={'100%'} height={'100%'} />
+                  <Image fit="cover" src={item?.thumb} width={'100%'} height={'76px'} />
                 </Flex.Item>
                 <Flex.Item span={15}>
-                  <Typography.Text ellipsis={3}>{item?.title}</Typography.Text>
+                  <Typography.Text ellipsis={2}>{item?.title}</Typography.Text>
                   <div>
                     <Typography.Text className={styles.sportsListTime}>{item?.createtime}</Typography.Text>
                   </div>
