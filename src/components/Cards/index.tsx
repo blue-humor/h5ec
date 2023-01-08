@@ -38,11 +38,11 @@ const Index: React.FC<IndexProps> = ({ cardList }) => {
                 {item?.price ? (
                   <>
                     <Typography.Text type="danger">
-                      <span className="card_parice">{item?.price ? `¥${priceFormat(item?.price, 2)}` : null}</span>
+                      <span className="card_parice">{item?.originPrice ? `¥${item?.originPrice}` : null}</span>
                     </Typography.Text>
-                    <Typography.Text type="secondary" delete>
-                      {item?.originPrice ? `¥${priceFormat(item?.originPrice, 2)}` : null}
-                    </Typography.Text>
+                    {/* <Typography.Text type="secondary" delete>
+                      {item?.originPrice ? `¥${item?.originPrice}` : null}
+                    </Typography.Text> */}
                   </>
                 ) : null}
               </Card.Body>

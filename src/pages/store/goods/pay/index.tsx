@@ -147,7 +147,7 @@ const Index: React.FC<IndexProps> = () => {
       ) : (
         <div>
           <Card style={{ margin: '10px 0 0 0 ' }}>
-            <Cell title="店铺名" icon={<ShopO />} />
+            {/* <Cell title="店铺名" icon={<ShopO />} /> */}
             <ProductCard num={orderDetail?.selectedNum} price={priceFormat(orderDetail?.price, 2)} desc={orderDetail?.sku} title={orderDetail?.title} thumb={orderDetail?.imgUrl} />
             <Form
               form={form}

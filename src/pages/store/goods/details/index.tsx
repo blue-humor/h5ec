@@ -74,12 +74,13 @@ const Index: React.FC<IndexProps> = () => {
           <Card.Body>
             <Flex justify="between" align="center">
               <Flex.Item>
+                <Typography.Text type="danger"></Typography.Text>
                 <Typography.Text type="danger">
-                  <span className={styles.card_currentPrice}>¥{priceFormat(detailsParams?.price, 2)}</span>起
+                  <span className={styles.card_currentPrice}>{detailsParams?.originPrice ? `¥${detailsParams?.originPrice}` : null}</span>起
                 </Typography.Text>{' '}
-                <Typography.Text delete className={styles.card_originalPrice}>
+                {/* <Typography.Text delete className={styles.card_originalPrice}>
                   ¥{priceFormat(detailsParams?.originPrice, 2)}
-                </Typography.Text>
+                </Typography.Text> */}
               </Flex.Item>
               {/* <Flex.Item>
                 <Typography.Text>已售{detailsParams?.sellOutAmount}</Typography.Text>
