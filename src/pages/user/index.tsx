@@ -53,7 +53,7 @@ const Index: React.FC<IndexProps> = props => {
         <Cell style={{ alignItems: 'center' }} className={styles.user_avater} border={false} title={<Typography.Title> {userInfo?.nickName}</Typography.Title>} icon={<Image width={'60px'} height={'60px'} src={userInfo?.headimg} round />} />
         <Card className={styles.user_card}>
           <Cell title={<Typography.Title level={6}>我的订单</Typography.Title>} isLink value="全部订单" onClick={() => handlePush(-1)} />
-
+          {/* 
           <Flex justify="around" style={{ margin: '10px 0 20px  0' }}>
             {flow.map(item => {
               return (
@@ -67,8 +67,8 @@ const Index: React.FC<IndexProps> = props => {
                 </Flex.Item>
               );
             })}
-          </Flex>
-          <Cell isLink title="收获地址" border className={styles.harvest_addres} onClick={() => history.push('/address/list')} />
+          </Flex> */}
+          <Cell isLink title="收获地址" border onClick={() => history.push('/address/list')} />
           <Cell isLink title="我的投稿" border onClick={() => history.push('/user/articlesList')} />
         </Card>
       </div>
