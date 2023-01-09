@@ -24,13 +24,13 @@ const Index: React.FC<IndexProps> = ({ cardList }) => {
           <Flex.Item span={12} key={item?.id}>
             <Card className="card_nav" round onClick={() => handleClickCard(item)}>
               <Card.Cover className="card_cover">
-                <Image lazyload showError fit="fill" src={item?.thumb} width="100%" />
+                <Image lazyload showError fit="cover" src={item?.thumb} width="100%" />
               </Card.Cover>
               <Card.Body>
-                <Typography.Title level={6} ellipsis={2}>
+                <Typography.Title level={6} ellipsis={1}>
                   {item?.storeName}
                 </Typography.Title>
-                <Typography.Title level={6} ellipsis={2}>
+                <Typography.Title level={6} ellipsis={1}>
                   {item?.title}
                 </Typography.Title>
 

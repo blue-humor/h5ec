@@ -7,7 +7,7 @@ import { Card, Button, Input, Form, Uploader, Picker, Typography, Toast, Dialog,
 import { reqProjects, reqApply, reqApplyRegistered, reqUpload } from '@/services/apply';
 
 import { apply } from '@/utils/rules';
-import { optionalEvents, fixedEvents } from './option';
+import { fixedEvents, optionalEvents } from './option';
 
 import styles from './index.less';
 
@@ -79,28 +79,6 @@ const Index: React.FC<IndexProps> = props => {
 
   const handleProjectType = async (v: string) => {
     setGroupProject(v);
-    // const res = await reqProjects(parmas);
-    // if (res?.code === 200) {
-    //   const { projectType, registerProjectList } = res?.data;
-    //   registerProjectList?.forEach((item: any) => {
-    //     let proList: any = [];
-    //     arr.push({
-    //       projectName: item?.projectName,
-    //       proList,
-    //     });
-    //     item?.propList.forEach((item2: { value: any; key: any }) => {
-    //       proList.push({
-    //         label: item2?.value,
-    //         value: item2?.key,
-    //       });
-    //     });
-    //   });
-
-    //   setGroupProject({
-    //     projectType,
-    //     registerProjectList: arr,
-    //   });
-    // }
   };
 
   const handleRegistered = async () => {
@@ -130,41 +108,34 @@ const Index: React.FC<IndexProps> = props => {
   };
 
   const handlegroupProject = () => {
-    if (groupProject === '固定项目') {
-      return fixedEvents.map(item => {
-        return (
-          <Form.Item name={item?.name} key={item?.name} label={item?.title}>
-            <Selector
-              showCheckMark={false}
-              style={{
-                '--rv-selector-border-radius': '100px',
-                '--rv-selector-checked-border': 'solid var(--adm-color-primary) 1px',
-                '--rv-selector-padding': '10px 54px',
-                '--rv-selector-margin': '0px 32px 8px 0',
-              }}
-              options={item?.option}
-            />
-          </Form.Item>
-        );
-      });
+    if (groupProject === '规定项目') {
+      return (
+        <Form.Item name={'stipulation'}>
+          <Selector
+            className={styles.eventsPadding}
+            showCheckMark={false}
+            style={{
+              '--rv-selector-border-radius': '100px',
+              '--rv-selector-checked-border': 'solid var(--adm-color-primary) 1px',
+            }}
+            options={fixedEvents}
+          />
+        </Form.Item>
+      );
     } else if (groupProject === '自选项目') {
-      return optionalEvents.map(item => {
-        return (
-          <Form.Item name={item?.name} key={item?.name} label={item?.title}>
-            <Selector
-              showCheckMark={false}
-              className={item?.name === 'lalacao' ? `${styles.laCaoPadding}` : `${styles.eventsPadding}`}
-              style={{
-                '--rv-selector-border-radius': '100px',
-                '--rv-selector-checked-border': 'solid var(--adm-color-primary) 1px',
-                // '--rv-selector-padding': '10px 54px',
-                // '--rv-selector-margin': '10px 32px 8px 0'
-              }}
-              options={item?.option}
-            />
-          </Form.Item>
-        );
-      });
+      return (
+        <Form.Item name={'optional'}>
+          <Selector
+            className={styles.optionsPadding}
+            showCheckMark={false}
+            style={{
+              '--rv-selector-border-radius': '100px',
+              '--rv-selector-checked-border': 'solid var(--adm-color-primary) 1px',
+            }}
+            options={optionalEvents}
+          />
+        </Form.Item>
+      );
     } else {
       return;
     }
@@ -195,10 +166,10 @@ const Index: React.FC<IndexProps> = props => {
         >
           <Form.Item label="注册类型" rules={apply.type}>
             <Selector
+              className={styles.applyType}
               style={{
                 '--rv-selector-border-radius': '100px',
                 '--rv-selector-checked-border': 'solid var(--adm-color-primary) 1px',
-                '--rv-selector-padding': '5px 10px',
               }}
               showCheckMark={false}
               options={typeOption}
@@ -232,7 +203,7 @@ const Index: React.FC<IndexProps> = props => {
               action.current?.open();
             }}
           >
-            <Picker title="选择项目" key={'projectType'} onConfirm={(v: string) => handleProjectType(v)} popup columns={['固定项目', '自选项目']}>
+            <Picker title="选择项目" key={'projectType'} onConfirm={(v: string) => handleProjectType(v)} popup columns={['规定项目', '自选项目']}>
               {val => val || '选择项目类型'}
             </Picker>
           </Form.Item>
@@ -311,7 +282,7 @@ const Index: React.FC<IndexProps> = props => {
                 </>
               }
             >
-              <Uploader accept="image/png" maxCount={1} upload={handleUpload} />
+              <Uploader accept="*" maxCount={1} upload={handleUpload} />
             </Form.Item>
           ) : null}
           <Form.Item
@@ -326,7 +297,7 @@ const Index: React.FC<IndexProps> = props => {
             }
             rules={[{ required: true, message: '请上传队伍logo' }]}
           >
-            <Uploader accept="image/png" maxCount={1} upload={handleUpload} />
+            <Uploader accept="*" maxCount={1} upload={handleUpload} />
           </Form.Item>
         </Form>
       </Card>

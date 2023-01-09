@@ -37,7 +37,7 @@ const Index: React.FC<IndexProps> = props => {
     setDefaultTab(v);
     const res = await reqOrder({ status: v, ...params });
     if (res?.code === 200) {
-      setOrdersList(res?.data);
+      setOrdersList(res?.data?.list);
     }
   };
 
@@ -55,24 +55,24 @@ const Index: React.FC<IndexProps> = props => {
             {ordersList?.map((item: any) => {
               return (
                 <Card className={styles.order_card} key={item?.id}>
-                  <Cell title={`订单号：${item?.orderNo} `} value={<Typography.Text type="danger">{item?.orderStatusName}</Typography.Text>} />
+                  <Cell title={`订单号：${item?.order?.orderNo} `} value={<Typography.Text type="secondary">{item?.order?.orderStatusName}</Typography.Text>} />
                   <ProductCard
-                    num={`${item?.buyQuantity}`}
-                    price={`${priceFormat(item?.itemPaymentAmount, 2)}`}
+                    num={`${item?.order?.buyQuantity}`}
+                    price={`${priceFormat(item?.order?.itemPaymentAmount, 2)}`}
                     title={
                       <Typography.Text ellipsis={2} className={styles.orderTitle}>
-                        {item?.goodsName}
+                        {item?.order?.goodsName}
                       </Typography.Text>
                     }
-                    thumb={`${item?.goodsPictureUrl}`}
+                    thumb={`${item?.order?.goodsPictureUrl}`}
                   />
                   <Flex style={{ margin: '20px 16px 0 0 ' }} justify="end" align="center">
-                    <Typography.Text size="sm">总价¥:{priceFormat(item?.paymentAmount, 2)}，</Typography.Text>
+                    <Typography.Text size="sm">总价¥:{priceFormat(item?.order?.paymentAmount, 2)}，</Typography.Text>
                     <Typography.Text size="sm" style={{ margin: '0 6px 0 0 ' }}>
                       运费¥:0
                     </Typography.Text>
                     <Typography.Text size="md" type="danger">
-                      实付¥:{priceFormat(item?.paymentAmount, 2)}
+                      实付¥:{priceFormat(item?.order?.paymentAmount, 2)}
                     </Typography.Text>
                   </Flex>
                   <Flex style={{ margin: '14px 10px 0 0 ' }} justify="end">

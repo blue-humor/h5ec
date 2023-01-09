@@ -69,7 +69,7 @@ const Index: React.FC<IndexProps> = () => {
       {/* <NavBar title="商品详情" /> */}
 
       <div className={styles.goods_detalis_nav}>
-        <SwiperFade list={detailsParams?.imag} effect="fade" height={168} />
+        <SwiperFade list={detailsParams?.imag} effect="fade" height={'100%'} />
         <Card className={styles.details_card}>
           <Card.Body>
             <Flex justify="between" align="center">

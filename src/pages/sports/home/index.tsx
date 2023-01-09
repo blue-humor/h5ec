@@ -74,7 +74,7 @@ const Index: React.FC<IndexProps> = props => {
       <Refresh handleList={handleHomeList} setList={setNewList}>
         <div className={styles.home_nav}>
           <Card style={{ margin: '0 0 10px 0' }}>
-            <SwiperFade list={newList?.imagesList} effect={'fade'} height={122} />
+            <SwiperFade list={newList?.imagesList} effect={'slide'} height={'100%'} />
           </Card>
           <Grid border={false}>
             <Grid.Item icon={<Image src={TouGao} height={'32px'} width={'36px'} />} text={<Typography.Text className={styles.articlesSvg}>投稿集锦</Typography.Text>} onClick={() => huandlePush('1', '投稿集锦')} />

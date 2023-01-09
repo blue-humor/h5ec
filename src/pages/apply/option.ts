@@ -1,156 +1,87 @@
 export const fixedEvents = [
   {
-    title: '花球',
-    name: 'huaqiu',
-    option: [
-      {
-        label: '双人',
-        value: '双人',
-      },
-      {
-        label: '集体',
-        value: '集体',
-      },
-    ],
+    label: '花球',
+    value: '花球',
   },
   {
-    title: '爵士',
-    name: 'jueshi',
-    option: [
-      {
-        label: '双人',
-        value: '双人',
-      },
-      {
-        label: '集体',
-        value: '集体',
-      },
-    ],
+    label: '爵士',
+    value: '爵士',
   },
   {
-    title: '街舞',
-    name: 'jiewu',
-    option: [
-      {
-        label: '双人',
-        value: '双人',
-      },
-      {
-        label: '集体',
-        value: '集体',
-      },
-    ],
+    label: '街舞',
+    value: '街舞',
   },
   {
-    title: '高踢腿',
-    name: 'gaotitui',
-    option: [
-      {
-        label: '双人',
-        value: '双人',
-      },
-      {
-        label: '集体',
-        value: '集体',
-      },
-    ],
+    label: '高踢腿',
+    value: '高踢腿',
   },
 ];
 
 export const optionalEvents = [
   {
-    title: '花球',
-    name: 'huaqiu',
-    option: [
-      {
-        label: '双人',
-        value: '双人',
-      },
-      {
-        label: '集体',
-        value: '集体',
-      },
-    ],
+    label: '花球',
+    description: '双人',
+    value: '花球双人',
   },
   {
-    title: '爵士',
-    name: 'jueshi',
-    option: [
-      {
-        label: '双人',
-        value: '双人',
-      },
-      {
-        label: '集体',
-        value: '集体',
-      },
-    ],
+    label: '花球',
+    description: '集体',
+    value: '花球集体',
   },
   {
-    title: '街舞',
-    name: 'jiewu',
-    option: [
-      {
-        label: '双人',
-        value: '双人',
-      },
-      {
-        label: '集体',
-        value: '集体',
-      },
-    ],
+    label: '爵士',
+    description: '双人',
+    value: '爵士双人',
   },
   {
-    title: '高踢腿',
-    name: 'gaotitui',
-    option: [
-      {
-        label: '双人',
-        value: '双人',
-      },
-      {
-        label: '集体',
-        value: '集体',
-      },
-    ],
+    label: '爵士',
+    description: '集体',
+    value: '爵士集体',
+  },
+  {
+    label: '街舞',
+    description: '双人',
+    value: '街舞双人',
+  },
+  {
+    label: '街舞',
+    description: '集体',
+    value: '街舞集体',
+  },
+  {
+    label: '高踢腿',
+    description: '双人',
+    value: '高踢腿双人',
+  },
+  {
+    label: '高踢腿',
+    description: '集体',
+    value: '高踢腿集体',
   },
 
   {
-    title: '技巧啦啦操',
-    name: 'lalacao',
-
-    option: [
-      {
-        label: '小团体(混合)',
-        value: '小团体(混合)',
-      },
-      {
-        label: '小团体(全女)',
-        value: '小团体(全女)',
-      },
-      {
-        label: '集体(五级)',
-        value: '集体(五级)',
-      },
-      {
-        label: '集体(六级)',
-        value: '集体(六级)',
-      },
-      {
-        label: '翻腾(单人)',
-        value: '翻腾(单人)',
-      },
-    ],
+    label: '技巧啦啦操',
+    description: '小团体(混合)',
+    value: '技巧啦啦操小团体(混合)',
   },
-
   {
-    title: '转体',
-    name: 'zhuanti',
-    option: [
-      {
-        label: '转体(单人)',
-        value: '转体(单人)',
-      },
-    ],
+    label: '技巧啦啦操',
+    description: '小团体(全女)',
+    value: '技巧啦啦操小团体(全女)',
+  },
+  {
+    label: '技巧啦啦操',
+    description: '集体',
+    value: '技巧啦啦操集体',
+  },
+  {
+    label: '技巧啦啦操',
+    description: '翻腾(单人)',
+    value: '技巧啦啦操翻腾(单人)',
+  },
+  {
+    label: '转体',
+    description: '单人',
+    value: '转体(单人)',
   },
 ];

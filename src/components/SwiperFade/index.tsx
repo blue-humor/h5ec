@@ -6,7 +6,7 @@ import 'swiper/swiper-bundle.css';
 
 interface IndexProps {
   list: [];
-  height: number;
+  height: number | string;
   effect: string | any;
 }
 

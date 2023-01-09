@@ -1,5 +1,5 @@
 import React from 'react';
-import { Popup } from 'react-vant';
+import { Popup, ActionBar } from 'react-vant';
 
 interface RemarkModelProps {
   showClose: boolean;
@@ -12,6 +12,9 @@ const RemarkModel: React.FC<RemarkModelProps> = ({ showClose, handleShowClose, c
     <>
       <Popup title="商家备注" safeAreaInsetBottom closeable round visible={showClose} style={{ height: '70%' }} position="bottom" onClose={() => handleShowClose(false)}>
         {children}
+        <ActionBar safeAreaInsetBottom>
+          <ActionBar.Button color="#1f22e3" text="确认" onClick={() => handleShowClose(false)} />
+        </ActionBar>
       </Popup>
     </>
   );

@@ -194,7 +194,7 @@ const Index: React.FC<IndexProps> = () => {
 
           <RemarkModel handleShowClose={handleShowClose} showClose={showClose}>
             <Card className={styles.pay_remark_card} round>
-              <Input.TextArea autoFocus maxLength={200} showWordLimit placeholder="请输入文本" autoSize={{ minHeight: 200 }} onChange={v => setRemark(v)} />
+              <Input.TextArea autoFocus maxLength={200} showWordLimit={({ currentCount }) => <span>已经输入{currentCount}个字啦 ✍️</span>} placeholder="请输入商家备注" autoSize={{ minHeight: 240 }} onChange={v => setRemark(v)} />
             </Card>
           </RemarkModel>
         </div>

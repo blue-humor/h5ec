@@ -5,19 +5,45 @@
   margin: 20px 12px;
 }
 
-.laCaoPadding {
-  :global(.rv-selector__item) {
-    font-size: 12px;
-    padding: 10px !important;
-    margin: 10px 10px 10px 0;
+.common {
+  :global(.rv-selector__item--active) {
+    transition: all 0.6s;
+    border: #1654ff 1px solid;
   }
 }
 
 .eventsPadding {
   :global(.rv-selector__item) {
-    padding: 10px 54px;
-    margin: 10px 20px 8px 0;
+    width: 126px;
+    padding: 10px;
+    margin: 10px 22px 8px 0;
+    border: transparent 1px solid;
   }
+
+  .common();
+}
+
+.optionsPadding {
+  :global(.rv-selector__item) {
+    padding: 4px 10px;
+    width: 136px;
+    margin: 10px 22px 8px 0;
+    border: transparent 1px solid;
+  }
+
+  .common();
+}
+
+.applyType {
+  :global(.rv-selector__item) {
+    padding: 6px 6px;
+    width: 100px;
+    font-size: 12px;
+    // margin: 10px 22px 8px 0;
+    border: transparent 1px solid;
+  }
+
+  .common();
 }
 
 .bg {

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { history } from 'umi';
 
 import { DropdownMenu } from 'react-vant';
-import NavBar from '@/components/NavBar';
+// import NavBar from '@/components/NavBar';
 import Cards from '@/components/Cards';
 import Refresh from '@/components/Refresh';
 

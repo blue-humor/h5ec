@@ -60,7 +60,7 @@ const Index: React.FC<IndexProps> = props => {
                   name: info?.name,
                   phone: info?.phone,
                   detailAddress: info?.detailAddress,
-                  isDefault: info?.isDefault,
+                  // isDefault: info?.isDefault,
                 }
               : {}
           }
@@ -95,9 +95,9 @@ const Index: React.FC<IndexProps> = props => {
           <Form.Item name="detailAddress" label="详细地址">
             <Input.TextArea rows={3} autoSize maxLength={200} showWordLimit />
           </Form.Item>
-          <Form.Item name="isDefault" controlAlign="right" label="是否设置默认地址" valuePropName="checked" labelWidth="160px">
+          {/* <Form.Item name="isDefault" controlAlign="right" label="是否设置默认地址" valuePropName="checked" labelWidth="160px">
             <Switch size={20} activeColor="#1654ff" inactiveColor="#dcdee0" />
-          </Form.Item>
+          </Form.Item> */}
         </Form>
       </Card>
     </>
