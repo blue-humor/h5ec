@@ -75,7 +75,7 @@ const Index: React.FC<IndexProps> = () => {
                   <Typography.Title level={6}>队员姓名：{item?.name}</Typography.Title>
                   <Typography.Title level={6}>队员性别：{item?.sex}</Typography.Title>
                   <Typography.Title level={6}>队员身份证号：{item?.idNo}</Typography.Title>
-                  {item?.type === '1' ? (
+                  {type === '1' ? (
                     <>
                       <Typography.Text>所属学校：{item?.colleageName}</Typography.Text>
                       <br />
