@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Toast, PullRefresh, List } from 'react-vant';
+import { Toast, PullRefresh, List, Divider } from 'react-vant';
 
 interface IndexProps {
   handleList: (params: { current: number; pageSize: number; id?: number }) => Promise<any>;
@@ -35,6 +35,7 @@ const Index: React.FC<IndexProps> = ({ handleList, setList, children, setSwiperL
       setTotal(total);
       setCurrent(v => v + 1);
     }
+
     if (setList.length >= total) {
       setFinished(true);
       return;
@@ -43,7 +44,7 @@ const Index: React.FC<IndexProps> = ({ handleList, setList, children, setSwiperL
 
   return (
     <PullRefresh onRefresh={async () => handleOnRefresh(true)} onRefreshEnd={() => console.log('onRefreshEnd')} successText="刷新成功">
-      <List finished={finished} key="list" onLoad={async () => handleOnLoad()} finishedText="暂无更多">
+      <List finished={finished} key="list" onLoad={async () => handleOnLoad()} finishedText={<Divider style={{ paddingBottom: '100px' }}>到底啦～</Divider>}>
         {children}
       </List>
     </PullRefresh>

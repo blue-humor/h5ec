@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import { history } from 'umi';
 
-import { Image, Cell, Typography, Divider, Sticky } from 'react-vant';
+import { Image, Cell, Typography, Divider } from 'react-vant';
 
-import NavBar from '@/components/NavBar';
 import Bubble from '@/components/Ball/bubble';
 import XGPlayer from '@/components/XGPlayer';
 
@@ -32,8 +31,6 @@ const Index: React.FC<IndexProps> = () => {
     return () => {};
   }, []);
 
-  const content = 'React Vant 是一套轻量、可靠的移动端 React 组件库，提供了丰富的基础组件和业务组件，帮助开发者快速搭建移动应用，使用过程中发现任何问题都可以提 Issue 给我们，当然，我们也非常欢迎你给我们发 PR。';
-
   return (
     <>
       {/* <NavBar title="赛事新闻" /> */}
@@ -60,7 +57,7 @@ const Index: React.FC<IndexProps> = () => {
       )}
 
       <p className={styles.sportsDetailsText}>{article?.content}</p>
-      <Divider>到底啦～</Divider>
+      <Divider style={{ paddingBottom: '50px' }}>到底啦～</Divider>
       <Bubble articleId={query?.id} like={article?.like} />
     </>
   );

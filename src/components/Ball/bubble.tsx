@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Image, Flex, FloatingBall, List } from 'react-vant';
+import { Image, Flex, FloatingBall } from 'react-vant';
 
 import ZanHong from '@/common/imgs/zanhong.png';
 
 import ZanBai from '@/common/imgs/zanbai.png';
 
 import { reqLikeIt } from '@/services/common';
-
-import { throttle } from '@/utils/index';
 
 import './index.less';
 

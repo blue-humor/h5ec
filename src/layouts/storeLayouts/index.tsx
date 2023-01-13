@@ -3,7 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { history } from 'umi';
 
 import { Tabbar } from 'react-vant';
-import { Bars, WapHome, Friends } from '@react-vant/icons';
+import { ShopO, WapHomeO, UserO } from '@react-vant/icons';
+
+import Scroll from '@/components/Scroll';
 
 import IconFont from '@/utils/iconFont';
 
@@ -32,21 +34,22 @@ const Layout: React.FC<IndexProps> = (props: { children: any }) => {
   return (
     <>
       {props.children}
+
       <div className="demo-tabbar" style={{ zIndex: 999 }}>
         <Tabbar defaultValue={'/home'} placeholder fixed value={name} activeColor="#7490eb" inactiveColor="#cec8c8" safeAreaInsetBottom onChange={(c: any) => handleHistory(c)}>
-          <Tabbar.Item name="/home" icon={<WapHome />}>
+          <Tabbar.Item name="/home" icon={<WapHomeO />}>
             首页
           </Tabbar.Item>
-          <Tabbar.Item name="/store/classify" icon={<Bars />}>
+          <Tabbar.Item name="/store/classify" icon={<ShopO />}>
             商城
           </Tabbar.Item>
           {/* <Tabbar.Item name="/store/cart" icon={<Cart />} badge={{ content: 5 }}>
             购物车
           </Tabbar.Item> */}
-          <Tabbar.Item name="/apply" icon={<IconFont name="icon-baoming" />}>
+          <Tabbar.Item name="/apply/list" icon={<IconFont name="icon-baoming" />}>
             报名
           </Tabbar.Item>
-          <Tabbar.Item name="/user" icon={<Friends />}>
+          <Tabbar.Item name="/user" icon={<UserO />}>
             个人中心
           </Tabbar.Item>
         </Tabbar>

@@ -66,7 +66,24 @@ export async function reqUpload(data: any, options?: any): Promise<API.Res> {
   return request('/v1/pc/upload', {
     method: 'post',
     data,
-    headers: {},
+    ...(options || {}),
+  });
+}
+
+//
+export async function reqActivityList(data: any, options?: any): Promise<API.Res> {
+  return request('/v1/getActivityList', {
+    method: 'post',
+    data,
+    ...(options || {}),
+  });
+}
+
+//
+export async function reqAbouts(data: any, options?: any): Promise<API.Res> {
+  return request('/v1/aboutus', {
+    method: 'post',
+    data,
     ...(options || {}),
   });
 }

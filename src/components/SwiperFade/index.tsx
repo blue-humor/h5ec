@@ -13,7 +13,7 @@ interface IndexProps {
 const Index: React.FC<IndexProps> = ({ list, effect, height }) => {
   return (
     <>
-      <Swiper modules={[Navigation, Pagination, Autoplay, Scrollbar, A11y, EffectFade]} effect={effect} autoplay pagination={{ clickable: true }}>
+      <Swiper modules={[Navigation, Pagination, Autoplay, Scrollbar, A11y, EffectFade]} effect={effect} loop autoplay pagination={{ clickable: true }}>
         {list?.map((item: any) => (
           <SwiperSlide key={item?.id}>
             <Image fit="cover" src={item?.fileUrl || item} height={height} round radius={6} />

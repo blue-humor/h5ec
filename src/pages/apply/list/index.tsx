@@ -1,121 +1,78 @@
 import React, { useEffect, useState } from 'react';
 import { history } from 'umi';
-import { SwipeCell, Button, Typography, Card, Flex, ActionBar, Toast, Empty, Image, NavBar, Divider } from 'react-vant';
 
-import IconFont from '@/utils/iconFont';
+import { Button, Card, Divider, Flex, Image, Tag, Typography } from 'react-vant';
 
-// import NavBar from '@/components/NavBar';
+import Refresh from '@/components/Refresh';
+import InfoBall from '@/components/Ball/infoBall';
 
-import { reqApplyList, reqApplyDel } from '@/services/apply';
+import { reqAbouts, reqActivityList } from '@/services/apply';
 
-import styles from './index.less';
-import TeamSvg from '@/common/svg/team.svg';
+import classNames from './index.less';
 
-// import wx from 'weixin-js-sdk';
+type Props = {};
 
-interface IndexProps {}
+const index = (props: Props) => {
+  const [list, setList] = useState([]);
 
-const Index: React.FC<IndexProps> = () => {
-  const { query } = history.location;
-  const { parentId, type }: any = query;
+  const handleArticleList = async (params: any) => {
+    const res = await reqActivityList({ ...params });
+    return res;
+  };
 
-  const [applyList, setapplyList] = useState<any>([]);
-
-  // 获取地址列表
-  const handleapplyList = async () => {
-    const res = await reqApplyList({ current: 1, pageSize: 26, parentId: query?.parentId });
-    if (res?.code === 200) {
-      const { list } = res?.data;
-      setapplyList(list);
+  const handlePush = (params: any) => {
+    if (params.status === '未报名') {
+      history.push({
+        pathname: '/apply/enroll',
+        query: {
+          activityId: params?.id,
+        },
+      });
+    } else {
+      history.push({
+        pathname: '/apply/enrollList',
+        query: {
+          activityId: params?.id,
+          type: params.type,
+        },
+      });
     }
   };
 
-  // 删除地址
-  const handleAplayDel = async (params: any) => {
-    const res = await reqApplyDel({ id: params });
-    if (res?.code === 200) {
-      setapplyList(applyList.filter((item: any) => item?.id !== params));
-      Toast.success(res?.message);
-    }
-  };
-
-  const handleApplyEditorPush = (item: any) => {
-    history.push({
-      pathname: '/apply/editor',
-      query: {
-        register_memberId: parentId,
-        type: type,
-        info: item,
-      },
-    });
+  const handleAbouts = async () => {
+    const res = await reqAbouts({});
   };
 
   useEffect(() => {
-    handleapplyList();
-
-    return () => {};
+    handleAbouts();
   }, []);
 
   return (
-    <div className={styles.address_list_nav}>
-      {/* <NavBar title="队员信息列表" onClickLeft={() => history.push('/')} fixed placeholder safeAreaInsetTop /> */}
-      {applyList?.map((item: any, index: number) => {
-        return (
-          <SwipeCell
-            key={item?.id}
-            rightAction={
-              <Button style={{ height: '100%' }} square type="danger" onClick={() => handleAplayDel(item?.id)}>
-                删除
-              </Button>
-            }
-          >
-            <Card className={styles.addressCard}>
-              <Flex align="center" justify="around">
-                <Flex.Item className={styles.addressInfo} onClick={() => handleApplyEditorPush(item)}>
-                  <Typography.Title level={6}>队员姓名：{item?.name}</Typography.Title>
-                  <Typography.Title level={6}>队员性别：{item?.sex}</Typography.Title>
-                  <Typography.Title level={6}>队员身份证号：{item?.idNo}</Typography.Title>
-                  {type === '1' ? (
-                    <>
-                      <Typography.Text>所属学校：{item?.colleageName}</Typography.Text>
-                      <br />
-                      <Typography.Text>未成年监护人姓名：{item?.supervisorName}</Typography.Text>
-                      <br />
-                      <Typography.Text>监护人身份证号：{item?.supervisorIdNo}</Typography.Text>
-                      <br />
-                    </>
-                  ) : null}
-                </Flex.Item>
-                <Flex.Item>
-                  <IconFont width={'20px'} height={'60px'} name="icon-wenbenbianjitianchong" onClick={() => handleApplyEditorPush(item)} />
-                </Flex.Item>
-              </Flex>
-            </Card>
-          </SwipeCell>
-        );
-      })}
-      {applyList.length >= 1 ? <Divider style={{ padding: '0 0 70px 0 ' }}>到底啦～</Divider> : null}
-      <ActionBar safeAreaInsetBottom style={{ padding: '16px' }}>
-        <Button
-          round
-          color="linear-gradient(to right, #1654ff, #1654ff)"
-          block
-          icon={<IconFont name="icon-tianjia1" />}
-          onClick={() => {
-            history.replace({
-              pathname: '/apply/editor',
-              query: {
-                register_memberId: parentId,
-                type,
-              },
-            });
-          }}
-        >
-          添加队友信息含替补
-        </Button>
-      </ActionBar>
-    </div>
+    <>
+      <Refresh handleList={handleArticleList} setList={setList}>
+        <div className={classNames.nav}>
+          {list.map((item: any) => {
+            return (
+              <Card key={item?.id} className={classNames.sportsListCard} onClick={() => handlePush(item)}>
+                <Flex justify="around">
+                  <Flex.Item span={15}>
+                    <Typography.Title>{item?.title}</Typography.Title>
+                    <Typography.Text>{item?.intro}</Typography.Text>
+                    <br />
+                    <Tag color={`${item?.status === '已报名' ? '#1654ff' : ''}`}>{item?.status}</Tag>
+                  </Flex.Item>
+                  <Flex.Item span={9} style={{ margin: '4px 0 0 0 ' }}>
+                    <Image fit="cover" src={item?.thumb} width={'128px'} height={'100%'} radius={6} />
+                  </Flex.Item>
+                </Flex>
+              </Card>
+            );
+          })}
+        </div>
+      </Refresh>
+      <InfoBall />
+    </>
   );
 };
 
-export default Index;
+export default index;

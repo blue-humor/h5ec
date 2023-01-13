@@ -7,7 +7,7 @@ import { Card, Button, Input, Form, Uploader, Picker, Typography, Toast, Dialog,
 import { reqProjects, reqApply, reqApplyRegistered, reqUpload } from '@/services/apply';
 
 import { apply } from '@/utils/rules';
-import { fixedEvents, optionalEvents } from './option';
+import { fixedEvents, optionalEvents } from '../option';
 
 import styles from './index.less';
 
@@ -30,6 +30,8 @@ const typeOption = [
 
 const Index: React.FC<IndexProps> = props => {
   const [form] = Form.useForm();
+
+  const { activityId } = history.location.query as { id: string };
   // const schoolDocument = Form.useWatch('schoolDocument', form)
   // const setFileImageKey = (fileKey: any) => form.setFieldsValue({ 'schoolDocument': fileKey })
 
@@ -62,11 +64,11 @@ const Index: React.FC<IndexProps> = props => {
       });
       return;
     }
-    const res = await reqApply({ ...values, type });
+    const res = await reqApply({ ...values, type, id: activityId });
     if (res?.code === 200) {
       Toast.success(res?.message);
       history.push({
-        pathname: '/apply/list',
+        pathname: '/apply/enrollList',
         query: {
           type: type + '',
           parentId: res?.data?.id,
@@ -81,20 +83,20 @@ const Index: React.FC<IndexProps> = props => {
     setGroupProject(v);
   };
 
-  const handleRegistered = async () => {
-    const res = await reqApplyRegistered({});
-    if (res?.code === 200) {
-      if (res.data !== null) {
-        history.replace({
-          pathname: '/apply/list',
-          query: {
-            type: type + '',
-            parentId: res?.data?.id,
-          },
-        });
-      }
-    }
-  };
+  // const handleRegistered = async () => {
+  //   const res = await reqApplyRegistered({ activityId });
+  //   if (res?.code === 200) {
+  //     if (res.data !== null) {
+  //       history.replace({
+  //         pathname: '/apply/enrollList',
+  //         query: {
+  //           type: type + '',
+  //           parentId: res?.data?.id,
+  //         },
+  //       });
+  //     }
+  //   }
+  // };
 
   const handleUpload = async (file: any) => {
     const body = new FormData();
@@ -142,7 +144,7 @@ const Index: React.FC<IndexProps> = props => {
   };
 
   useEffect(() => {
-    handleRegistered();
+    // handleRegistered()
 
     return () => {};
   }, []);

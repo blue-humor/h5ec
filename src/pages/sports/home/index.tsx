@@ -10,6 +10,8 @@ import Refresh from './components/Refresh';
 
 import { reqHomeData } from '@/services/sports/home';
 
+import { reqAbouts } from '@/services/about';
+
 import IconFont from '@/utils/iconFont';
 
 import styles from './index.less';
@@ -25,6 +27,8 @@ const Index: React.FC<IndexProps> = props => {
   const [value, setValue] = useState('');
 
   // const [swiperImage, setSwiperImage] = useState<any>([]);
+
+  const [info, setInfo] = useState<any>({});
 
   const [newList, setNewList] = useState<any>({
     articles1: [],
@@ -56,7 +60,17 @@ const Index: React.FC<IndexProps> = props => {
     });
   };
 
+  const handleInfo = async () => {
+    const res = await reqAbouts({});
+    if (res?.code === 200) {
+      setInfo(res?.data);
+    }
+  };
+
   useEffect(() => {
+    setTimeout(() => {
+      handleInfo();
+    }, 600);
     return () => {};
   }, []);
 
@@ -109,7 +123,7 @@ const Index: React.FC<IndexProps> = props => {
                     });
                   }}
                 >
-                  <Image fit="cover" src={item?.thumb} className={styles.eventsImage} height={'120px'}>
+                  <Image fit="cover" src={item?.thumb} className={`${item?.video ? styles.eventsVideo : styles.eventsImage}`} height={'120px'}>
                     {/* <Typography.Text className={styles.createtime}>{item?.createtime}</Typography.Text> */}
                     {item?.video ? <Image src={VideoPng} fit="cover" className={styles.newsVideoPng} width="40" height="40" /> : null}
                   </Image>
@@ -133,6 +147,21 @@ const Index: React.FC<IndexProps> = props => {
           <NewsCard newList={newList?.articles2} />
         </div>
       </Refresh>
+
+      {info.intro ? (
+        <div className={styles.homeInfo}>
+          <span>关于我们</span>
+          <br />
+          <span>联系人：{info?.concatperson}</span>
+          <br />
+          <span>
+            <a href={`tel:${info?.concattel}`}>{info?.concattel}</a>{' '}
+          </span>
+          <br />
+          <span style={{ color: '#999', fontSize: '12px' }}>{info?.intro}</span>
+          <br />
+        </div>
+      ) : null}
     </>
   );
 };

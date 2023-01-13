@@ -12,20 +12,22 @@ export default [
   { exact: true, path: '/user/order', title: '订单', component: '@/pages/store/order' },
   { exact: true, path: '/user/articlesList', title: '我的投稿', component: '@/pages/user/articlesList' },
 
-  { exact: true, path: '/apply/list', title: '报名列表', component: '@/pages/apply/list' },
+  { exact: true, path: '/apply/enrollList', title: '登记列表', component: '@/pages/apply/enrollList' },
   { exact: true, path: '/apply/editor', title: '报名编辑', component: '@/pages/apply/editor' },
   { exact: true, path: '/sports/list', title: '资讯列表', component: '@/pages/sports/list' },
   { exact: true, path: '/sports/details', title: '资讯详情', component: '@/pages/sports/details' },
+  { exact: true, path: '/apply/enroll', title: '登记', component: '@/pages/apply/enroll' },
+  { exact: true, path: '/about', title: '', component: '@/pages/about' },
 
   {
     exact: false,
     component: '@/layouts/storeLayouts',
     routes: [
       { exact: false, path: '/home', title: '峰巍体育', component: '@/pages/sports/home' },
-      { exact: true, path: '/store/classify', title: '分类', component: '@/pages/store/classify' },
+      { exact: true, path: '/store/classify', title: '商城', component: '@/pages/store/classify' },
       // { exact: true, path: '/store/cart', title: '购物车', component: '@/pages/store/cart' },
       { exact: true, path: '/user', title: '个人中心', component: '@/pages/user' },
-      { exact: true, path: '/apply', title: '报名', component: '@/pages/apply' },
+      { exact: true, path: '/apply/list', title: '报名', component: '@/pages/apply/list' },
       { path: '/', redirect: '/home' },
       { component: './404' },
     ],
